@@ -1,0 +1,32 @@
+version: '2'
+services:
+  ftpserver:
+    build: ./ftpserver
+    image: ftpserver
+    env_file: .env
+    environment:
+      PUBLICHOST: "${DOCKER_HOST_ADDRESS}"
+    ports:
+      - "${FTP_SERVER_PORT}:${FTP_SERVER_PORT}"
+
+  submission:
+    build:
+      context: ./nihms-submission
+      args:
+        SUBMISSION_GIT_REPO: "${SUBMISSION_GIT_REPO}"
+        SUBMISSION_GIT_BRANCH: "${SUBMISSION_GIT_BRANCH}"
+    image: submission
+    depends_on:
+      - ftpserver
+    env_file: .env
+    environment:
+      DOCKER_HOST_ADDRESS: "${DOCKER_HOST_ADDRESS}"
+      PY_CGI_PORT: "${PY_CGI_PORT}"
+      FTP_SUBMISSION_DEBUG_PORT: "${FTP_SUBMISSION_DEBUG_PORT}"
+      SUBMISSION_GIT_REPO: "${SUBMISSION_GIT_REPO}"
+      SUBMISSION_GIT_BRANCH: "${SUBMISSION_GIT_BRANCH}"
+    ports:
+      - "${PY_CGI_PORT}:${PY_CGI_PORT}"
+      - "${FTP_SUBMISSION_DEBUG_PORT}:${FTP_SUBMISSION_DEBUG_PORT}"
+    links:
+      - "ftpserver"
