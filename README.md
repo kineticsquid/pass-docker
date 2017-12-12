@@ -10,6 +10,7 @@ The Docker containers _must_ be built prior to starting the demo.  Currently the
       - FTP_SUBMISSION_DEBUG_PORT
       - FTP_SERVER_PORT
   - The FTP submission code base will be downloaded and built from `SUBMISSION_GIT_REPO`, using the branch or tag defined in `SUBMISSION_GIT_BRANCH` 
+  - The Ember code base will be downloaded and built from `EMBER_GIT_REPO`, using the branch or tag defined in `EMBER_GIT_BRANCH`
 3. Run `docker-compose build`
   - Lots of things should fly across, including the Maven build of the FTP submission code
   
@@ -20,11 +21,12 @@ The Docker containers _must_ be built prior to starting the demo.  Currently the
 
 After starting the demo with the defaults, the following services should work.  
 
->(**N.B.** `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`)
+  - Ember application: [http://localhost:4200](http://localhost:4200)
+  - Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
+  - HTTP POST submission trigger: `localhost:8080`
 
-- Ember application: [http://localhost:4200](http://localhost:4200)
-- Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
-- HTTP POST submission trigger: `localhost:8080`
+
+>(**N.B.** `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`)
 
 ### Stopping
 1. Type `CTRL-C`
@@ -36,12 +38,12 @@ TODO
 ## Trigger a Submission Manually
 To trigger a submission _without using the PASS Ember UI_:
 1. Start the demo
-  - `docker-compose up`
+    - `docker-compose up`
 2. Send an empty HTTP `POST` request to the submission container, by default port `8080` or whatever `PY_CGI_PORT` is defined as
-  - for `docker-machine` users, this will be an IP address like `192.168.99.100`
-  - for `Docker for *` users, this will be `localhost`
-  - e.g. `curl -X POST localhost:8080`
-  - e.g. `curl -X POST 192.168.99.100:8080`
+    - for `docker-machine` users, this will be an IP address like `192.168.99.100`
+    - for `Docker for *` users, this will be `localhost`
+    - e.g. `curl -X POST localhost:8080`
+    - e.g. `curl -X POST 192.168.99.100:8080`
 
 You should see some logs flow across your Docker terminal window, and an indication of a successful FTP upload.
 
