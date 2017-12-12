@@ -1,5 +1,25 @@
 version: '2'
+
 services:
+
+  ember:
+    build:
+      context: ./pass-ember
+      args:
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
+    image: pass
+    env_file: .env
+    depends_on:
+      - submission
+    environment:
+      EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
+      EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
+    ports:
+      - "4200:4200"
+    links:
+      - submission
+
   ftpserver:
     build: ./ftpserver
     image: ftpserver

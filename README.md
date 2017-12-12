@@ -15,12 +15,21 @@
 ### Starting
 1. Run `docker-compose up`
 
+After starting the demo with the defaults, the following services should work.  `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`
+
+- Ember application: [http://localhost:4200](http://localhost:4200)
+- Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
+- HTTP POST submission trigger: `localhost:8080`
+
 ### Stopping
 1. Type `CTRL-C`
 1. Optionally, run `docker-compose down`
 
-## Manually Trigger a Submission
-To trigger a submission without using the PASS Ember UI:
+## Trigger a Submission with PASS
+TODO
+
+## Trigger a Submission Manually
+To trigger a submission _without using the PASS Ember UI_:
 1. Start the demo
   - `docker-compose up`
 2. Send an empty HTTP `POST` request to the submission container, by default port `8080` or whatever `PY_CGI_PORT` is defined as
