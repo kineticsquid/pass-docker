@@ -19,7 +19,9 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.7/community' >> /etc/apk/repos
     git clone ${SUBMISSION_GIT_REPO} && \
     cd nihms-submission && \
     git checkout ${SUBMISSION_GIT_BRANCH} && \
-    mvn package -DskipTests -Dcheckstyle.skip -Djavadoc.skip
+    mvn package -DskipTests -Dcheckstyle.skip -Djavadoc.skip && \
+    rm -rf ~/.m2 && \
+    rm -rf /var/cache/apk/
 
 ENV DOCKER_HOST_ADDRESS ftpserver
 
