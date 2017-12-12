@@ -1,6 +1,7 @@
 # Instructions
 
 ## Building
+The Docker containers _must_ be built prior to starting the demo.  Currently the containers are **not** deployed on the Docker Hub.
 
 1. Check out this repository
 2. `cd` into `pass-demo-docker`
@@ -12,10 +13,14 @@
 3. Run `docker-compose build`
   - Lots of things should fly across, including the Maven build of the FTP submission code
   
+>If edits are made to any of the `Dockerfile`s or any of their included content (e.g. `cgi_server.py` or content downloaded and built from GitHub), then the containers must be re-built and the demo restarted in order for those edits to take affect.
+  
 ### Starting
 1. Run `docker-compose up`
 
-After starting the demo with the defaults, the following services should work.  `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`
+After starting the demo with the defaults, the following services should work.  
+
+>(**N.B.** `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`)
 
 - Ember application: [http://localhost:4200](http://localhost:4200)
 - Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
