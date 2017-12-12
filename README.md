@@ -12,10 +12,10 @@
 3. Run `docker-compose build`
   - Lots of things should fly across, including the Maven build of the FTP submission code
   
-## Starting  
+### Starting
 1. Run `docker-compose up`
 
-## Stopping
+### Stopping
 1. Type `CTRL-C`
 1. Optionally, run `docker-compose down`
 
