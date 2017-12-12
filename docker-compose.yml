@@ -20,6 +20,7 @@ services:
       - ftpserver
     env_file: .env
     environment:
+      FTP_CONFIGURATION_KEY:
       DOCKER_HOST_ADDRESS: "${DOCKER_HOST_ADDRESS}"
       PY_CGI_PORT: "${PY_CGI_PORT}"
       FTP_SUBMISSION_DEBUG_PORT: "${FTP_SUBMISSION_DEBUG_PORT}"

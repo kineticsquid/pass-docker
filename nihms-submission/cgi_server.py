@@ -10,8 +10,9 @@ from subprocess import call
 # Edit these values to control the server behavior
 PORT    = os.environ['PY_CGI_PORT']
 DEBUG_PORT = os.environ['FTP_SUBMISSION_DEBUG_PORT']
+FTP_CONFIGURATION_KEY = os.getenv('FTP_CONFIGURATION_KEY', "local")
 COMMAND = "java -jar /usr/local/src/nihms-submission/nihms-cli/target/nihms-cli-1.0.0-SNAPSHOT-shaded.jar"
-ARGS    = "/usr/local/src/nihms-submission/nihms-cli/src/main/resources/FilesystemModelBuilderTest.properties local"
+ARGS    = "/usr/local/src/nihms-submission/nihms-cli/src/main/resources/FilesystemModelBuilderTest.properties " + FTP_CONFIGURATION_KEY
 
 try:
     os.environ['PY_CGI_PORT']
@@ -33,7 +34,7 @@ class RequestHandler (BaseHTTPServer.BaseHTTPRequestHandler):
         # Execute the command and prepare the POST response code.
         # Prints an error message to the console on failure.
         # This is a blocking function.  Use subprocess.Popen for non-blocking.
-        status = call(["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=" + DEBUG_PORT, "-jar", "/usr/local/src/nihms-submission/nihms-cli/target/nihms-cli-1.0.0-SNAPSHOT-shaded.jar", "/usr/local/src/nihms-submission/nihms-cli/src/main/resources/FilesystemModelBuilderTest.properties", "local"])
+        status = call(["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=" + DEBUG_PORT, "-jar", "/usr/local/src/nihms-submission/nihms-cli/target/nihms-cli-1.0.0-SNAPSHOT-shaded.jar", "/usr/local/src/nihms-submission/nihms-cli/src/main/resources/FilesystemModelBuilderTest.properties", FTP_CONFIGURATION_KEY])
         if status != 0:
             print "Command '{} {}' failed with code {}".format(COMMAND, ARGS, status)
             code = 500

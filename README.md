@@ -19,13 +19,22 @@
 1. Type `CTRL-C`
 1. Optionally, run `docker-compose down`
 
-# Trigger a Submission
+## Manually Trigger a Submission
+To trigger a submission without using the PASS Ember UI:
 1. Start the demo
   - `docker-compose up`
 2. Send an empty HTTP `POST` request to the submission container, by default port `8080` or whatever `PY_CGI_PORT` is defined as
   - for `docker-machine` users, this will be an IP address like `192.168.99.100`
-  - for `Docker for *` users, this will be `localhost`   
+  - for `Docker for *` users, this will be `localhost`
+  - e.g. `curl -X POST localhost:8080`
+  - e.g. `curl -X POST 192.168.99.100:8080`
 
 You should see some logs flow across your Docker terminal window, and an indication of a successful FTP upload.
 
+## Configuring Submission FTP site
+Submissions may be FTPed to one of two locations:
+1. The internal FTP server configured by Docker
+2. The NIH test FTP server
+
+By default, the internal FTP server is used.  To use the NIH test FTP server, export an environment variable named `FTP_CONFIGURATION_KEY` with a value of `nih`, then (re)start the demo application using `docker-compose`.  To explicitly configure the internal FTP server, export `FTP_CONFIGURATION_KEY` with a value of `local`.
  
