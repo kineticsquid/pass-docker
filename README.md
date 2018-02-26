@@ -5,7 +5,7 @@ These instructions are for starting the PASS demo instance locally, using Docker
 <h2><a id="prereq" href="#prereq">Prerequisites</a></h2>
 
 1. A working Docker installation: Docker for Mac, Docker for Windows, Docker Linux, or Docker Machine
-2. Checkout (i.e. clone) this repository: `git clone https://github.com/DataConservancy/pass-demo-docker`
+2. Checkout (i.e. clone) this repository: `git clone https://github.com/OA-PASS/pass-demo-docker`
 3. `cd` into `pass-demo-docker`
 
 > Docker Machine users should remember to set the appropriate environment variables in order to select an active machine (e.g. `eval $(docker-machine env default)`), and insure the selected machine is running (e.g. `docker-machine ls`, `docker-machine start default`)
