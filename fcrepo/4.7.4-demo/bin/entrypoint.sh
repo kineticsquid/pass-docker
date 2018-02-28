@@ -27,7 +27,8 @@ else
   fi
 fi
 
-OPTS="-Dfcrepo.log=${FCREPO_LOG_LEVEL}                                       \
+OPTS="-Dfcrepo.log=${FCREPO_LOG_LEVEL}
+      -Dfcrepo.log.auth=${FCREPO_AUTH_LOG_LEVEL}                             \
       -Dfcrepo.jms.baseUrl=${_JMS_BASEURL}                                   \
       -Dfcrepo.modeshape.configuration=${FCREPO_MODESHAPE_CONFIGURATION}     \
       -Dfcrepo.spring.configuration=${FCREPO_SPRING_CONFIGURATION}           \
