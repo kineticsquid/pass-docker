@@ -1,12 +1,19 @@
+# Purpose
+
+This repository serves as the canonical environment for demonstrating integration of the [PASS Ember application](https://github.com/oa-pass/pass-ember) with its dependant services.  This repository provides two things:
+1. Docker images that are the basis for the production deployment of PASS, pushed to the [`pass` organization](https://hub.docker.com/u/pass/dashboard/) in Docker Hub 
+1. Provides a `docker-compose` orchestration that configures and launches PASS for developers 
+
 # Instructions
 
-These instructions are for starting the PASS demo instance locally, using Docker.  To see the Amazon ECS instructions, look at [AMAZON.md](AMAZON.md).  If you have Docker already installed and want to start up the demo ASAP, jump to [starting Docker](#start).
+These instructions are for starting PASS with `docker-compose`.  If you have Docker already installed and want to start up the demo ASAP, jump to [starting Docker](#start).
 
 <h2><a id="prereq" href="#prereq">Prerequisites</a></h2>
 
-1. A working Docker installation: Docker for Mac, Docker for Windows, Docker Linux, or Docker Machine
-2. Checkout (i.e. clone) this repository: `git clone https://github.com/OA-PASS/pass-demo-docker`
-3. `cd` into `pass-demo-docker`
+1. Create a "hosts" entry (`lmhosts` for windows, `/etc/hosts` for *nix) that aliases the hostname `pass` to your loopback address (`127.0.0.1`) or to your docker-machine address (e.g. `192.168.99.100`)
+2. A working Docker installation: Docker for Mac, Docker for Windows, Docker Linux, or Docker Machine
+3. Checkout (i.e. clone) this repository: `git clone https://github.com/OA-PASS/pass-demo-docker`
+4. `cd` into `pass-demo-docker`
 
 > Docker Machine users should remember to set the appropriate environment variables in order to select an active machine (e.g. `eval $(docker-machine env default)`), and insure the selected machine is running (e.g. `docker-machine ls`, `docker-machine start default`)
 
@@ -44,6 +51,9 @@ To configure the Docker images, open up the `.env` file and make any necessary c
   - FCREPO_PORT: the port Fedora runs on (may differ from the port in `PASS_FEDORA_PORT` or `PASS_FEDORA_HOST` when the infrastructure is behind a proxy)
   - FCREPO_JMS_PORT: used by Fedora JMS messaging
   - FCREPO_STOMP_PORT: used by Fedora JMS messaging
+  - FCREPO_LOG_LEVEL: sets the log level of the Fedora repository
+  - FCREPO_TOMCAT_REQUEST_DUMPER_ENABLED: if set to `true`, instructs Tomcat to dump the headers for each request/response
+  - FCREPO_TOMCAT_AUTH_LOGGING_ENABLED: if set to `true`, instructs Tomcat to log additional information regarding authentication and authorization
 
 <h2><a id="build" href="#build">Building the Docker Images</a> (optional)</h2>
 
@@ -66,10 +76,11 @@ If you built the images (or if you already have the images locally from a previo
 
 After starting the demo with the defaults, the following services should work.
 
-  - Ember application: [http://localhost](http://localhost)
+  - Ember application: [https://localhost](https://localhost)
   - Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
   - HTTP POST submission trigger: `localhost:8081`
-  - Fedora: `localhost:8080/fcrepo/rest`
+  - Fedora: `http://localhost:8080/fcrepo/rest`
+  - Same Fedora instance behind a Shibboleth SP: `https://localhost/fcrepo/rest`
 
 
 >(**N.B.** `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`)
@@ -153,7 +164,3 @@ The [Ember application](ember-fcrepo) may have its own versioning scheme based o
 
 1. (Optional) Use `git tag` in order to provide traceability for the deployed images
     - > N.B. don't forget to push the tag
-
-1. (Optional) [Deploy](AMAZON.md#ecs_deploy) the new images to the Amazon ECS cluster
-
- 
