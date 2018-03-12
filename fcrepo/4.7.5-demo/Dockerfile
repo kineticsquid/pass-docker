@@ -11,6 +11,7 @@ FCREPO_MODESHAPE_CONFIGURATION=classpath:/config/servlet-auth/repository.json \
 ACTIVEMQ_BROKER_URI=tcp://localhost:61616 \
 FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/config/activemq.xml \
 FCREPO_SPRING_CONFIGURATION=classpath:/spring/master.xml \
+SLF4J_VERSION=1.7.25 \
 DEBUG_PORT=5006 \
 DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006"
 
@@ -31,16 +32,25 @@ RUN apk update && \
         | sha1sum -c -  && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
+    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.1-SNAPSHOT-shaded.jar \
+        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.1-SNAPSHOT/jsonld-addon-filters-0.0.1-SNAPSHOT-shaded.jar && \
     mkdir ${CATALINA_HOME}/webapps/fcrepo && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
     chmod 700 /bin/entrypoint.sh && \
-    chmod 700 /bin/setup_fedora.sh && \
+    chmod 700 /bin/setup_fedora.sh
+
+ RUN wget -O ${CATALINA_HOME}/lib/slf4j-api-${SLF4J_VERSION}.jar \
+    http://central.maven.org/maven2/org/slf4j/slf4j-api/${SLF4J_VERSION}/slf4j-api-${SLF4J_VERSION}.jar && \
+    wget -O ${CATALINA_HOME}/lib/slf4j-jdk14-${SLF4J_VERSION}.jar \
+    http://central.maven.org/maven2/org/slf4j/slf4j-jdk14/${SLF4J_VERSION}/slf4j-jdk14-${SLF4J_VERSION}.jar && \
     /bin/entrypoint.sh startup.sh && \
     /bin/setup_fedora.sh http://127.0.0.1:${FCREPO_PORT}/${FCREPO_CONTEXT_PATH}/rest && \
     ${CATALINA_HOME}/bin/shutdown.sh && \
     sed -i '/bootstrap/d' conf/tomcat-users.xml
 
+RUN wget -O ${CATALINA_HOME}/lib/context.jsonld \
+   https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld
 
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
