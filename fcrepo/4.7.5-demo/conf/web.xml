@@ -4707,6 +4707,12 @@
       <filter-class>org.dataconservancy.fcrepo.jsonld.deserialize.DeserializationFilter</filter-class>
       <async-supported>true</async-supported>
     </filter>
+
+    <filter>
+      <filter-name>uri-protocol-filter</filter-name>
+      <filter-class>org.dataconservancy.fcrepo.jsonld.request.UriProtocolFilter</filter-class>
+      <async-supported>true</async-supported>
+    </filter>
     
     <filter-mapping>
       <filter-name>jsonld-compaction-filter</filter-name>
@@ -4715,6 +4721,11 @@
     
     <filter-mapping>
       <filter-name>jsonld-deserialization-filter</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+      <filter-name>uri-protocol-filter</filter-name>
       <url-pattern>/*</url-pattern>
     </filter-mapping>
 
