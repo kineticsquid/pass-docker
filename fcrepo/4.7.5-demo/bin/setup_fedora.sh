@@ -86,6 +86,8 @@ create_object "identifiers"
 create_object "journals"
 create_object "publishers"
 create_object "deposits"
+create_object "repositories"
+create_object "policies"
 create_object "workflows"
 
 curl -v -i -# -u bootstrap:bootstrap -X PUT -H "Content-Type: text/turtle" --data-binary "@conf/acl.ttl" ${REPO}/.acl
