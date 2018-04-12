@@ -4,8 +4,8 @@ services:
 
   fcrepo:
     build:
-      context: ./fcrepo/4.7.5-demo
-    image: oapass/fcrepo
+      context: ./fcrepo/4.7.5-SNAPSHOT
+    image: oapass/fcrepo:4.7.5-0.0-SNAPSHOT
     container_name: fcrepo
     env_file: .env
     ports: 
@@ -19,11 +19,11 @@ services:
 
   ember:
     build:
-      context: ./ember-fcrepo/0.0.1-demo
+      context: ./ember
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember-fcrepo
+    image: oapass/ember:20180412-bf7c71c6
     container_name: ember
     env_file: .env
     ports:
