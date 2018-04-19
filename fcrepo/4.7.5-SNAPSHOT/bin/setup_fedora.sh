@@ -77,18 +77,19 @@ function delete_object {
 wait_until_up
 delete_object ""
 create_object ""
+create_object "contributors"
+create_object "deposits"
+create_object "files"
+create_object "funders"
 create_object "grants"
+create_object "journals"
+create_object "policies"
+create_object "publications"
+create_object "publishers"
+create_object "repositories"
+create_object "repositoryCopies"
 create_object "submissions"
 create_object "users"
-create_object "funders"
-create_object "people"
-create_object "identifiers"
-create_object "journals"
-create_object "publishers"
-create_object "deposits"
-create_object "repositories"
-create_object "policies"
-create_object "workflows"
 
 curl -v -i -# -u bootstrap:bootstrap -X PUT -H "Content-Type: text/turtle" --data-binary "@conf/acl.ttl" ${REPO}/.acl
 curl -v -i -# -u bootstrap:bootstrap -X PUT -H "Content-Type: text/turtle" --data-binary "@conf/authz.ttl" ${REPO}/.acl/authz
