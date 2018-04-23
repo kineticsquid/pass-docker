@@ -63,7 +63,23 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 ### Postgres-related variables
 
   - POSTGRES_DB_PORT: the port that the Postgres database is exposed on, defaults to `6543`
-     
+
+### Elasticsearch-related variables
+
+  - ES_PORT: the port that Elasticsearch is exposed on, defaults to `9200`
+
+### PASS indexer related variables
+
+  - PI_FEDORA_USER: user to do basic auth with when retrieving Fedora resources
+  - PI_FEDORA_PASS: password for basic auth when retrieving Fedora resources
+  - PI_FEDORA_INTERNAL_BASE: Internal URI for Fedora. Used to test if it is up.
+  - PI_ES_BASE: URL to base of Elasticsearch. Used to test if it is up.
+  - PI_ES_INDEX: URL to Elasticsearch index where Fedora resources will be indexed.
+  - PI_FEDORA_JMS_BROKER: location of Fedora JMS broker.
+  - PI_FEDORA_JMS_QUEUE: name of Fedora JMS queue
+  - PI_TYPE_PREFIX: prefix of Fedora resource type which indicates resource should be indexed
+  - PI_LOG_LEVEL: log level of pass-indexer
+
 <h2><a id="build" href="#build">Building the Docker Images</a> (optional)</h2>
 
 If the images deployed to Docker Hub are up-to-date, then you do not need to build the images.

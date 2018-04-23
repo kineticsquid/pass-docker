@@ -1,7 +1,7 @@
 FROM tomcat:8.5.24-jre8-alpine
 
 ENV FCREPO_VERSION=4.7.5 \
-FCREPO_HOST=localhost \
+FCREPO_HOST=fcrepo \
 FCREPO_PORT=8080 \
 FCREPO_JMS_PORT=61616 \
 FCREPO_STOMP_PORT=61613 \
@@ -41,7 +41,9 @@ RUN apk update && \
     chmod 700 /bin/entrypoint.sh && \
     chmod 700 /bin/setup_fedora.sh
 
- RUN wget -O ${CATALINA_HOME}/lib/slf4j-api-${SLF4J_VERSION}.jar \
+ RUN export FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/activemq-queue.xml && \
+    export FCREPO_JMS_BASEURL=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest && \
+    wget -O ${CATALINA_HOME}/lib/slf4j-api-${SLF4J_VERSION}.jar \
     http://central.maven.org/maven2/org/slf4j/slf4j-api/${SLF4J_VERSION}/slf4j-api-${SLF4J_VERSION}.jar && \
     wget -O ${CATALINA_HOME}/lib/slf4j-jdk14-${SLF4J_VERSION}.jar \
     http://central.maven.org/maven2/org/slf4j/slf4j-jdk14/${SLF4J_VERSION}/slf4j-jdk14-${SLF4J_VERSION}.jar && \

@@ -8,6 +8,8 @@ services:
     image: oapass/fcrepo:4.7.5-2.0-SNAPSHOT
     container_name: fcrepo
     env_file: .env
+    environment:
+      - FCREPO_JMS_BASEURL=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest
     ports: 
       - "${FCREPO_PORT}:${FCREPO_PORT}"
       - "${FCREPO_JMS_PORT}:${FCREPO_JMS_PORT}"
@@ -132,6 +134,41 @@ services:
       - "${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}"
     networks:
       - back
+
+  indexer:
+    build:
+      context: ./indexer/0.0.3-SNAPSHOT
+      args:
+        PI_LOG_LEVEL: "${PI_LOG_LEVEL}"
+    image: oapass/indexer
+    container_name: indexer
+    env_file: .env
+    networks:
+      - back
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3
+    container_name: elasticsearch
+    env_file: .env
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data   
+    ports: 
+      - "${ES_PORT}:${ES_PORT}"
+    networks:
+      - front
+      - back
+
+volumes:
+  esdata:
+    driver: local
 
 networks:
   front:
