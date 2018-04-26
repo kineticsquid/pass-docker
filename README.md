@@ -70,11 +70,14 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 
 ### PASS indexer related variables
 
+   See [pass-indexer](https://github.com/OA-PASS/pass-indexer) for more info.
+
   - PI_FEDORA_USER: user to do basic auth with when retrieving Fedora resources
   - PI_FEDORA_PASS: password for basic auth when retrieving Fedora resources
   - PI_FEDORA_INTERNAL_BASE: Internal URI for Fedora. Used to test if it is up.
   - PI_ES_BASE: URL to base of Elasticsearch. Used to test if it is up.
   - PI_ES_INDEX: URL to Elasticsearch index where Fedora resources will be indexed.
+  - PI_ES_CONFIG: URL to Elasticsearch index where Fedora resources will be indexed.  
   - PI_FEDORA_JMS_BROKER: location of Fedora JMS broker.
   - PI_FEDORA_JMS_QUEUE: name of Fedora JMS queue
   - PI_TYPE_PREFIX: prefix of Fedora resource type which indicates resource should be indexed

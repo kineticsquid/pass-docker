@@ -136,10 +136,7 @@ services:
       - back
 
   indexer:
-    build:
-      context: ./indexer/0.0.3-SNAPSHOT
-      args:
-        PI_LOG_LEVEL: "${PI_LOG_LEVEL}"
+    build: ./indexer/0.0.4-SNAPSHOT
     image: oapass/indexer
     container_name: indexer
     env_file: .env
