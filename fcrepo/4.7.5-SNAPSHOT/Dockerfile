@@ -13,7 +13,11 @@ FCREPO_SPRING_CONFIGURATION=classpath:/spring/master.xml \
 FCREPO_MODESHAPE_CONFIGURATION=classpath:/pass-repository.json \
 SLF4J_VERSION=1.7.25 \
 DEBUG_PORT=5006 \
-DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006"
+DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006" \
+COMPACTION_URI=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld \
+COMPACTION_PRELOAD_URI_PASS_STATIC=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld \
+COMPACTION_PRELOAD_FILE_PASS_STATIC=/usr/local/tomcat/lib/context-2.0.jsonld \
+JSONLD_STRICT=true
 
 EXPOSE ${DEBUG_PORT}
 EXPOSE ${FCREPO_PORT}
