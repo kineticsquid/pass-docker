@@ -33,8 +33,8 @@ RUN apk update && \
         | sha1sum -c -  && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
-    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.2-SNAPSHOT-shaded.jar \
-        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.2-SNAPSHOT/jsonld-addon-filters-0.0.2-SNAPSHOT-shaded.jar && \
+    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.4-SNAPSHOT-shaded.jar \
+        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.4-SNAPSHOT/jsonld-addon-filters-0.0.4-SNAPSHOT-shaded.jar && \
     mkdir ${CATALINA_HOME}/webapps/fcrepo && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
@@ -53,7 +53,7 @@ RUN apk update && \
     sed -i '/bootstrap/d' conf/tomcat-users.xml
 
 RUN wget -O ${CATALINA_HOME}/lib/context-2.0.jsonld \
-   https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld
+   ${COMPACTION_URI}
 
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
