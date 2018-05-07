@@ -17,7 +17,9 @@ DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006" \
 COMPACTION_URI=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld \
 COMPACTION_PRELOAD_FILE_PASS_STATIC=/usr/local/tomcat/lib/context-2.0.jsonld \
-JSONLD_STRICT=true
+JSONLD_STRICT=true \
+JSONLD_CONTEXT_PERSIST=true \
+JSONLD_CONTEXT_MINIMAL=true
 
 EXPOSE ${DEBUG_PORT}
 EXPOSE ${FCREPO_PORT}
@@ -38,7 +40,7 @@ RUN apk update && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
     wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.4-SNAPSHOT-shaded.jar \
-        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.4-SNAPSHOT/jsonld-addon-filters-0.0.4-SNAPSHOT-shaded.jar && \
+        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.4-SNAPSHOT/jsonld-addon-filters-0.0.5-SNAPSHOT-shaded.jar && \
     mkdir ${CATALINA_HOME}/webapps/fcrepo && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
@@ -47,10 +49,6 @@ RUN apk update && \
 
  RUN export FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/activemq-queue.xml && \
     export FCREPO_JMS_BASEURL=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest && \
-    wget -O ${CATALINA_HOME}/lib/slf4j-api-${SLF4J_VERSION}.jar \
-    http://central.maven.org/maven2/org/slf4j/slf4j-api/${SLF4J_VERSION}/slf4j-api-${SLF4J_VERSION}.jar && \
-    wget -O ${CATALINA_HOME}/lib/slf4j-jdk14-${SLF4J_VERSION}.jar \
-    http://central.maven.org/maven2/org/slf4j/slf4j-jdk14/${SLF4J_VERSION}/slf4j-jdk14-${SLF4J_VERSION}.jar && \
     /bin/entrypoint.sh startup.sh && \
     /bin/setup_fedora.sh http://127.0.0.1:${FCREPO_PORT}/${FCREPO_CONTEXT_PATH}/rest && \
     ${CATALINA_HOME}/bin/shutdown.sh && \
@@ -58,7 +56,6 @@ RUN apk update && \
 
 RUN wget -O ${CATALINA_HOME}/lib/context-2.0.jsonld \
    ${COMPACTION_URI}
-
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
