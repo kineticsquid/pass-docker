@@ -39,8 +39,8 @@ RUN apk update && \
         | sha1sum -c -  && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
-    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.4-SNAPSHOT-shaded.jar \
-        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.4-SNAPSHOT/jsonld-addon-filters-0.0.5-SNAPSHOT-shaded.jar && \
+    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.5-SNAPSHOT-shaded.jar \
+        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.5-SNAPSHOT/jsonld-addon-filters-0.0.5-SNAPSHOT-shaded.jar && \
     mkdir ${CATALINA_HOME}/webapps/fcrepo && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
