@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-ENV PI_VERSION=0.0.4
+ENV PI_VERSION=0.0.5
 
 WORKDIR /app
 
