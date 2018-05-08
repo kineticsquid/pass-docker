@@ -102,3 +102,9 @@
 [pass:RepositoryCopy] > fedora:Container mixin
 [pass:Submission] > fedora:Container mixin
 [pass:User] > fedora:Container mixin
+
+
+/*
+ * DC types
+ */ 
+<dcjsonld = 'http://dataconservancy.org/ns/jsonld#'>
