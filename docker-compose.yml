@@ -16,6 +16,10 @@ services:
     networks:
       - front
       - back
+    volumes:
+      - passdata:/data
+    depends_on: 
+      - assets
 
   ember:
     build:
@@ -154,15 +158,30 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - esdata:/usr/share/elasticsearch/data
-    ports:
+      - passdata:/usr/share/elasticsearch/data   
+    ports: 
       - "${ES_PORT}:${ES_PORT}"
     networks:
       - front
       - back
+    depends_on: 
+      - assets
+
+  assets:
+    image: oapass/assets
+    build: ./assets
+    volumes:
+      - passdata:/data
+  
+  bootstrap:
+    image: oapass/bootstrap
+    build: ./bootstrap
+    container_name: bootstrap
+    networks:
+      - back
 
 volumes:
-  esdata:
+  passdata:
     driver: local
 
 networks:
