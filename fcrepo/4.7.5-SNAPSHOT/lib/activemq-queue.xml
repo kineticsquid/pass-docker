@@ -38,10 +38,10 @@
 
                     -->
                         <pendingMessageLimitStrategy>
-                            <constantPendingMessageLimitStrategy limit="1000"/>
+                            <constantPendingMessageLimitStrategy limit="2000"/>
                         </pendingMessageLimitStrategy>
                     </policyEntry>
-                    <policyEntry queue=">" producerFlowControl="true" memoryLimit="1mb">
+                    <policyEntry queue=">" producerFlowControl="true" memoryLimit="10mb">
                         <!-- Use VM cursor for better latency
                        For more information, see:
 
