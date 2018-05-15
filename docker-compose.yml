@@ -168,17 +168,17 @@ services:
       - assets
 
   assets:
-    image: oapass/assets
+    image: birkland/assets:2018-05-15
     build: ./assets
     volumes:
       - passdata:/data
   
-  bootstrap:
-    image: oapass/bootstrap
-    build: ./bootstrap
-    container_name: bootstrap
-    networks:
-      - back
+  #bootstrap:
+  #  image: oapass/bootstrap
+  #  build: ./bootstrap
+  #  container_name: bootstrap
+  #  networks:
+  #    - back
 
 volumes:
   passdata:

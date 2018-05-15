@@ -47,7 +47,8 @@ OPTS="-Dfcrepo.home=${FCREPO_HOME}
       -Dactivemq.broker.uri=${ACTIVEMQ_BROKER_URI}                           \
       -Dfcrepo.dynamic.jms.port=${FCREPO_JMS_PORT}                           \
       -Dfcrepo.dynamic.stomp.port=${FCREPO_STOMP_PORT}                       \
-      -Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=${ARJUNA_OBJECTSTORE_DIRECTORY}"
+      -Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=${ARJUNA_OBJECTSTORE_DIRECTORY} \
+      -Dfcrepo.properties.management=${FCREPO_PROPERTIES_MANAGEMENT}"
 
 if [ -n "${FCREPO_JMX_PORT}" ]
 then
