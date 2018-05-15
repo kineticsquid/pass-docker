@@ -5,10 +5,10 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-0.0-SNAPSHOT
+    image: oapass/fcrepo:4.7.5-2.0-SNAPSHOT-5
     container_name: fcrepo
     env_file: .env
-    ports: 
+    ports:
       - "${FCREPO_PORT}:${FCREPO_PORT}"
       - "${FCREPO_JMS_PORT}:${FCREPO_JMS_PORT}"
       - "${FCREPO_STOMP_PORT}:${FCREPO_STOMP_PORT}"
@@ -23,7 +23,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180412-bf7c71c6
+    image: oapass/ember:20180515-2eaa328
     container_name: ember
     env_file: .env
     ports:
@@ -132,6 +132,38 @@ services:
       - "${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}"
     networks:
       - back
+
+  indexer:
+    build: ./indexer/0.0.6-SNAPSHOT
+    image: oapass/indexer:0.0.6-2.0-SNAPSHOT
+    container_name: indexer
+    env_file: .env
+    networks:
+      - back
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3
+    container_name: elasticsearch
+    env_file: .env
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data   
+    ports: 
+      - "${ES_PORT}:${ES_PORT}"
+    networks:
+      - front
+      - back
+
+volumes:
+  esdata:
+    driver: local
 
 networks:
   front:

@@ -12,7 +12,7 @@ sed -ie "s:<Connector port=\"8080\":<Connector port=\"${FCREPO_PORT}\":" conf/se
 # Prefer the API-X base uri as the JMS base url
 if [ -n "${FCREPO_JMS_BASEURL}" ] ;
 then 
-  _JMS_BASEURL=${FCREPO_JMS_BASEURI}
+  _JMS_BASEURL=${FCREPO_JMS_BASEURL}
 elif [ -n "${PUBLIC_REPOSITORY_BASEURI}" ] ;
 then
   _JMS_BASEURL=${PUBLIC_REPOSITORY_BASEURI}
@@ -29,7 +29,9 @@ fi
 
 OPTS="-Dfcrepo.log=${FCREPO_LOG_LEVEL}
       -Dfcrepo.log.auth=${FCREPO_AUTH_LOG_LEVEL}                             \
+      -Dfcrepo.log.jms=${FCREPO_LOG_JMS}                                     \
       -Dfcrepo.jms.baseUrl=${_JMS_BASEURL}                                   \
+      -Dfcrepo.spring.jms.configuration=${FCREPO_JMS_CONFIGURATION}          \
       -Dfcrepo.modeshape.configuration=${FCREPO_MODESHAPE_CONFIGURATION}     \
       -Dfcrepo.spring.configuration=${FCREPO_SPRING_CONFIGURATION}           \
       -Dfcrepo.postgresql.host=${FCREPO_POSTGRESQL_HOST}                     \
@@ -45,6 +47,18 @@ OPTS="-Dfcrepo.log=${FCREPO_LOG_LEVEL}
       -Dfcrepo.dynamic.jms.port=${FCREPO_JMS_PORT}                           \
       -Dfcrepo.dynamic.stomp.port=${FCREPO_STOMP_PORT}                       \
       -Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=${ARJUNA_OBJECTSTORE_DIRECTORY}"
+
+if [ -n "${FCREPO_JMX_PORT}" ]
+then
+  OPTS="${OPTS}                                                              \
+  -Dcom.sun.management.jmxremote                                             \
+  -Djava.rmi.server.hostname=$(hostname -i)                                  \
+  -Dcom.sun.management.jmxremote.local.only=false                            \
+  -Dcom.sun.management.jmxremote.authenticate=false                          \
+  -Dcom.sun.management.jmxremote.port=${FCREPO_JMX_PORT}                     \
+  -Dcom.sun.management.jmxremote.rmi.port=${FCREPO_JMX_PORT}
+  -Dcom.sun.management.jmxremote.ssl=false                                   "
+fi
 
 # handle debugging
 

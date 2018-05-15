@@ -89,15 +89,22 @@
  
  <pass = 'http://example.org/pass/'>
 
+[pass:Contributor] > fedora:Container mixin
 [pass:Deposit] > fedora:Container mixin
+[pass:File] > fedora:Container mixin
 [pass:Funder] > fedora:Container mixin
 [pass:Grant] > fedora:Container mixin
-[pass:Identifier] > fedora:Container mixin
 [pass:Journal] > fedora:Container mixin
-[pass:Person] > fedora:Container mixin
 [pass:Policy] > fedora:Container mixin
+[pass:Publication] > fedora:Container mixin
 [pass:Publisher] > fedora:Container mixin
 [pass:Repository] > fedora:Container mixin
+[pass:RepositoryCopy] > fedora:Container mixin
 [pass:Submission] > fedora:Container mixin
 [pass:User] > fedora:Container mixin
-[pass:Workflow] > fedora:Container mixin
+
+
+/*
+ * DC types
+ */ 
+<dcjsonld = 'http://dataconservancy.org/ns/jsonld#'>
