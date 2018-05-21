@@ -23,7 +23,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180516-ec40e41
+    image: oapass/ember:20180517-f7eb984
     container_name: ember
     env_file: .env
     ports:
@@ -154,8 +154,8 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - esdata:/usr/share/elasticsearch/data   
-    ports: 
+      - esdata:/usr/share/elasticsearch/data
+    ports:
       - "${ES_PORT}:${ES_PORT}"
     networks:
       - front
