@@ -71,7 +71,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy
+    image: oapass/httpd-proxy:20180518
     container_name: proxy
     networks:
      - front
@@ -82,7 +82,7 @@ services:
 
   idp:
     build: ./idp/3.3.2
-    image: oapass/idp
+    image: oapass/idp:20180518
     container_name: idp
     depends_on:
      - ldap
@@ -103,14 +103,14 @@ services:
 
   ldap:
     build: ./ldap/
-    image: oapass/ldap
+    image: oapass/ldap:20180518
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp
+    image: oapass/sp:20180518
     container_name: sp
     networks:
      - back

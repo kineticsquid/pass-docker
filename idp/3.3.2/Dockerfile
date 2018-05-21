@@ -1,6 +1,4 @@
-FROM unicon/shibboleth-idp@sha256:f16dcc80e237b0ae14dfcdac2a93c049d4992bb86f26220480f2814e872b7a70
-
-MAINTAINER Unicon, Inc.
+FROM unicon/shibboleth-idp@sha256:397941df7098b44c939b6d7e0a94afde627a79c27863e0a99f4ae8d8ec069134
 
 COPY shibboleth-idp/ /opt/shibboleth-idp/
 COPY shib-jetty-base/ /opt/shib-jetty-base/

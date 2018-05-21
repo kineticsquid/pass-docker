@@ -14,11 +14,10 @@
         xsi:schemaLocation="urn:mace:shibboleth:2.0:afp http://shibboleth.net/schema/idp/shibboleth-afp.xsd">
 
     <!-- Release some attributes to an SP. -->
-    <AttributeFilterPolicy id="example1">
-        <PolicyRequirementRule xsi:type="OR">
-            <Rule xsi:type="Requester" value="https://sp.pass/shibboleth" />
-        </PolicyRequirementRule>
-
+    <AttributeFilterPolicy id="releaseToPass">
+    
+        <PolicyRequirementRule xsi:type="Requester" value="https://sp.pass/shibboleth" />
+        
         <AttributeRule attributeID="eduPersonPrincipalName">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
@@ -39,7 +38,19 @@
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
 
-        <AttributeRule attributeID="eduPersonPrincipalName">
+        <AttributeRule attributeID="eduPersonScopedAffiliation">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="displayName">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="employeeNumber">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
+        <AttributeRule attributeID="eduPersonAffiliation">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
 
