@@ -15,11 +15,13 @@ FCREPO_JMS_CONFIGURATION=classpath:/spring/jms.xml \
 SLF4J_VERSION=1.7.25 \
 DEBUG_PORT=5006 \
 DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006" \
-COMPACTION_URI=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.1.jsonld \
+COMPACTION_URI=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC_2_0=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld \
 COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0=/usr/local/tomcat/lib/context-2.0.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC_2_1=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.1.jsonld \
 COMPACTION_PRELOAD_FILE_PASS_STATIC_2_1=/usr/local/tomcat/lib/context-2.1.jsonld \
+COMPACTION_PRELOAD_URI_PASS_STATIC_2_2=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld \
+COMPACTION_PRELOAD_FILE_PASS_STATIC_2_2=/usr/local/tomcat/lib/context-2.2.jsonld \
 JSONLD_STRICT=true \
 JSONLD_CONTEXT_PERSIST=true \
 JSONLD_CONTEXT_MINIMAL=true \
@@ -70,7 +72,9 @@ RUN apk update && \
 RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
         ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_0} && \
     wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_1} \
-        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_1}
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_1} && \
+    wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_2} \
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_2}
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 

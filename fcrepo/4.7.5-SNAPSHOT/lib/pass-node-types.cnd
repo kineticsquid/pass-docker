@@ -87,7 +87,7 @@
  * PASS types
  */
  
- <pass = 'http://example.org/pass/'>
+ <pass = 'http://oapass.org/ns/pass#'>
 
 [pass:Contributor] > fedora:Container mixin
 [pass:Deposit] > fedora:Container mixin

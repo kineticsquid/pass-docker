@@ -1,4 +1,4 @@
-@prefix pass: <http://example.org/pass/> .
+@prefix pass: <http://oapass.org/ns/pass#> .
 
 <> a pass:Repository ;
 pass:name "NIHMS"^^<http://www.w3.org/2001/XMLSchema#string> .
