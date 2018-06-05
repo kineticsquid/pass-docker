@@ -27,7 +27,8 @@ else
   fi
 fi
 
-OPTS="-Dfcrepo.log=${FCREPO_LOG_LEVEL}
+OPTS="-Dfcrepo.home=${FCREPO_HOME}
+      -Dfcrepo.log=${FCREPO_LOG_LEVEL}
       -Dfcrepo.log.auth=${FCREPO_AUTH_LOG_LEVEL}                             \
       -Dfcrepo.log.jms=${FCREPO_LOG_JMS}                                     \
       -Dfcrepo.jms.baseUrl=${_JMS_BASEURL}                                   \
@@ -46,7 +47,8 @@ OPTS="-Dfcrepo.log=${FCREPO_LOG_LEVEL}
       -Dactivemq.broker.uri=${ACTIVEMQ_BROKER_URI}                           \
       -Dfcrepo.dynamic.jms.port=${FCREPO_JMS_PORT}                           \
       -Dfcrepo.dynamic.stomp.port=${FCREPO_STOMP_PORT}                       \
-      -Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=${ARJUNA_OBJECTSTORE_DIRECTORY}"
+      -Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir=${ARJUNA_OBJECTSTORE_DIRECTORY} \
+      -Dfcrepo.properties.management=${FCREPO_PROPERTIES_MANAGEMENT}"
 
 if [ -n "${FCREPO_JMX_PORT}" ]
 then

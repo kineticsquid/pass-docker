@@ -1,4 +1,4 @@
-FROM unicon/shibboleth-sp@sha256:e54cc2f47bd4d7529497bde778fa50b7392c78feb0b16610e0b3ad6b5ad8aafe
+FROM unicon/shibboleth-sp@sha256:6969edc938243c26f0485bf40ce006f4ef763481f57dd2c9f364237f1243894b
 
 RUN yum -y install php mod_ssl mod_substitute mod_proxy_ajp
 

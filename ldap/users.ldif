@@ -5,87 +5,58 @@ cn: admin
 userPassword: password
 description: LDAP administrator
 
-
-dn: uid=student1,ou=People,dc=pass
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-objectClass: inetOrgPerson
-givenName: Stud
-uid: student1
-sn: Ent
-cn: Stud Ent
-mail: student1@pass.edu
-userPassword: password
-
 dn: uid=staff1,ou=People,dc=pass
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
-givenName: St
-uid: staff1
-sn: aff
-cn: St aff
-mail: staff1@pass.edu
-userPassword: password
+givenName: Staff
+sn: Hasgrants
+cn: Staff Hasgrants
+mail: staffWithGrants@jhu.edu
+userPassword: moo
+employeeNumber: 00017179
+displayName: Staff Hasgrants
+employeeType: STAFF
 
-dn: uid=admin,ou=People,dc=pass
+dn: uid=staff2,ou=People,dc=pass
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
-givenName: Moo
-uid: admin
-sn: Admin
-cn: Moo Cow
-mail: admin@pass.edu
+givenName: Staff
+sn: Hasnogrants
+cn: Staff Hasnogrants
+mail: staffWithNoGrants@jhu.edu
 userPassword: moo
+employeeNumber: 1020304
+displayName: Staff Hasnogrants
+employeeType: STAFF
 
-dn: uid=fedoraAdmin,ou=People,dc=pass
+dn: uid=faculty1,ou=People,dc=pass
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
-givenName: Admin Moo
-uid: fedoraAdmin
-sn: fedoraAdmin
-cn: Admin Moo Cow
-mail: fedoraAdmin@pass.edu
+givenName: Faculty
+sn: Hasgrants
+cn: Faculty Hasgrants
+mail: facultyWithGrants@jhu.edu
 userPassword: moo
+employeeNumber: 00003343
+displayName: Faculty Hasgrants
+employeeType: FACULTY
 
-dn: uid=agudzun,ou=People,dc=pass
+dn: uid=faculty2,ou=People,dc=pass
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
-givenName: Anne
-uid: agudzun
-sn: Gudzun
-cn: Anne Gudzun
-mail: agudzun@pass.edu
+givenName: Faculty
+sn: Hasnogrants
+cn: Faculty Hasnogrants
+mail: facultyWithNoGrants@jhu.edu
 userPassword: moo
-
-dn: uid=BenjaminHarman,ou=People,dc=pass
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-objectClass: inetOrgPerson
-givenName: Ben
-uid: BenjaminHarman
-sn: Harman
-cn: Benjamin Harman
-mail: BenjaminHarman@pass.edu
-userPassword: moo
-
-dn: uid=CynthiaSears,ou=People,dc=pass
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-objectClass: inetOrgPerson
-givenName: Cynthia
-uid: CynthiaSears
-sn: Sears
-cn: Cynthia Sears
-mail: CynthiaSears@pass.edu
-userPassword: moo
+employeeNumber: 2040608
+displayName: Faculty Hasnogrants
+employeeType: FACULTY

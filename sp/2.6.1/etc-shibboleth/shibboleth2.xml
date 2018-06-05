@@ -5,6 +5,8 @@
     xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
     clockSkew="180">
 
+    <InProcess checkSpoofing="false" />
+
     <!--
     By default, in-memory StorageService, ReplayCache, ArtifactMap, and SessionCache
     are used. See example-shibboleth2.xml for samples of explicitly configuring them.
@@ -21,7 +23,7 @@
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
     <ApplicationDefaults entityID="https://sp.pass/shibboleth"
-                         REMOTE_USER="eppn uid persistent-id targeted-id">
+                         REMOTE_USER="eppn uid persistent-id targeted-id" attributePrefix="AJP_">
 
         <!--
         Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
@@ -55,7 +57,7 @@
             <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1"/>
 
             <!-- Session diagnostic service. -->
-            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+            <Handler type="Session" Location="/Session" showAttributeValues="true"/>
 
             <!-- JSON feed of discovery information. -->
             <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>

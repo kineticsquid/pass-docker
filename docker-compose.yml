@@ -16,6 +16,10 @@ services:
     networks:
       - front
       - back
+    volumes:
+      - passdata:/data
+    depends_on: 
+      - assets
 
   ember:
     build:
@@ -67,7 +71,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy
+    image: oapass/httpd-proxy:20180518
     container_name: proxy
     networks:
      - front
@@ -78,7 +82,7 @@ services:
 
   idp:
     build: ./idp/3.3.2
-    image: oapass/idp
+    image: oapass/idp:20180518
     container_name: idp
     depends_on:
      - ldap
@@ -99,14 +103,14 @@ services:
 
   ldap:
     build: ./ldap/
-    image: oapass/ldap
+    image: oapass/ldap:20180518
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp
+    image: oapass/sp:20180518
     container_name: sp
     networks:
      - back
@@ -154,15 +158,30 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - esdata:/usr/share/elasticsearch/data
-    ports:
+      - passdata:/usr/share/elasticsearch/data   
+    ports: 
       - "${ES_PORT}:${ES_PORT}"
     networks:
       - front
       - back
+    depends_on: 
+      - assets
+
+  assets:
+    image: birkland/assets:2018-06-04
+    build: ./assets
+    volumes:
+      - passdata:/data
+  
+  #bootstrap:
+  #  image: oapass/bootstrap
+  #  build: ./bootstrap
+  #  container_name: bootstrap
+  #  networks:
+  #    - back
 
 volumes:
-  esdata:
+  passdata:
     driver: local
 
 networks:

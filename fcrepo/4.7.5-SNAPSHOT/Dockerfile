@@ -1,6 +1,7 @@
 FROM tomcat:8.5.24-jre8-alpine
 
 ENV FCREPO_VERSION=4.7.5 \
+FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
 FCREPO_PORT=8080 \
 FCREPO_JMS_PORT=61616 \
@@ -12,6 +13,7 @@ FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/config/activemq.xml \
 FCREPO_SPRING_CONFIGURATION=classpath:/spring/master.xml \
 FCREPO_MODESHAPE_CONFIGURATION=classpath:/pass-repository.json \
 FCREPO_JMS_CONFIGURATION=classpath:/spring/jms.xml \
+FCREPO_PROPERTIES_MANAGEMENT=relaxed \
 SLF4J_VERSION=1.7.25 \
 DEBUG_PORT=5006 \
 DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006" \
@@ -29,6 +31,8 @@ AUTHZ_USE_SHIB_HEADERS=true
 
 EXPOSE ${DEBUG_PORT}
 EXPOSE ${FCREPO_PORT}
+
+VOLUME /data
 
 COPY bin/* /bin/
 COPY conf/* ${CATALINA_HOME}/conf/
