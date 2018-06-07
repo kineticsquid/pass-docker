@@ -104,7 +104,7 @@ If you built the images (or if you already have the images locally from a previo
 
 After starting the demo with the defaults, the following services should work.
 
-  - Ember application: [https://localhost](https://localhost)
+  - Ember application: [https://localhost](https://localhost). _See [Shibboleth users](#shibboleth-users) below for login options_ 
   - Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
   - HTTP POST submission trigger: `localhost:8081`
   - Fedora: `http://localhost:8080/fcrepo/rest`
@@ -118,9 +118,16 @@ After starting the demo with the defaults, the following services should work.
       - Not behind the Shibboleth SP
   - Postgres database, exposed at port `6543`
       - DSpace database name `dspace`, username `dspace`, no password
-
-
+	  
 >(**N.B.** `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`)
+
+### Shibboleth users
+There are four users that can log in via Shibboleth. These can be used to log in to Ember. Each uses the password `moo`.
+* `staff1` A staff member who does have grants and therefore does have a User resource already, and is the PI on grants.
+* `staff2` A staff member who does not have grants. Because PASS policy is to only allow faculty in, this user will be denied access to the user service, or the repository.
+* `faculty1` A faculty member who does have lots of grants, and therefore does have a User resource already, and is a PI on grants.
+* `faculty2` A faculty member who does not have grants. Because PASS policy is to give faculty submitter privileges, the first time this person logs to shibboleth and hits the user service, a new User resource is created, but the user should not be allowed to associate grants with his or her submissions.
+
 
 <h2><a id="stop" href="#stop">Stopping</a></h2>
 
