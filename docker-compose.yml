@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-1
+    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-2
     container_name: fcrepo
     env_file: .env
     ports:
@@ -41,37 +41,13 @@ services:
     container_name: ftpserver
     env_file: .env
     ports:
-      - "${FTP_SERVER_PORT}:${FTP_SERVER_PORT}"
-    networks:
-      - front
-
-  submission:
-    build:
-      context: ./nihms-submission/1.0.0-SNAPSHOT-demo
-      args:
-        SUBMISSION_GIT_REPO: "${SUBMISSION_GIT_REPO}"
-        SUBMISSION_GIT_BRANCH: "${SUBMISSION_GIT_BRANCH}"
-    image: oapass/nihms-submission
-    container_name: submission
-    depends_on:
-      - ftpserver
-    env_file: .env
-    environment:
-      FTP_CONFIGURATION_KEY:
-      LOCAL_FTP_SERVER: "${LOCAL_FTP_SERVER}"
-      PY_CGI_PORT: "${PY_CGI_PORT}"
-      FTP_SUBMISSION_DEBUG_PORT: "${FTP_SUBMISSION_DEBUG_PORT}"
-      SUBMISSION_GIT_REPO: "${SUBMISSION_GIT_REPO}"
-      SUBMISSION_GIT_BRANCH: "${SUBMISSION_GIT_BRANCH}"
-    ports:
-      - "${PY_CGI_PORT}:${PY_CGI_PORT}"
-      - "${FTP_SUBMISSION_DEBUG_PORT}:${FTP_SUBMISSION_DEBUG_PORT}"
+      - "${FTP_PORT}:${FTP_PORT}"
     networks:
       - front
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20180518
+    image: oapass/httpd-proxy:20180608
     container_name: proxy
     networks:
      - front
@@ -125,7 +101,9 @@ services:
     ports:
       - "${DSPACE_PORT}:${DSPACE_PORT}"
     networks:
-      - back
+      back:
+        aliases:
+          - pass
 
   postgres:
     build: ./postgres/10.3
@@ -179,6 +157,16 @@ services:
   #  container_name: bootstrap
   #  networks:
   #    - back
+
+  deposit:
+    build: ./deposit-services/0.0.3-2.2
+    image: oapass/deposit-services:0.0.3-2.2
+    container_name: deposit
+    env_file: .env
+    ports:
+      - "${DEPOSIT_DEBUG_PORT}:5007"
+    networks:
+      - back
 
 volumes:
   passdata:

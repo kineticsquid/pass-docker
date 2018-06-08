@@ -13,6 +13,7 @@ FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/config/activemq.xml \
 FCREPO_SPRING_CONFIGURATION=classpath:/spring/master.xml \
 FCREPO_MODESHAPE_CONFIGURATION=classpath:/pass-repository.json \
 FCREPO_JMS_CONFIGURATION=classpath:/spring/jms.xml \
+FCREPO_LOGBACK_LOCATION=webapps/fcrepo/WEB-INF/classes/logback.xml \
 FCREPO_PROPERTIES_MANAGEMENT=relaxed \
 SLF4J_VERSION=1.7.25 \
 DEBUG_PORT=5006 \
@@ -52,21 +53,21 @@ RUN apk update && \
     wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.6-SNAPSHOT-shaded.jar \
         https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.6-SNAPSHOT/jsonld-addon-filters-0.0.6-SNAPSHOT-shaded.jar && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar \
-        https://github.com/OA-PASS/pass-authz/releases/download/0.0.2-SNAPSHOT/pass-authz-filters-0.0.2-SNAPSHOT-shaded.jar && \
+        https://github.com/OA-PASS/pass-authz/releases/download/0.0.3-SNAPSHOT/pass-authz-filters-0.0.3-SNAPSHOT-shaded.jar && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
-        https://github.com/OA-PASS/pass-authz/releases/download/0.0.2-SNAPSHOT/pass-user-service-0.0.2-SNAPSHOT.war && \
+        https://github.com/OA-PASS/pass-authz/releases/download/0.0.3-SNAPSHOT/pass-user-service-0.0.3-SNAPSHOT.war && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
     rm ${CATALINA_HOME}/webapps/pass-user-service.war && \
     mkdir ${CATALINA_HOME}/webapps/fcrepo && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
-    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-0.0.1.jar \
-            https://github.com/DataConservancy/fcrepo-jms/releases/download/jms-addon-0.0.1/jms-addon-0.0.1.jar && \
+    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-0.0.2.jar \
+            https://github.com/DataConservancy/fcrepo-jms/releases/download/jms-addon-0.0.2/jms-addon-0.0.2.jar && \
     chmod 700 /bin/entrypoint.sh && \
     chmod 700 /bin/setup_fedora.sh
 
- RUN export FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/activemq-queue.xml && \
+RUN export FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/activemq-queue.xml && \
     export FCREPO_JMS_BASEURL=http://${FCREPO_HOST}:${FCREPO_PORT}/fcrepo/rest && \
     /bin/entrypoint.sh startup.sh && \
     /bin/setup_fedora.sh http://127.0.0.1:${FCREPO_PORT}/${FCREPO_CONTEXT_PATH}/rest && \
