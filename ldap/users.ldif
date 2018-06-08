@@ -60,3 +60,47 @@ userPassword: moo
 employeeNumber: 2040608
 displayName: Faculty Hasnogrants
 employeeType: FACULTY
+
+dn: uid=nih-user,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Nihu
+sn: Ser
+cn: Nihu Ser
+mail: nihuser@jhu.edu
+userPassword: moo
+employeeNumber: 00001421
+displayName: Nihu Ser
+employeeType: FACULTY
+
+dn: uid=ed-user,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Ed
+sn: User
+cn: Ed User
+mail: eduser@jhu.edu
+userPassword: moo
+employeeNumber: 00010090
+displayName: Ed User
+employeeType: FACULTY
+
+dn: uid=usaid-user,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Usai
+sn: Duser
+cn: Usai Duser
+mail: usaiduser@jhu.edu
+userPassword: moo
+employeeNumber: 00003088
+displayName: Usai Duser
+employeeType: FACULTY
+
+

@@ -127,6 +127,9 @@ There are four users that can log in via Shibboleth. These can be used to log in
 * `staff2` A staff member who does not have grants. Because PASS policy is to only allow faculty in, this user will be denied access to the user service, or the repository.
 * `faculty1` A faculty member who does have lots of grants, and therefore does have a User resource already, and is a PI on grants.
 * `faculty2` A faculty member who does not have grants. Because PASS policy is to give faculty submitter privileges, the first time this person logs to shibboleth and hits the user service, a new User resource is created, but the user should not be allowed to associate grants with his or her submissions.
+* `nih-user` Person with NIH grants
+* `ed-user` Person with DOE gtants
+* `usaid-user` Person with USAID grants
 
 
 <h2><a id="stop" href="#stop">Stopping</a></h2>
