@@ -1,6 +1,9 @@
-FROM tomcat:8.5.24-jre8-alpine
+FROM tomcat:8.5.31-jre8-alpine@sha256:f9a53932a3cc61ea3a1c307e7bf60897bce356c60c61beb0a1d1cdc5c13c9b83
 
 ENV FCREPO_VERSION=4.7.5 \
+JSONLD_ADDON_VERSION=0.0.6-SNAPSHOT \
+PASS_AUTHZ_VERSION=0.0.3-SNAPSHOT \
+JMS_ADDON_VERSION=0.0.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
 FCREPO_PORT=8080 \
@@ -50,20 +53,28 @@ RUN apk update && \
         | sha1sum -c -  && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
-    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-0.0.6-SNAPSHOT-shaded.jar \
-        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/0.0.6-SNAPSHOT/jsonld-addon-filters-0.0.6-SNAPSHOT-shaded.jar && \
+    wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar \
+        https://github.com/DataConservancy/fcrepo-jsonld/releases/download/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
+    echo "fa95adf77b0933f163e213f8133e8d78df7a9141 *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
+        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar \
-        https://github.com/OA-PASS/pass-authz/releases/download/0.0.3-SNAPSHOT/pass-authz-filters-0.0.3-SNAPSHOT-shaded.jar && \
+        https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-filters-${PASS_AUTHZ_VERSION}-shaded.jar && \
+    echo "dfaa302043005f8c6201459d79997e9d3009daf1 *${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar" \
+        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
-        https://github.com/OA-PASS/pass-authz/releases/download/0.0.3-SNAPSHOT/pass-user-service-0.0.3-SNAPSHOT.war && \
+        https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
+    echo "145c64206c3d63a9f9ca9eb82f9006522239643d *${CATALINA_HOME}/webapps/pass-user-service.war" \
+        | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
     rm ${CATALINA_HOME}/webapps/pass-user-service.war && \
     mkdir ${CATALINA_HOME}/webapps/fcrepo && \
     unzip ${CATALINA_HOME}/webapps/fcrepo.war -d ${CATALINA_HOME}/webapps/fcrepo  && \
     rm ${CATALINA_HOME}/webapps/fcrepo.war && \
-    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-0.0.2.jar \
-            https://github.com/DataConservancy/fcrepo-jms/releases/download/jms-addon-0.0.2/jms-addon-0.0.2.jar && \
+    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-${JMS_ADDON_VERSION}.jar \
+            https://github.com/DataConservancy/fcrepo-jms/releases/download/jms-addon-${JMS_ADDON_VERSION}/jms-addon-${JMS_ADDON_VERSION}.jar && \
+    echo "5f3cbb87fc9117b5761efa38c0a085b017166729 *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/jms-addon-${JMS_ADDON_VERSION}.jar" \
+        | sha1sum -c -  && \
     chmod 700 /bin/entrypoint.sh && \
     chmod 700 /bin/setup_fedora.sh
 

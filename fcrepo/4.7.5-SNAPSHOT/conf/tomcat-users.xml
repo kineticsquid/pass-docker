@@ -11,5 +11,6 @@
   <user name="nih-user" password="27387daea77f878f82b46c7e323db3245ce2fa079ab2c6f6c410bcbac4cb7da5$1$84f7dcbeb8fff3fa1bbcd50b41f272eec890f21749ce774a03742fa2d3a7399b" roles="fedoraUser" />
   <user name="ed-user" password="27387daea77f878f82b46c7e323db3245ce2fa079ab2c6f6c410bcbac4cb7da5$1$84f7dcbeb8fff3fa1bbcd50b41f272eec890f21749ce774a03742fa2d3a7399b" roles="fedoraUser" />
   <user name="usaid-user" password="27387daea77f878f82b46c7e323db3245ce2fa079ab2c6f6c410bcbac4cb7da5$1$84f7dcbeb8fff3fa1bbcd50b41f272eec890f21749ce774a03742fa2d3a7399b" roles="fedoraUser" />
+  <user name="incomplete-nih-user" password="27387daea77f878f82b46c7e323db3245ce2fa079ab2c6f6c410bcbac4cb7da5$1$84f7dcbeb8fff3fa1bbcd50b41f272eec890f21749ce774a03742fa2d3a7399b" roles="fedoraUser" />
   <user name="fedoraAdmin" password="53253a46e9f2f74e6a1141f654eb0cb4a71624d0493e7289489ada0c6255a1f0$1$4ab46c609603537a8665e0dde3a6aaadae24914cb4d8cff10084bb1a7a45c91e" roles="fedoraAdmin" />
 </tomcat-users>

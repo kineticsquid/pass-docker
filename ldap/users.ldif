@@ -89,6 +89,20 @@ employeeNumber: 00010090
 displayName: Ed User
 employeeType: FACULTY
 
+dn: uid=incomplete-nih-user,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Incomplete
+sn: Nihuser
+cn: Incomplete Nihuser
+mail: incompletenihuser@jhu.edu
+userPassword: moo
+employeeNumber: 00023666
+displayName: Incomplete Nihuser
+employeeType: FACULTY
+
 dn: uid=usaid-user,ou=People,dc=pass
 objectClass: organizationalPerson
 objectClass: person
