@@ -1,3 +1,4 @@
 #!/bin/sh
 
-ember server --port ${EMBER_PORT} --live-reload=false
+envsubst < /nginx-template.conf > /etc/nginx/conf.d/default.conf && \
+    nginx -g 'daemon off;'
