@@ -49,11 +49,13 @@ To configure the Docker images, open up the `.env` file and make any necessary c
       - This allows for the Fedora repository to be accessible when a host name for Fedora is not known _a priori_ (e.g. when deploying to a cloud service that dynamically supplies IPs or hostnames)
       - A limitation of this approach is that Fedora _must_ be publicly accessible from the same host as the Ember application
   - FCREPO_PORT: the port Fedora runs on (may differ from the port in `PASS_FEDORA_PORT` or `PASS_FEDORA_HOST` when the infrastructure is behind a proxy)
-  - FCREPO_JMS_PORT: used by Fedora JMS messaging
-  - FCREPO_STOMP_PORT: used by Fedora JMS messaging
+  - FCREPO_JMS_PORT: used by Fedora JMS messaging.  _This is only necessary when using the internal activeMQ broker_
+  - FCREPO_STOMP_PORT: used by Fedora JMS messaging.  _This is only necessary when using the internal activeMQ broker_
   - FCREPO_LOG_LEVEL: sets the log level of the Fedora repository
   - FCREPO_TOMCAT_REQUEST_DUMPER_ENABLED: if set to `true`, instructs Tomcat to dump the headers for each request/response
   - FCREPO_TOMCAT_AUTH_LOGGING_ENABLED: if set to `true`, instructs Tomcat to log additional information regarding authentication and authorization
+  - FCREPO_JMS_CONFIGURATION: Defines the JMS broker configuration for Fedora.  A value of `classpath:/pass-jms-external.xml` specifies an external activemq.
+
 
 ### DSpace-related variables
 
@@ -82,6 +84,13 @@ To configure the Docker images, open up the `.env` file and make any necessary c
   - PI_FEDORA_JMS_QUEUE: name of Fedora JMS queue
   - PI_TYPE_PREFIX: prefix of Fedora resource type which indicates resource should be indexed
   - PI_LOG_LEVEL: log level of pass-indexer
+
+### ActiveMQ-related variables
+
+- `ACTIVEMQ_BROKER_URI` URI for clients to connect to the broker, e.g. `failover:tcp://activemq:61616`
+- `ACTIVEMQ_JMS_PORT` Openwire wire protocol (ActiveMQ native) port e.g. `61616`
+- `ACTIVEMQ_STOMP_PORT`= STOMP wire protocol (text-based) port e.g. `61613`
+- `ACTIVEMQ_WEBCONSOLE_PORT`= HTTP port for the ActiveMQ web console (admin/admin) e.g. `8161`
 
 <h2><a id="build" href="#build">Building the Docker Images</a> (optional)</h2>
 

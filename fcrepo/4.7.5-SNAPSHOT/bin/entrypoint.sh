@@ -44,6 +44,7 @@ OPTS="-Dfcrepo.home=${FCREPO_HOME}
       -Dfcrepo.modeshape.index.directory=${FCREPO_MODESHAPE_INDEX_DIRECTORY} \
       -Dfcrepo.object.directory=${FCREPO_OBJECT_DIRECTORY}                   \
       -Dfcrepo.activemq.configuration=${FCREPO_ACTIVEMQ_CONFIGURATION}       \
+      -Dactivemq.connectionfactory=${FCREPO_ACTIVEMQ_CONNECTIONFACTORY}      \
       -Dactivemq.broker.uri=${ACTIVEMQ_BROKER_URI}                           \
       -Dfcrepo.dynamic.jms.port=${FCREPO_JMS_PORT}                           \
       -Dfcrepo.dynamic.stomp.port=${FCREPO_STOMP_PORT}                       \

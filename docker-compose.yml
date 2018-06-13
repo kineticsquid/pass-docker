@@ -5,13 +5,11 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-4@sha256:5af64e29c4e0ecc0887c94ab5ea2fe6eea959e0dd30995985d4226b65de951a9
+    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-5@sha256:ff4bf5ef9e9ceafe04d86a94be6ae9ad90234998c2334fa1c598ee85ef1ce5d0
     container_name: fcrepo
     env_file: .env
     ports:
       - "${FCREPO_PORT}:${FCREPO_PORT}"
-      - "${FCREPO_JMS_PORT}:${FCREPO_JMS_PORT}"
-      - "${FCREPO_STOMP_PORT}:${FCREPO_STOMP_PORT}"
       - "${FCREPO_DEBUG_PORT}:${FCREPO_DEBUG_PORT}"
     networks:
       - front
@@ -20,6 +18,21 @@ services:
       - passdata:/data
     depends_on: 
       - assets
+      - activemq
+
+  activemq:
+    build:
+      context: ./activemq
+    image: oapass/activemq:20180611@sha256:ab180f10f19e72b4dc6b11f38f8faf4ba4789d623700827f85786f8cca52a19e
+    container_name: activemq
+    env_file: .env
+    ports:
+      - "${ACTIVEMQ_JMS_PORT}:${ACTIVEMQ_JMS_PORT}"
+      - "${ACTIVEMQ_STOMP_PORT}:${ACTIVEMQ_STOMP_PORT}"
+      - "${ACTIVEMQ_WEBCONSOLE_PORT}:${ACTIVEMQ_WEBCONSOLE_PORT}"
+    networks:
+      - front
+      - back
 
   ember:
     build:

@@ -12,6 +12,7 @@ FCREPO_STOMP_PORT=61613 \
 FCREPO_CONTEXT_PATH=/fcrepo \
 FCREPO_LOG_LEVEL=INFO \
 ACTIVEMQ_BROKER_URI=tcp://localhost:61616 \
+FCREPO_ACTIVEMQ_CONNECTIONFACTORY=org.apache.activemq.ActiveMQConnectionFactory \
 FCREPO_ACTIVEMQ_CONFIGURATION=classpath:/config/activemq.xml \
 FCREPO_SPRING_CONFIGURATION=classpath:/spring/master.xml \
 FCREPO_MODESHAPE_CONFIGURATION=classpath:/pass-repository.json \
