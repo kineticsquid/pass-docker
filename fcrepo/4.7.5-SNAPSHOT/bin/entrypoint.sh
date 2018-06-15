@@ -27,8 +27,9 @@ else
   fi
 fi
 
-OPTS="-Dfcrepo.home=${FCREPO_HOME}
-      -Dfcrepo.log=${FCREPO_LOG_LEVEL}
+OPTS="${OPTS}                                                                \
+      -Dfcrepo.home=${FCREPO_HOME}                                           \
+      -Dfcrepo.log=${FCREPO_LOG_LEVEL}                                       \
       -Dfcrepo.log.auth=${FCREPO_AUTH_LOG_LEVEL}                             \
       -Dfcrepo.log.jms=${FCREPO_LOG_JMS}                                     \
       -Dfcrepo.jms.baseUrl=${_JMS_BASEURL}                                   \
