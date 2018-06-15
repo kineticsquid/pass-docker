@@ -129,7 +129,7 @@ services:
 
   indexer:
     build: ./indexer/0.0.10-SNAPSHOT
-    image: oapass/indexer:0.0.10-2.2-SNAPSHOT-1@sha256:5cbba3d4f195ba28fd4b0111baf8a95a11bccdde44091538c31090c4df70b849
+    image: oapass/indexer:0.0.10-2.2-SNAPSHOT-2@sha256:dad48734e5b34ac79eaa12c6580ce1e79413a3a15787373819f7a80d01b1a7ae
     container_name: indexer
     env_file: .env
     networks:
