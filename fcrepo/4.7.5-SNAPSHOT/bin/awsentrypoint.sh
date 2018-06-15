@@ -9,7 +9,8 @@ if [ -f /bin/fcrepo_entrypoint.sh ]; then
       /bin/fcrepo_entrypoint.sh
 fi
 
-OPTS="-Daws.bucket=${FCREPO_AWS_BUCKET}                           \
-      -Daws.secretKey=${FCREPO_AWS_PASSWORD}                      "
+export OPTS="-Daws.bucket=${FCREPO_AWS_BUCKET}                          \
+	     -Daws.accessKeyId=${FCREPO_AWS_USER}			\
+      	     -Daws.secretKey=${FCREPO_AWS_PASSWORD}                    "
 
 /bin/entrypoint.sh
