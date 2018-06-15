@@ -84,6 +84,7 @@ To configure the Docker images, open up the `.env` file and make any necessary c
   - PI_FEDORA_JMS_QUEUE: name of Fedora JMS queue
   - PI_TYPE_PREFIX: prefix of Fedora resource type which indicates resource should be indexed
   - PI_LOG_LEVEL: log level of pass-indexer
+  - PI_MAX_ATTEMPTS: set the max attempts to contact Elasticsearch and Fedora (default: 20)
 
 ### ActiveMQ-related variables
 

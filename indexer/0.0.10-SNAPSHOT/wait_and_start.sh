@@ -10,7 +10,7 @@ function wait_until_fedora_up {
     echo "Waiting for response from Fedora via ${CMD}"
 
     RESULT=0
-    max=20
+    max=${PI_MAX_ATTEMPTS}
     i=1
     
     until [ ${RESULT} -eq 200 ]
@@ -37,7 +37,7 @@ function wait_until_es_up {
     echo "Waiting for response from Elasticsearch via ${CMD}"
 
     RESULT=0
-    max=20
+    max=${PI_MAX_ATTEMPTS}
     i=1
     
     until [ ${RESULT} -eq 200 ]
