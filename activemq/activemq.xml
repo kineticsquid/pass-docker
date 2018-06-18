@@ -61,13 +61,15 @@
         <destinationInterceptors>
             <virtualDestinationInterceptor>
                 <virtualDestinations>
-                    <compositeTopic name="fedora" forwardOnly="false">
+                    <virtualTopic name="VirtualTopic.>" prefix="Consumer.*."   selectorAware="false"/>
+                    <!--
+                    <compositeQueue name="pass" forwardOnly="false">
                         <forwardTo>
-                            <queue physicalName="indexer"/>
                             <filteredDestination selector="(orgFcrepoJmsEventType LIKE '%http://fedora.info/definitions/v4/event#ResourceCreation%' OR orgFcrepoJmsEventType LIKE '%http://fedora.info/definitions/v4/event#ResourceModification%') AND orgFcrepoJmsResourceType LIKE '%http://oapass.org/ns/pass#Submission%'" queue="submission"/>
                             <filteredDestination selector="(orgFcrepoJmsEventType LIKE '%http://fedora.info/definitions/v4/event#ResourceCreation%' OR orgFcrepoJmsEventType LIKE '%http://fedora.info/definitions/v4/event#ResourceModification%') AND orgFcrepoJmsResourceType LIKE '%http://oapass.org/ns/pass#Deposit%'" queue="deposit"/>
                         </forwardTo>
-                    </compositeTopic>
+                    </compositeQueue>
+                    -->
                 </virtualDestinations>
             </virtualDestinationInterceptor>
         </destinationInterceptors>

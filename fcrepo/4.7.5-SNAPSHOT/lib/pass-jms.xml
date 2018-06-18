@@ -24,7 +24,9 @@
   <context:annotation-config/>
 
   <!-- publishes events from the internal bus to JMS -->
-  <bean class="org.fcrepo.jms.JMSTopicPublisher"/>
+  <bean class="${fcrepo.jms.publisher:-org.fcrepo.jms.JMSTopicPublisher}">
+      <constructor-arg type="String" value="${fcrepo.jms.name:-fedora}"/>
+  </bean>
 
   <bean id="connectionFactory"
         class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="jmsBroker"
