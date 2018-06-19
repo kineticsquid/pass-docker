@@ -29,8 +29,11 @@
  </bean>
 
   <bean id="connectionFactory"
-        class="${activemq.connectionfactory:org.apache.activemq.ActiveMQConnectionFactory}"
-        p:brokerURL="${activemq.broker.uri}"/>
+        class="${fcrepo.connectionfactory:org.apache.activemq.ActiveMQConnectionFactory}">
+        <property name="brokerURL" value="${activemq.broker.uri:-tcp://localhost:61613}" />
+        <property name="userName" value="${activemq.broker.username:-}"/>
+        <property name="password" value="${activemq.broker.password:-}"/>
+  </bean>
 
   <!-- Insures Fedora message property names can be used in Message selectors -->
   <bean class="org.dataconservancy.fcrepo.jms.HeaderTransformingMessageFactory"/>

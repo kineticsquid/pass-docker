@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-7@sha256:bc62b45878ef0154423a7a67dc81b089270102234c7950ad1322e83bf3424d77
+    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-8@sha256:75abb2ccc05040f65c4ca854871d7005ea6853c974d70d932823a6ad3b611d23
     container_name: fcrepo
     env_file: .env
     ports:
@@ -23,7 +23,7 @@ services:
   activemq:
     build:
       context: ./activemq
-    image: oapass/activemq:20180614@sha256:2afadbccda09448ec67eb6d830314d2b690b83f1c535d0fbbefaee7ec358bfcc
+    image: oapass/activemq:20180618@sha256:e3cd47a1bc4c21899fc34e5ac7198f6c069f4148296bad0ce619cc2bdda5f435
     container_name: activemq
     env_file: .env
     ports:
@@ -129,7 +129,7 @@ services:
 
   indexer:
     build: ./indexer/0.0.10-SNAPSHOT
-    image: oapass/indexer:0.0.10-2.2-SNAPSHOT-2@sha256:dad48734e5b34ac79eaa12c6580ce1e79413a3a15787373819f7a80d01b1a7ae
+    image: oapass/indexer:0.0.11-2.2-SNAPSHOT@sha256:e950b07401ee790ec4d034d18ceafb05f5dd0a951e0f7f4fb13547f772934b7e
     container_name: indexer
     env_file: .env
     networks:

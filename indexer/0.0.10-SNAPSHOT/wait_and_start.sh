@@ -4,7 +4,19 @@
 # Wait until we get a 200 from Fedora or fail some number of times.
 # Then start indexer.
 
+if [ -z "$PI_FEDORA_JMS_BROKER" ]; then
+    export PI_FEDORA_JMS_BROKER=${SPRING_ACTIVEMQ_BROKER_URL}
+fi
 
+if [ -z "$PI_FEDORA_JMS_USER" ]; then
+    export PI_FEDORA_JMS_USER=${SPRING_ACTIVEMQ_USER}
+fi
+
+if [ -z "$PI_FEDORA_JMS_PASSWORD" ]; then
+    export PI_FEDORA_JMS_PASSWORD=${SPRING_ACTIVEMQ_PASSWORD}
+fi
+
+export PI_FEDORA_JMS_USER=${PI_FEDORA_JMS_USER:-}
 function wait_until_fedora_up {
     CMD="curl -I -u ${PI_FEDORA_USER}:${PI_FEDORA_PASS} --write-out %{http_code} --silent -o /dev/stderr ${PI_FEDORA_INTERNAL_BASE}"
     echo "Waiting for response from Fedora via ${CMD}"

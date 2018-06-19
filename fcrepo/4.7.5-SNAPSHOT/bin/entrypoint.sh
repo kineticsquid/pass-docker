@@ -26,7 +26,7 @@ else
     _JMS_BASEURL="http://${FCREPO_HOST}:${FCREPO_PORT}${FCREPO_CONTEXT_PATH}/rest"
   fi
 fi
-ACTIVEMQ_BROKER_URI=$( echo ${ACTIVEMQ_BROKER_URI} | sed 's/\(\W\)/\\\1/g')
+SPRING_ACTIVEMQ_BROKER_URL=$( echo ${SPRING_ACTIVEMQ_BROKER_URL} | sed 's/\(\W\)/\\\1/g')
 
 OPTS="${OPTS}                                                                \
       -Dfcrepo.home=${FCREPO_HOME}                                           \
@@ -49,7 +49,9 @@ OPTS="${OPTS}                                                                \
       -Dactivemq.connectionfactory=${FCREPO_ACTIVEMQ_CONNECTIONFACTORY}      \
       -Dfcrepo.jms.publisher=${FCREPO_JMS_PUBLISHER}                         \
       -Dfcrepo.jms.destination=${FCREPO_JMS_DESTINATION}                     \
-      -Dactivemq.broker.uri=${ACTIVEMQ_BROKER_URI}                           \
+      -Dactivemq.broker.uri=${SPRING_ACTIVEMQ_BROKER_URL}                    \
+      -Dactivemq.broker.username=${SPRING_ACTIVEMQ_USER}                     \
+      -Dactivemq.broker.password=${SPRING_ACTIVEMQ_PASSWORD}                 \
       -Dfcrepo.dynamic.jms.port=${FCREPO_JMS_PORT}                           \
       -Dfcrepo.dynamic.stomp.port=${FCREPO_STOMP_PORT}                       \
       -Dfcrepo.properties.management=${FCREPO_PROPERTIES_MANAGEMENT}         \
