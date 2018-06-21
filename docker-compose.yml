@@ -59,7 +59,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20180615@sha256:7e2b54361bb01e69e2d1ab48792dc71ef42159d31cab2c30dfd4b849d2db2858
+    image: oapass/httpd-proxy:20180618@sha256:fff8cff84a4821d52156c38d82d45910f4937806b857ece35571ea064665e92c
     container_name: proxy
     networks:
      - front
@@ -98,7 +98,7 @@ services:
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:201806015@sha256:412938d0847ff19df3dc2d8f2bf62cf1c45a66fa7b8f845a5d471acc2b2ab7f9
+    image: oapass/sp:20180618@sha256:6999dc7a46c3fd3710bb215d562aca12463e8366eead899ec633b84e1456af3a
     container_name: sp
     networks:
      - back
