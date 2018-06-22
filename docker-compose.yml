@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-8@sha256:75abb2ccc05040f65c4ca854871d7005ea6853c974d70d932823a6ad3b611d23
+    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-9@sha256:698b79edcd3bb89ff832e261021f6e8688e69227b08e436b862874b37fc2740f
     container_name: fcrepo
     env_file: .env
     ports:
@@ -158,7 +158,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-06-19@sha256:5639825b668e982f248d35bb23a5d942a9353ca37c55cba06221e568e8445d88
+    image: birkland/assets:2018-06-20@sha256:a0c584ca72683178382fb6002330c034d10b1b91851202fabfaef9fb812b9863
     build: ./assets
     volumes:
       - passdata:/data

@@ -11,6 +11,8 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     FEDORA_ADAPTER_CONTEXT=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld \
     FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
     FEDORA_ADAPTER_ES=/es/ \
+    FEDORA_ADAPTER_PASSWORD="" \    
+    FEDORA_ADAPTER_USER="" \
     USER_SERVICE_URL=/pass-user-service/whoami \
     EMBER_ROOT_URL=${EMBER_ROOT_URL:-/app/}
 
