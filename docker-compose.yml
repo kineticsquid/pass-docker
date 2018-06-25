@@ -40,11 +40,26 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180623-876e097@sha256:1f86e57fa1b888d01eee8483d1045f232e84d0787c04582b2591a592bb042aa5
+    image: oapass/ember:20180625-a236157@sha256:9a0cdd531d2a0fff9b7a2c788b690befe2ca14ddcbaa188e1428f77b2667594c
     container_name: ember
     env_file: .env
     networks:
       - back
+
+  static-html:
+    build:
+      context: ./static-html
+      args:
+        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
+        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
+    image: oapass/static-html:20180625-e2a4717@sha256:515be2360ca9e22b3ecbfee9ccdc4700af9e74764cfa0128fa8e96820c17b367
+    container_name: static-html
+    env_file: .env
+    ports:
+      - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
+    networks:
+      - back
+      - front
 
   ftpserver:
     build: ./ftpserver/0.0.1-demo
@@ -60,7 +75,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20180618@sha256:fff8cff84a4821d52156c38d82d45910f4937806b857ece35571ea064665e92c
+    image: oapass/httpd-proxy:20180622@sha256:423b358d177cb903316b1449ed2d25357137e85a9b3f4d270e30e56354c54c0e
     container_name: proxy
     networks:
      - front
