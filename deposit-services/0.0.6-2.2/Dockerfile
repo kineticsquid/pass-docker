@@ -44,8 +44,11 @@ EXPOSE ${DEPOSIT_DEBUG_PORT}
 #java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
 # spring.activemq.broker-url
 
+COPY bin/aws_entrypoint.sh /bin/
 RUN apk update && \
-    apk add --no-cache ca-certificates wget && \
+    apk add --no-cache ca-certificates wget python py-pip && \
+    pip install awscli && \
+    chmod 700 /bin/aws_entrypoint.sh && \
     wget -O deposit-messaging.jar \
         https://github.com/OA-PASS/nihms-submission/releases/download/deposit-services-${DEPOSIT_SERVICES_VERSION}/deposit-messaging-${DEPOSIT_SERVICES_VERSION}-${JSONLD_CONTEXT_VERSION}.jar
 
