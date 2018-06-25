@@ -18,7 +18,7 @@ ARG ES_HOST
 ARG ES_PORT
 ARG DEPOSIT_DEBUG_PORT
 
-ENV DEPOSIT_SERVICES_VERSION=0.0.5 \
+ENV DEPOSIT_SERVICES_VERSION=0.0.6 \
     JSONLD_CONTEXT_VERSION=2.2 \
     FCREPO_HOST=${FCREPO_HOST:-fcrepo} \
     FCREPO_PORT=${FCREPO_PORT:-8080} \
@@ -48,6 +48,10 @@ RUN apk update && \
     apk add --no-cache ca-certificates wget && \
     wget -O deposit-messaging.jar \
         https://github.com/OA-PASS/nihms-submission/releases/download/deposit-services-${DEPOSIT_SERVICES_VERSION}/deposit-messaging-${DEPOSIT_SERVICES_VERSION}-${JSONLD_CONTEXT_VERSION}.jar
+
+RUN touch /packagers.properties
+
+ADD packagers.properties /packagers.properties
 
 #ADD deposit-messaging-${DEPOSIT_SERVICES_VERSION}-${JSONLD_CONTEXT_VERSION}.jar deposit-messaging.jar
 

@@ -53,6 +53,7 @@ services:
     env_file: .env
     ports:
       - "${FTP_PORT}:${FTP_PORT}"
+      - "30000-30010:30000-30010"
     networks:
       - front
       - back
@@ -171,14 +172,19 @@ services:
   #    - back
 
   deposit:
-    build: ./deposit-services/0.0.5-2.2
-    image: oapass/deposit-services:0.0.5-2.2@sha256:56b3c6434991efc2e49ffe0e541f9bf0d25683f04e09ee52a41f45171280769d
+    build: ./deposit-services/0.0.6-2.2
+    image: oapass/deposit-services:0.0.6-2.2@sha256:e152e4b77bd86b09fc293b221bc25fa554e489bb394c362bbdf994ac5e30b6cb
     container_name: deposit
     env_file: .env
+    environment:
+      - PASS_DEPOSIT_TRANSPORT_CONFIGURATION=file:/packagers.properties
     ports:
       - "${DEPOSIT_DEBUG_PORT}:5007"
     networks:
       - back
+# To override packager configuration, create a file named './packagers.properties', edit to suit, and uncomment below
+#    volumes:
+#      - ./packagers.properties:/packagers.properties
 
 volumes:
   passdata:
