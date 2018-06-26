@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-9@sha256:698b79edcd3bb89ff832e261021f6e8688e69227b08e436b862874b37fc2740f
+    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-10@sha256:fef548b284f4a52bfe6530b8295f6dadd4f3cfe1ed330c564983a7382fd832d0
     container_name: fcrepo
     env_file: .env
     ports:
@@ -107,7 +107,7 @@ services:
 
   ldap:
     build: ./ldap/
-    image: oapass/ldap:20180609@sha256:a90044c91d70735f8a0b10cf63151d109fbb87fd775d48f5bc02a91c04fbd882
+    image: oapass/ldap:20180625@sha256:91775d0aa6ed7767aa25345355cea22c9136a8be4dac564ecc9c44870ab00af5
     container_name: ldap
     networks:
      - back
@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-06-20@sha256:a0c584ca72683178382fb6002330c034d10b1b91851202fabfaef9fb812b9863
+    image: birkland/assets:2018-06-24@sha256:3f2214373afe1791235487e153f58c4c3e4f4788a9d2d9ef35d6f8ca2a41bbbb
     build: ./assets
     volumes:
       - passdata:/data
@@ -200,6 +200,21 @@ services:
 # To override packager configuration, create a file named './packagers.properties', edit to suit, and uncomment below
 #    volumes:
 #      - ./packagers.properties:/packagers.properties
+
+  authz:
+    build: ./authz
+    image: oapass/authz:0.1.0-2.2-SNAPSHOT@sha256:7b82b6a348794f5aff4b91a90dcfcbeb1a8fbffee6a7e1bd337f12909480a86f
+    container_name: authz
+    env_file: .env
+    networks:
+      - back
+  
+  testing:
+    image: oapass/test:20180625@sha256:15b9a579eb46cfaf823334564078feb1d9f722a32fefb37073b7cd9081cd21f8
+    build: ./testing
+    env_file: .env
+    networks:
+      - back
 
 volumes:
   passdata:

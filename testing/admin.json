@@ -1,0 +1,7 @@
+{
+  "@id" : "",
+  "@type" : "User",
+  "localKey" : "admin0001",
+  "roles" : [ "admin" ],
+  "@context" : "https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld"
+}

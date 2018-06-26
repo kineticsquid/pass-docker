@@ -117,4 +117,18 @@ employeeNumber: 00003088
 displayName: Usai Duser
 employeeType: FACULTY
 
+dn: uid=admin,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Grant
+sn: Admin
+cn: Grant Admin
+mail: grand-admin@jhu.edu
+userPassword: moo
+employeeNumber: admin0001
+displayName: Grant Admin
+employeeType: STAFF
+
 

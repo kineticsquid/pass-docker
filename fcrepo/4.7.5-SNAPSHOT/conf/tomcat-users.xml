@@ -2,7 +2,7 @@
   <!-- Create passwords with ./digest.sh -a sha-256 -h org.apache.catalina.realm.MessageDigestCredentialHandler [PASSWD] -->
   <role rolename="fedoraAdmin" />
   <role rolename="http://oapass.org/ns/roles/johnshopkins.edu#pass-backend" />
-  <user name="backend" password="d643a7be407e3f39a924b147a84f48397af41fe465f65b8506daac6cd84904dd$1$0e6a64c63d54a053607b156d48a34fca1ddcaedca71d743b8635f21d50a14fb2" roles="http://oapass.org/ns/roles/johnshopkins.edu#pass-backend" />
+  <user name="backend" password="53253a46e9f2f74e6a1141f654eb0cb4a71624d0493e7289489ada0c6255a1f0$1$4ab46c609603537a8665e0dde3a6aaadae24914cb4d8cff10084bb1a7a45c91e" roles="http://oapass.org/ns/roles/johnshopkins.edu#pass-backend" />
   <user name="bootstrap" password="d643a7be407e3f39a924b147a84f48397af41fe465f65b8506daac6cd84904dd$1$0e6a64c63d54a053607b156d48a34fca1ddcaedca71d743b8635f21d50a14fb2" roles="fedoraAdmin" />
   <user name="fedoraAdmin" password="53253a46e9f2f74e6a1141f654eb0cb4a71624d0493e7289489ada0c6255a1f0$1$4ab46c609603537a8665e0dde3a6aaadae24914cb4d8cff10084bb1a7a45c91e" roles="fedoraAdmin" />
 </tomcat-users>

@@ -141,6 +141,7 @@ There are four users that can log in via Shibboleth. These can be used to log in
 * `ed-user` Person with DOE gtants
 * `usaid-user` Person with USAID grants
 * `incomplete-nih-user` Person with incomplete submissions harvested from NIHMS
+* `admin` Grant admin
 
 
 <h2><a id="stop" href="#stop">Stopping</a></h2>
