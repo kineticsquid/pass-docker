@@ -93,7 +93,12 @@ RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
     wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_1} \
         ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_1} && \
     wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_2} \
-        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_2}
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_2_2} && \
+    rm ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0.Final.jar && \
+    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0-maint-01.jar \
+        https://github.com/OA-PASS/modeshape/releases/download/modeshape-5.4.0-maint-01/modeshape-jcr-5.4.0.Final.jar && \
+    echo "159697fd2c15db3c9caf47f52f64c453e1ed67a2 *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0-maint-01.jar" \
+        | sha1sum -c -
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
