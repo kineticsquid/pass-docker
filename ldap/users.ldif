@@ -125,10 +125,38 @@ objectClass: inetOrgPerson
 givenName: Grant
 sn: Admin
 cn: Grant Admin
-mail: grand-admin@jhu.edu
+mail: grant-admin@jhu.edu
 userPassword: moo
-employeeNumber: admin0001
+employeeNumber: 99000001
 displayName: Grant Admin
+employeeType: STAFF
+
+dn: uid=admin-submitter,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Grant
+sn: Admin
+cn: Grant Admin
+mail: grant-admin-submitter@jhu.edu
+userPassword: moo
+employeeNumber: 99000002
+displayName: Grant Admin + Submitter
+employeeType: STAFF
+
+dn: uid=superuser,ou=People,dc=pass
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+givenName: Super
+sn: User
+cn: Superuser
+mail: superuser@jhu.edu
+userPassword: moo
+employeeNumber: 99000003
+displayName: Superuser
 employeeType: STAFF
 
 

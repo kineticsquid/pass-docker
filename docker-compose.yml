@@ -107,7 +107,7 @@ services:
 
   ldap:
     build: ./ldap/
-    image: oapass/ldap:20180625@sha256:91775d0aa6ed7767aa25345355cea22c9136a8be4dac564ecc9c44870ab00af5
+    image: oapass/ldap:201808706@sha256:89cdbc3e91917675d9e3da94447f05b74a8fa0b018965c8d97ff278273ab7971
     container_name: ldap
     networks:
      - back
@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-06-24@sha256:3f2214373afe1791235487e153f58c4c3e4f4788a9d2d9ef35d6f8ca2a41bbbb
+    image: birkland/assets:2018-07-06@sha256:2af6f8394e337e31abcf7594c66d03547824a49538aafa6ee688bb4011e8aab5
     build: ./assets
     volumes:
       - passdata:/data
@@ -205,13 +205,6 @@ services:
     build: ./authz
     image: oapass/authz:0.1.0-2.2-SNAPSHOT@sha256:7b82b6a348794f5aff4b91a90dcfcbeb1a8fbffee6a7e1bd337f12909480a86f
     container_name: authz
-    env_file: .env
-    networks:
-      - back
-  
-  testing:
-    image: oapass/test:20180625@sha256:15b9a579eb46cfaf823334564078feb1d9f722a32fefb37073b7cd9081cd21f8
-    build: ./testing
     env_file: .env
     networks:
       - back

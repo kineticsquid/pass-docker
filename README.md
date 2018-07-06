@@ -142,6 +142,8 @@ There are four users that can log in via Shibboleth. These can be used to log in
 * `usaid-user` Person with USAID grants
 * `incomplete-nih-user` Person with incomplete submissions harvested from NIHMS
 * `admin` Grant admin
+* `admin-submitter` A superuser-like user who can see all submissions/grants, and also create their own
+* `superuser` DOES NOT WORK, needs an update to the user roles enum in the java client.  An experimental superuser who has admin and submitter provileges, but also has permission to write to any resource.
 
 
 <h2><a id="stop" href="#stop">Stopping</a></h2>
