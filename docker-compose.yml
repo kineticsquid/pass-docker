@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-11@sha256:48e4aa7c6cb5ab384815e1e88e8421f5b6978b52764bcc050781882f188aa3e5
+    image: oapass/fcrepo:4.7.5-2.2-SNAPSHOT-12@sha256:944c9d26a45283dfe14189b6da0e83ce72f824cfe0306f3f2951c97e706c51d9
     container_name: fcrepo
     env_file: .env
     ports:
@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180629-98b53a1@sha256:2ef51acc561bb43f65736bfc6ee1f8b927920677194099ae87618c679d931e6e
+    image: oapass/ember:20180710-def62bf@sha256:d61d5dd96bbe792434a15e5cf7b04ddd8010ed976d97353af0fc3682097dee98
     container_name: ember
     env_file: .env
     networks:
@@ -52,7 +52,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:20180629-7a50084@sha256:30805d485830d08161a1d4b4fb73c6c070174cfd529deb6edbcd4ef3dd286022
+    image: oapass/static-html:20180706-50b17b9@sha256:96361a5ffea55c09a60ad2e27697b8430e76a71e78d43a0c7892bddc29c96772
     container_name: static-html
     env_file: .env
     ports:
@@ -203,7 +203,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.1.0-2.2-SNAPSHOT@sha256:7b82b6a348794f5aff4b91a90dcfcbeb1a8fbffee6a7e1bd337f12909480a86f
+    image: oapass/authz:0.1.1-2.2-SNAPSHOT@sha256:a502eedb69405bad165cf5289b89ae169cb494b24630c9d4cbd5400ca1538746
     container_name: authz
     env_file: .env
     networks:
