@@ -10,7 +10,7 @@ These instructions are for starting PASS with `docker-compose`.  If you have Doc
 
 <h2><a id="prereq" href="#prereq">Prerequisites</a></h2>
 
-1. Create a "hosts" entry (`lmhosts` for windows, `/etc/hosts` for *nix) that aliases the hostname `pass` to your loopback address (`127.0.0.1`) or to your docker-machine address (e.g. `192.168.99.100`)
+1. Create a "hosts" entry (`C:\Windows\System32\Drivers\etc\hosts` for windows, `/etc/hosts` for *nix) that aliases the hostname `pass.local` to your loopback address (`127.0.0.1`) or to your docker-machine address (e.g. `192.168.99.100`)
 2. A working Docker installation: Docker for Mac, Docker for Windows, Docker Linux, or Docker Machine
 3. Checkout (i.e. clone) this repository: `git clone https://github.com/OA-PASS/pass-demo-docker`
 4. `cd` into `pass-demo-docker`
@@ -112,13 +112,17 @@ If the images deployed to Docker Hub are up-to-date, then you do not need to bui
 
 If you built the images (or if you already have the images locally from a previous build), services should begin to start right away.  If you did not build the images, Docker will first pull the images from Docker Hub.
 
-After starting the demo with the defaults, the following services should work.
+The PASS home page is accessible at `https://pass.local`.  It links to the pass ember app at `https://pass.local/app`.  These are the correct URLs to use
+You'll be prompted to log in as necessary.  Use one of the [Shibboleth users](#shibboleth-users) below to log in.
 
-  - Ember application: [https://localhost](https://localhost). _See [Shibboleth users](#shibboleth-users) below for login options_ 
+
+After starting the demo with the defaults, the following services shoud be accessible directly to developers:
+
+  - Ember application: [https://pass.local/app](https://pass.local/app). _See [Shibboleth users](#shibboleth-users) below for login options_ 
   - Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
   - HTTP POST submission trigger: `localhost:8081`
   - Fedora: `http://localhost:8080/fcrepo/rest`
-  - Same Fedora instance behind a Shibboleth SP: `https://localhost/fcrepo/rest`
+  - Same Fedora instance behind a Shibboleth SP: `https://pass.local/fcrepo/rest`
   - DSpace repository, exposed at port `8181`: `http://localhost:8181/xmlui`
       - Login with username `dspace-admin@oapass.org`, password `foobar`
       - Not behind the Shibboleth SP

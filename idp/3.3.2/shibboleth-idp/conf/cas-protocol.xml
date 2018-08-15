@@ -28,7 +28,7 @@
                       p:singleLogoutParticipant="true" />
                 -->
                 <bean class="net.shibboleth.idp.cas.service.ServiceDefinition"
-                      c:regex="https://pass/.*"
+                      c:regex="https://pass.local/.*"
                       p:group="non-proxying-services"
                       p:authorizedToProxy="false" />
                 
