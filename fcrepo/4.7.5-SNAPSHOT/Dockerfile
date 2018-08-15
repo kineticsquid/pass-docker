@@ -2,7 +2,7 @@ FROM tomcat:8.5.31-jre8-alpine@sha256:f9a53932a3cc61ea3a1c307e7bf60897bce356c60c
 
 ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6-SNAPSHOT \
-PASS_AUTHZ_VERSION=0.1.1-SNAPSHOT \
+PASS_AUTHZ_VERSION=0.1.2-SNAPSHOT \
 JMS_ADDON_VERSION=0.0.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
@@ -63,11 +63,11 @@ RUN apk update && \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar \
         https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-authz-filters-${PASS_AUTHZ_VERSION}-shaded.jar && \
-    echo "2e1e0d4b39b32304a66bccc1a0821d58674a0234 *${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar" \
+    echo "1e8d710a20df5d4c4e168be92faf1b530e2a6e89 *${CATALINA_HOME}/lib/pass-authz-filters-shaded.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
         https://github.com/OA-PASS/pass-authz/releases/download/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
-    echo "502bcbff78497f00a93038f3e3596dcf7dd3c010 *${CATALINA_HOME}/webapps/pass-user-service.war" \
+    echo "b3e79012a09a97048ded20b76abf3501fa5685df *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \

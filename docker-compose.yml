@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180710-def62bf@sha256:d61d5dd96bbe792434a15e5cf7b04ddd8010ed976d97353af0fc3682097dee98
+    image: oapass/ember:20180717-f78c434@sha256:fb9053cbcc7d49b3c334ca5342a24192af5d3c118f56b24bfbe7449730c8b022
     container_name: ember
     env_file: .env
     networks:
@@ -52,7 +52,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:20180706-50b17b9@sha256:96361a5ffea55c09a60ad2e27697b8430e76a71e78d43a0c7892bddc29c96772
+    image: oapass/static-html:20180706-eb6c317@sha256:d79a7a468dd4c6f67c0079bd26ac29edbce115ed0d4bb66eb9687f3d42f40968
     container_name: static-html
     env_file: .env
     ports:
@@ -203,7 +203,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.1.1-2.2-SNAPSHOT@sha256:a502eedb69405bad165cf5289b89ae169cb494b24630c9d4cbd5400ca1538746
+    image: oapass/authz:0.1.2-2.2-SNAPSHOT@sha256:024f2c2902f0a8d7191310fafe848f38b09565fa17e8ed22de56866eab5721dc
     container_name: authz
     env_file: .env
     networks:
