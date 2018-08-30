@@ -4722,7 +4722,7 @@
 
     <filter>
       <filter-name>pass-authz-filter</filter-name>
-      <filter-class>org.dataconservancy.pass.authz.filter.PassRolesFilter</filter-class>
+      <filter-class>org.dataconservancy.pass.authz.roles.PassRolesFilter</filter-class>
       <async-supported>true</async-supported>
     </filter>
     
