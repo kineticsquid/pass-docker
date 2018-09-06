@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-07-06@sha256:2af6f8394e337e31abcf7594c66d03547824a49538aafa6ee688bb4011e8aab5
+    image: birkland/assets:2018-08-01@sha256:5a4e2605f6d37cd12d3a6fbc9afecc16ab427a395b3150b9f072d4b25a06fab2
     build: ./assets
     volumes:
       - passdata:/data
@@ -203,7 +203,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.1.2-2.2-SNAPSHOT@sha256:024f2c2902f0a8d7191310fafe848f38b09565fa17e8ed22de56866eab5721dc
+    image: oapass/authz:0.2.1-2.3-SNAPSHOT@sha256:b8eca98c4cece4b0eb6df7024eb6bdebff8bc311942f098813cc077d025f08d3
     container_name: authz
     env_file: .env
     networks:
