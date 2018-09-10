@@ -89,6 +89,7 @@ create_object "publishers"
 create_object "repositories"
 create_object "repositoryCopies"
 create_object "submissions"
+create_object "submissionEvents"
 create_object "users"
 
 curl -v -i -# -u bootstrap:bootstrap -X PUT -H "Content-Type: text/turtle" --data-binary "@conf/acl.ttl" ${REPO}/.acl

@@ -101,6 +101,7 @@
 [pass:Repository] > fedora:Container mixin
 [pass:RepositoryCopy] > fedora:Container mixin
 [pass:Submission] > fedora:Container mixin
+[pass:SubmissionEvent] > fedora:Container mixin
 [pass:User] > fedora:Container mixin
 
 
