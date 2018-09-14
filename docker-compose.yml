@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5-SNAPSHOT
-    image: oapass/fcrepo:4.7.5-3.0-SNAPSHOT@sha256:fdcddf58002b69805b26c6b965ca025e4f9de29f8b4b1c1c69413b1523f2320c
+    image: oapass/fcrepo:4.7.5-3.0-SNAPSHOT@sha256:7798dcdbd4d14f6fc1b607bf081079c4e5d541d79c4b51a782cbcded1643b01a
     container_name: fcrepo
     env_file: .env
     ports:
@@ -145,7 +145,7 @@ services:
 
   indexer:
     build: ./indexer/0.0.14-SNAPSHOT
-    image: oapass/indexer:0.0.14-3.0-SNAPSHOT@sha256:f7ffa3678c39010b78fd2c3873f7dd98235612e748966a0810a4884b25f4f83e
+    image: oapass/indexer:0.0.14-3.0-SNAPSHOT@sha256:c206639dfba1a7d43c9caebed0ae427f04fe758dbe0bce69b0a8f3817161de29
     container_name: indexer
     env_file: .env
     networks:

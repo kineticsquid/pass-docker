@@ -9,7 +9,7 @@ ADD wait_and_start.sh /app
 
 RUN apk add --no-cache ca-certificates wget gettext curl && \
     wget https://github.com/OA-PASS/pass-indexer/releases/download/${PI_VERSION}/pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar && \
-    echo "8dd3e8fe4ee36e77535ac4e50413150a69028382 *pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar" \
+    echo "b30b24bb731afbfb2ae62a8e8e87eb11d9130296 *pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar" \
         | sha1sum -c -  && \
     rm -rf /var/cache/apk/ && \
     chmod 700 wait_and_start.sh 
