@@ -1,6 +1,6 @@
 FROM openjdk:8u151-jre-alpine3.7@sha256:795d1c079217bdcbff740874b78ddea80d5df858b3999951a33871ee61de15ce
 
-ENV PI_VERSION=0.0.14
+ENV PI_VERSION=0.0.15
 ENV PI_MAX_ATTEMPTS=20
 
 WORKDIR /app
@@ -9,7 +9,7 @@ ADD wait_and_start.sh /app
 
 RUN apk add --no-cache ca-certificates wget gettext curl && \
     wget https://github.com/OA-PASS/pass-indexer/releases/download/${PI_VERSION}/pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar && \
-    echo "b30b24bb731afbfb2ae62a8e8e87eb11d9130296 *pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar" \
+    echo "d83110d2c2dd10036be0a231d5ca6d724037d55c *pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar" \
         | sha1sum -c -  && \
     rm -rf /var/cache/apk/ && \
     chmod 700 wait_and_start.sh 
