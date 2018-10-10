@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-09-18@sha256:ac73a08576a02e377c8341bb26237f92148d278da914b507ec0b3e3116ae3140
+    image: birkland/assets:2018-10-09_3.1@sha256:e9d40e67d0ea784e4812e94ca93b0353c1466cdbd21546906ab14d98f2565001
     build: ./assets
     volumes:
       - passdata:/data
