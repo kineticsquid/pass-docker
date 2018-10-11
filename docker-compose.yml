@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20180830-60511fc@sha256:e63282d248ecdb5b631186f71b6f444c4eefb0e789de2c9850f543d7eb1b21ae
+    image: oapass/ember:20181011-775220d@sha256:fd57c1c94562b650343df72b75104000869ccd9b99d90dab69930782396d17f6
     container_name: ember
     env_file: .env
     networks:
@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-08-01@sha256:5a4e2605f6d37cd12d3a6fbc9afecc16ab427a395b3150b9f072d4b25a06fab2
+    image: birkland/assets:2018-10-09@sha256:583fcbc5b44a447aeb637974191912ff41ed34d5c516f12b1a87fd855504c911
     build: ./assets
     volumes:
       - passdata:/data
