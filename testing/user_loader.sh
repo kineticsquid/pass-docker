@@ -3,13 +3,12 @@
 if [ -z $3 ]; then
   echo "user_loader.sh:  used for adding or updating user records manually"
   echo ""
-  echo "Usage:  load_user.sh <user:pass> <fcrepo baseuri> <employee id> [roles]"
+  echo "Usage:  load_user.sh <user:pass> <fcrepo baseuri> <jhed id> [roles]"
   echo ""
   echo "For example:"
-  echo "  load_admin.sh fedoraAdmin:moo http://localhost:8080/fcrepo/rest/ 00010000"
+  echo "  load_admin.sh fedoraAdmin:moo http://localhost:8080/fcrepo/rest/ aburrrd1"
   echo ""
   echo "Note: fcrepo baseurl must end in a slash"
-  echo "Note: employee ID must be 8 digits long, pad with zeroes if necessary"
   echo "Note: by default, the user is created as a submitter."
   echo "      The optional roles argument can override this"
   echo "      Known roles are {admin, submitter}"
@@ -24,9 +23,9 @@ curl -u $1 -i -# -X PUT -H "return=representation" -H "Prefer: handling=lenient;
 {
   "@id" : "${2}users/${3}",
   "@type" : "User",
-  "localKey" : "${3}",
+  "locatorIds" : ["johnshopkins.edu:jhed:${3}"],
   "roles" : [ "${4:-submitter}" ],
-  "@context" : "https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld"
+  "@context" : "https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.1.jsonld"
 }
 EOF
 
