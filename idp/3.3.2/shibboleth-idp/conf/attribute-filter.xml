@@ -50,6 +50,10 @@
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
 
+        <AttributeRule attributeID="departmentNumber">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
         <AttributeRule attributeID="eduPersonAffiliation">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>

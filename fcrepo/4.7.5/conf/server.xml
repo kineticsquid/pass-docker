@@ -163,6 +163,9 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
+        <Context path="/pass-user-service" docBase="pass-user-service" reloadable="false" />
+        <Context path="/fcrepo" docBase="fcrepo" reloadable="true" crossContext="true"/>
+
       </Host>
     </Engine>
   </Service>

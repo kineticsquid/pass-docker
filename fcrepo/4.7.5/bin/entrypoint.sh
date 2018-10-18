@@ -28,6 +28,10 @@ else
 fi
 SPRING_ACTIVEMQ_BROKER_URL=$( echo ${SPRING_ACTIVEMQ_BROKER_URL} | sed 's/\(\W\)/\\\1/g')
 
+printf "\n**** Begin Environment Variable Dump ****\n\n"
+printenv | sort
+printf "\n**** End Environment Variable Dump ****\n\n"
+
 OPTS="${OPTS}                                                                \
       -Dfcrepo.home=${FCREPO_HOME}                                           \
       -Dfcrepo.log=${FCREPO_LOG_LEVEL}                                       \
@@ -77,4 +81,9 @@ then
   OPTS="${OPTS} `echo ${DEBUG_ARG} | envsubst`"
 fi
 
+printf "\n**** Begin CATALINA_OPTS Dump ****\n\n"
+echo ${OPTS}
+printf "\n**** End CATALINA_OPTS Dump ****\n\n"
+
+echo "Executing ${CMD}"
 CATALINA_OPTS="${OPTS}" ${CMD}

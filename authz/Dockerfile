@@ -1,6 +1,5 @@
-FROM openjdk:8u151-jre-alpine3.7@sha256:795d1c079217bdcbff740874b78ddea80d5df858b3999951a33871ee61de15ce
-
-ENV VERSION=0.2.1-SNAPSHOT \
+FROM openjdk:8u171-jre-alpine3.8@sha256:e3168174d367db9928bb70e33b4750457092e61815d577e368f53efb29fea48b
+ENV VERSION=0.3.1 \
     AUTHZ_MAX_ATTEMPTS=20 \
     PASS_BACKEND_ROLE=http://oapass.org/ns/roles/johnshopkins.edu#pass-backend \
     PASS_GRANTADMIN_ROLE=http://oapass.org/ns/roles/johnshopkins.edu#admin \
@@ -12,8 +11,8 @@ WORKDIR /app
 ADD wait_and_start.sh /app
 
 RUN apk add --no-cache ca-certificates wget gettext curl && \
-    wget https://github.com/OA-PASS/pass-authz/releases/download/${VERSION}/pass-authz-listener-${VERSION}-exe.jar && \
-    echo "fd62ede89a84e4b7f8f8e2a6e57ee2684255299b *pass-authz-listener-${VERSION}-exe.jar" \
+    wget http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-listener/${VERSION}/pass-authz-listener-${VERSION}-exe.jar && \
+    echo "8d3efa9b68548f2c2d74cbe401bacd5c3bd7dba0 *pass-authz-listener-${VERSION}-exe.jar" \
         | sha1sum -c -  && \
     rm -rf /var/cache/apk/ && \
     chmod 700 wait_and_start.sh 

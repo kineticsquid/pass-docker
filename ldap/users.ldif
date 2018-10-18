@@ -15,6 +15,7 @@ sn: Hasgrants
 cn: Staff Hasgrants
 mail: staffWithGrants@jhu.edu
 userPassword: moo
+departmentNumber: 3PD4GS
 employeeNumber: 00017179
 displayName: Staff Hasgrants
 employeeType: STAFF
@@ -29,6 +30,7 @@ sn: Hasnogrants
 cn: Staff Hasnogrants
 mail: staffWithNoGrants@jhu.edu
 userPassword: moo
+departmentNumber: FAKE0002
 employeeNumber: 1020304
 displayName: Staff Hasnogrants
 employeeType: STAFF
@@ -43,6 +45,7 @@ sn: Hasgrants
 cn: Faculty Hasgrants
 mail: facultyWithGrants@jhu.edu
 userPassword: moo
+departmentNumber: UC8KV5
 employeeNumber: 00003343
 displayName: Faculty Hasgrants
 employeeType: FACULTY
@@ -57,6 +60,7 @@ sn: Hasnogrants
 cn: Faculty Hasnogrants
 mail: facultyWithNoGrants@jhu.edu
 userPassword: moo
+departmentNumber: FAKE0001
 employeeNumber: 2040608
 displayName: Faculty Hasnogrants
 employeeType: FACULTY
@@ -71,6 +75,7 @@ sn: Ser
 cn: Nihu Ser
 mail: nihuser@jhu.edu
 userPassword: moo
+departmentNumber: KYWJIT
 employeeNumber: 00001421
 displayName: Nihu Ser
 employeeType: FACULTY
@@ -85,6 +90,7 @@ sn: User
 cn: Ed User
 mail: eduser@jhu.edu
 userPassword: moo
+departmentNumber: FAKE0006
 employeeNumber: 00010090
 displayName: Ed User
 employeeType: FACULTY
@@ -100,6 +106,7 @@ cn: Incomplete Nihuser
 mail: incompletenihuser@jhu.edu
 userPassword: moo
 employeeNumber: 00023666
+departmentNumber: SDH72F
 displayName: Incomplete Nihuser
 employeeType: FACULTY
 
@@ -114,6 +121,7 @@ cn: Usai Duser
 mail: usaiduser@jhu.edu
 userPassword: moo
 employeeNumber: 00003088
+departmentNumber: KYN456
 displayName: Usai Duser
 employeeType: FACULTY
 
@@ -127,6 +135,7 @@ sn: Admin
 cn: Grant Admin
 mail: grant-admin@jhu.edu
 userPassword: moo
+departmentNumber: FAKE0003
 employeeNumber: 99000001
 displayName: Grant Admin
 employeeType: STAFF
@@ -141,6 +150,7 @@ sn: Admin
 cn: Grant Admin
 mail: grant-admin-submitter@jhu.edu
 userPassword: moo
+departmentNumber: FAKE0004
 employeeNumber: 99000002
 displayName: Grant Admin + Submitter
 employeeType: STAFF
@@ -155,6 +165,7 @@ sn: User
 cn: Superuser
 mail: superuser@jhu.edu
 userPassword: moo
+departmentNumber: FAKE0005
 employeeNumber: 99000003
 displayName: Superuser
 employeeType: STAFF
