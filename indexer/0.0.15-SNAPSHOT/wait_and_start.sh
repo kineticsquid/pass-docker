@@ -71,7 +71,13 @@ function wait_until_es_up {
     echo "Elasticsearch is up"
 }
 
+printf "\n**** Begin Environment Variable Dump ****\n\n"
+printenv | sort
+printf "\n**** End Environment Variable Dump ****\n\n"
+
 wait_until_fedora_up
 wait_until_es_up
+
+echo "executing java -Dorg.slf4j.simpleLogger.defaultLogLevel=${PI_LOG_LEVEL} -jar ${1}"
 
 exec java -Dorg.slf4j.simpleLogger.defaultLogLevel=${PI_LOG_LEVEL} -jar "$1"
