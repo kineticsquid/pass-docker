@@ -144,8 +144,8 @@ services:
       - back
 
   indexer:
-    build: ./indexer/0.0.15-SNAPSHOT
-    image: oapass/indexer:0.0.15-3.1-SNAPSHOT@sha256:69a261ca4e55cf81da2823125f8b2ad6716780f0c6087c13b659bd42d32d018a
+    build: ./indexer/0.0.16-SNAPSHOT
+    image: oapass/indexer:0.0.16-3.1-SNAPSHOT@sha256:4e17c59aca0a3d4314697a1ab3ac557379ddffe2ca2c0969709214e630ae7839
     container_name: indexer
     env_file: .env
     networks:
@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-10-17_3.1@sha256:76673a46123f121f35cffe6ef935b3fef7e59990ae91ff891f51e1ab653b9fcf
+    image: birkland/assets:2018-10-24_3.1@sha256:cb3b5dff6e08ee8d4154f6c5b4e0f3e3c5f99f3a4ef229ea3b2c688f0e98f913
     build: ./assets
     volumes:
       - passdata:/data
