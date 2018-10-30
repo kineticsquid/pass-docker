@@ -23,7 +23,7 @@ FCREPO_LOGBACK_LOCATION=webapps/fcrepo/WEB-INF/classes/logback.xml \
 FCREPO_PROPERTIES_MANAGEMENT=relaxed \
 SLF4J_VERSION=1.7.25 \
 DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006" \
-COMPACTION_URI=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.1.jsonld \
+COMPACTION_URI=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.2.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC_2_0=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.0.jsonld \
 COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0=/usr/local/tomcat/lib/context-2.0.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC_2_1=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.1.jsonld \
@@ -36,6 +36,8 @@ COMPACTION_PRELOAD_URI_PASS_STATIC_3_0=https://oa-pass.github.io/pass-data-model
 COMPACTION_PRELOAD_FILE_PASS_STATIC_3_0=/usr/local/tomcat/lib/context-3.0.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC_3_1=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.1.jsonld \
 COMPACTION_PRELOAD_FILE_PASS_STATIC_3_1=/usr/local/tomcat/lib/context-3.1.jsonld \
+COMPACTION_PRELOAD_URI_PASS_STATIC_3_2=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.2.jsonld \
+COMPACTION_PRELOAD_FILE_PASS_STATIC_3_2=/usr/local/tomcat/lib/context-3.2.jsonld \
 JSONLD_STRICT=true \
 JSONLD_CONTEXT_PERSIST=true \
 JSONLD_CONTEXT_MINIMAL=true \
@@ -110,6 +112,8 @@ RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
         ${COMPACTION_PRELOAD_URI_PASS_STATIC_3_0} && \
     wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_3_1} \
         ${COMPACTION_PRELOAD_URI_PASS_STATIC_3_1} && \
+    wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_3_2} \
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_3_2} && \
     rm ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0.Final.jar && \
     wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0-maint-01.jar \
         https://github.com/OA-PASS/modeshape/releases/download/modeshape-5.4.0-maint-01/modeshape-jcr-5.4.0.Final.jar && \
