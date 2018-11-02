@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5
-    image: oapass/fcrepo:4.7.5-3.2-1@sha256:51df2f614da4a88d297dff3f4e7062cba7090cc029c335ba10fed4cedb39a9f7
+    image: oapass/fcrepo:4.7.5-3.2-2@sha256:d06ff883b93da52e784e40315cb7f9f10fa38a0d529e83d89a0a120086bf18d8
     container_name: fcrepo
     env_file: .env
     ports:
@@ -203,7 +203,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.3.1-3.1@sha256:e965e2f55b56d5865a8a3edaf34dc181a7024e9537de9c284bece30f60991a90
+    image: oapass/authz:0.4.0-3.2@sha256:64a5a8e7a4280d990d91ca60dffefbde4ad967547569d13d71e6e0d1aed32492
     container_name: authz
     env_file: .env
     networks:

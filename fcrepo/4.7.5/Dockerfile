@@ -2,7 +2,7 @@ FROM tomcat:8.5.34-jre8-alpine@sha256:fa2bce34c65dc57162d4764f1a3ce7c734c926616b
 
 ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6 \
-PASS_AUTHZ_VERSION=0.3.1 \
+PASS_AUTHZ_VERSION=0.4.0 \
 JMS_ADDON_VERSION=0.0.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
@@ -69,15 +69,15 @@ RUN apk update && \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
         http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
-    echo "6825664d81d98e1ab4bfbff70f3541becdc97e39 *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
+    echo "265c733b0157e5206d7c721603e28283bb622aee *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar \
         http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-roles/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
-    echo "f0ee6585012b58394938bfe89609aee006ccd4b9 *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
+    echo "7e3a7e456524c47f4f730d57c0dfb2fd1e81a096 *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
         http://central.maven.org/maven2/org/dataconservancy/pass/pass-user-service/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
-    echo "306ce9d3735b52e1745cdc7b06b84380f73854d4 *${CATALINA_HOME}/webapps/pass-user-service.war" \
+    echo "12f2b1052e966bad1e699772a5fb436bc61aabe1 *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
