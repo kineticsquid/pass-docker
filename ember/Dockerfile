@@ -8,7 +8,6 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/OA-PASS/pass-ember} \
     EMBER_BUILD_DIR=/ember \
     FEDORA_ADAPTER_BASE=/fcrepo/rest/ \
-    FEDORA_ADAPTER_CONTEXT=https://oa-pass.github.io/pass-data-model/src/main/resources/context-2.2.jsonld \
     FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
     FEDORA_ADAPTER_ES=/es/ \
     FEDORA_ADAPTER_PASSWORD="" \    
