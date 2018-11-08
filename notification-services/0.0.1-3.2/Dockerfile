@@ -15,7 +15,8 @@ ENV NOTIFICATION_SERVICES_VERSION=0.0.1-3.2 \
     PASS_NOTIFICATION_QUEUE_EVENT_NAME=${PASS_NOTIFICATION_QUEUE_EVENT_NAME:-event} \
     PASS_NOTIFICATION_SMTP_HOST=${PASS_NOTIFICATION_SMTP_HOST:-localhost} \
     PASS_NOTIFICATION_SMTP_PORT=${PASS_NOTIFICATION_SMTP_PORT:-587} \
-    PASS_NOTIFICATION_CONFIGURATION=${PASS_NOTIFICATION_CONFIGURATION:-file:/notification.json}
+    PASS_NOTIFICATION_CONFIGURATION=${PASS_NOTIFICATION_CONFIGURATION:-file:/notification.json} \
+    NOTIFICATION_OPTS=""
 
 RUN apk update && \
     apk add --no-cache wget
@@ -23,6 +24,9 @@ RUN apk update && \
 #        https://github.com/OA-PASS/nihms-submission/releases/download/deposit-services-${DEPOSIT_SERVICES_VERSION}/deposit-messaging-${DEPOSIT_SERVICES_VERSION}-${JSONLD_CONTEXT_VERSION}.jar
 
 COPY notification-services.jar /
+COPY entrypoint.sh /
+
+RUN chmod 700 /entrypoint.sh
 
 COPY notification.json /notification.json
 
@@ -30,4 +34,4 @@ COPY templates/ /templates
 
 ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${NOTIFICATION_DEBUG_PORT}
 
-ENTRYPOINT [ "java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "notification-services.jar" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
