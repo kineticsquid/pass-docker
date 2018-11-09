@@ -25,12 +25,12 @@ Configuring the Docker images allows you to:
 
 To configure the Docker images, open up the `.env` file and make any necessary changes.  A brief description of the variables are below:
 
-### Submission package-related variables
+### NIHMS Submission package-related variables
+-FTP_HOST: NIHMS ftp server
+-FTP_PORT: NIHMS ftp port (default 21)
+-FTP_USER: NIHMS ftp username
+-FTP_PASS: NIHMS FTP pasword
 
-  - PY_GGI_PORT: an empty HTTP `POST` to this port triggers the deposit of a dummy submission package to an FTP server 
-  - FTP_SUBMISSION_DEBUG_PORT: Used for Java debugging
-  - FTP_SERVER_PORT: The FTP command port, typically port 21
-  - The FTP submission code base will be downloaded and built from `SUBMISSION_GIT_REPO`, using the branch or tag defined in `SUBMISSION_GIT_BRANCH` 
 
 ### Ember application-related variables
   
@@ -61,6 +61,14 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 
   - DSPACE_HOST: the host name DSpace will use when generating HTTP responses, defaults to `localhost` (`docker-machine` users _must_ set this to the IP address of their docker-machine)
   - DSPACE_PORT: the port that DSpace and its applications are exposed on, defaults to port `8181`
+
+### Deposit-related variables
+
+- DSPACE_BASEURI: The baseURI (protocol, host, port) of the DSpace instance to deposit into (default: `http://pass.local:8181`)
+- DSPACE_USERNAME: DSpace username
+- DSPACE_PASSWORD: DSpace password
+- DSPACE_COLLECTION_HANDLE:  Handle of the collection to deposit into (default: `123456789/2`)
+
   
 ### Postgres-related variables
 

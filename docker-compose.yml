@@ -197,7 +197,9 @@ services:
       - "${DEPOSIT_DEBUG_PORT}:5007"
     networks:
       - back
-# To override packager configuration, create a file named './packagers.properties', edit to suit, and uncomment below
+    links:
+      - dspace:pass.local
+# To override configuration, create a file named './repositories.json', edit to suit, and uncomment below
 #    volumes:
 #      - ./packagers.properties:/packagers.properties
     links:
