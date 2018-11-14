@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2018-11-07_3.2@sha256:5043faf1e43505e45c013e8f0542b7494ddd6379bcf3714607a42f48bd1f4f3e
+    image: birkland/assets:2018-11-13_3.2@sha256:60310d68c7ab910096f471bf6636b35487c52ab6db970fc280959f49eec0f465
     build: ./assets
     volumes:
       - passdata:/data
@@ -188,7 +188,7 @@ services:
 
   deposit:
     build: ./deposit-services/0.1.0-3.2
-    image: oapass/deposit-services:0.1.0-3.2@sha256:68bce9938c4999ed3d045576e9c0ef3f65b730ec745d24db89400e3aa31484b1
+    image: oapass/deposit-services:0.1.0-3.2-1@sha256:fbe0f70af890ab97a0b2ab6c8d3ad058f7117d81c029b0a1980d037e9a7adc33
     container_name: deposit
     env_file: .env
     environment:
