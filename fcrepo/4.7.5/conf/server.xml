@@ -159,9 +159,9 @@
         <!-- Access log processes all example.
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-               prefix="localhost_access_log" suffix=".txt"
-               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/proc/self/fd"
+               prefix="1" suffix="" rotatable="false" buffered="false"
+               pattern="%t %I %a %u %{Eppn}r %s status, %D ms, %b bytes; &quot;%r&quot; %{user-agent}i" />
 
         <Context path="/pass-user-service" docBase="pass-user-service" reloadable="false" />
         <Context path="/fcrepo" docBase="fcrepo" reloadable="true" crossContext="true"/>
