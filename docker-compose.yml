@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20181113-be78916@sha256:42643d501f2e451cc2eb58e5e809523e7342e6582e1f8c541b4ed0307055e3e1
+    image: oapass/ember:20181115-37cab27@sha256:18bbff8f018df480af12a0abcfed3cde9afb9dcd6f5a9779bb57d9bd70ea7b70
     container_name: ember
     env_file: .env
     networks:
