@@ -118,7 +118,11 @@ RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
     wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0-maint-01.jar \
         https://github.com/OA-PASS/modeshape/releases/download/modeshape-5.4.0-maint-01/modeshape-jcr-5.4.0.Final.jar && \
     echo "159697fd2c15db3c9caf47f52f64c453e1ed67a2 *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0-maint-01.jar" \
-        | sha1sum -c -
+        | sha1sum -c - && \
+    rm ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5.jar && \
+    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar \
+      https://github.com/OA-PASS/fcrepo-module-auth-rbacl/releases/download/fixes-4.7.5-0/fcrepo-auth-roles-common-4.7.5.jar && \
+    echo "21d21474ca15fa69741dd9bf66a0f39962eff8bd *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar"
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
