@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20181127-aec1ef8@sha256:7365cc4b1149907cfbfeb4bcad678b5146dc6c28ab025d94d09bb889759d1ed5
+    image: oapass/ember:20181220-5a50f87@sha256:fbc6379cd3ad03fdc6f87b3c46cef1bf0d0b0e5987e76f92c8079d87a8980af7
     container_name: ember
     env_file: .env
     networks:
@@ -245,7 +245,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.1.0
+    image: oapass/schema-service:v0.1.1
     container_name: schemaservice
     env_file: .env
     ports:
