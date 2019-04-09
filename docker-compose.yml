@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5
-    image: oapass/fcrepo:4.7.5-3.3-1@sha256:9449f465746f14ac20aac4fcccf14e58297b18b9f12a0202543beb4850afdda0
+    image: oapass/fcrepo:4.7.5-3.4@sha256:3e39b01edf56c149279cfc51b647df335c01f9ec38036f1724f337ae35d68fe8
     container_name: fcrepo
     env_file: .env
     ports:
@@ -144,8 +144,8 @@ services:
       - back
 
   indexer:
-    build: ./indexer/0.0.17-SNAPSHOT
-    image: oapass/indexer:0.0.17-3.2-SNAPSHOT@sha256:b572bb48814fb1624a29556fd648de7b4f432c9f65f904d609efcf7f8ac36948
+    build: ./indexer/0.0.18-SNAPSHOT
+    image: oapass/indexer:0.0.18-3.4@sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d
     container_name: indexer
     env_file: .env
     networks:
@@ -174,7 +174,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2019-04-08_3.3@sha256:380fec538483daabdcd413e90a9538725790425c8db63892cbc5059bcf6c0a06
+    image: birkland/assets:2019-04-08_3.4@sha256:a86764c153cd5e1876fa90b648de39f018d056ee30df991c429893a8ba036d6a
     build: ./assets
     volumes:
       - passdata:/data
