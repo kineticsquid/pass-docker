@@ -1,4 +1,4 @@
-FROM tomcat:8.5.34-jre8-alpine@sha256:fa2bce34c65dc57162d4764f1a3ce7c734c926616b692d9afbcf57496e1f9d4c
+FROM tomcat:8.5.39-jre8-alpine@sha256:fa2bce34c65dc57162d4764f1a3ce7c734c926616b692d9afbcf57496e1f9d4c
 
 ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6 \
@@ -38,8 +38,10 @@ COMPACTION_PRELOAD_URI_PASS_STATIC_3_1=https://oa-pass.github.io/pass-data-model
 COMPACTION_PRELOAD_FILE_PASS_STATIC_3_1=/usr/local/tomcat/lib/context-3.1.jsonld \
 COMPACTION_PRELOAD_URI_PASS_STATIC_3_2=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.2.jsonld \
 COMPACTION_PRELOAD_FILE_PASS_STATIC_3_2=/usr/local/tomcat/lib/context-3.2.jsonld \
-COMPACTION_PRELOAD_URI_PASS_STATIC_3_3=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.2.jsonld \
-COMPACTION_PRELOAD_FILE_PASS_STATIC_3_3=/usr/local/tomcat/lib/context-3.2.jsonld \
+COMPACTION_PRELOAD_URI_PASS_STATIC_3_3=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.3.jsonld \
+COMPACTION_PRELOAD_FILE_PASS_STATIC_3_3=/usr/local/tomcat/lib/context-3.3.jsonld \
+COMPACTION_PRELOAD_URI_PASS_STATIC_3_4=https://oa-pass.github.io/pass-data-model/src/main/resources/context-3.4.jsonld \
+COMPACTION_PRELOAD_FILE_PASS_STATIC_3_4=/usr/local/tomcat/lib/context-3.4.jsonld \
 JSONLD_STRICT=true \
 JSONLD_CONTEXT_PERSIST=true \
 JSONLD_CONTEXT_MINIMAL=true \
@@ -118,6 +120,8 @@ RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
         ${COMPACTION_PRELOAD_URI_PASS_STATIC_3_2} && \
     wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_3_3} \
         ${COMPACTION_PRELOAD_URI_PASS_STATIC_3_3} && \
+    wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_3_4} \
+        ${COMPACTION_PRELOAD_URI_PASS_STATIC_3_4} && \
     rm ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0.Final.jar && \
     wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/modeshape-jcr-5.4.0-maint-01.jar \
         https://github.com/OA-PASS/modeshape/releases/download/modeshape-5.4.0-maint-01/modeshape-jcr-5.4.0.Final.jar && \
