@@ -75,7 +75,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20190306@sha256:63770ee48bfaf251565b2e3ffd593284ed3783ef1b1c44390a60d57c9764009c
+    image: oapass/httpd-proxy:201900424@sha256:e960fa8c6df45dcfb062ca80e355fb97809f2ce9274b50fd36f672a1703463ee
     container_name: proxy
     networks:
      - front
@@ -114,7 +114,7 @@ services:
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20190306@sha256:6df4a3307fcee68c3f9b1e7fecaa58c0357da1713450a63173ab8a2c79cf14d5
+    image: oapass/sp:20190426@sha256:91f3cd23618f81b2be56d7760bb6dc0e22885ee1c000d14352686500f30595ee
     container_name: sp
     networks:
      - back
@@ -250,6 +250,16 @@ services:
     env_file: .env
     ports:
       - "${SCHEMA_SERVICE_PORT}:${SCHEMA_SERVICE_PORT}"
+    networks:
+      - front
+      - back
+  
+  policyservice:
+    image: oapass/policy-service:v0.1.0
+    container_name: policyservice
+    env_file: .env
+    ports:
+      - "${POLICY_SERVICE_PORT}:${POLICY_SERVICE_PORT}"
     networks:
       - front
       - back
