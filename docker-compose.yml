@@ -264,6 +264,16 @@ services:
       - front
       - back
 
+  doiservice:
+    image: oapass/doi-service:version0.0.1@sha256:23a438caeb1f0d4a6f4daab8585fb2f54e111595d843c08e7c1a1ed6e4e5cf27
+    container_name: doiservice
+    env_file: .env
+    ports:
+      - "${PASS_DOI_SERVICE_PORT}:8080"
+    networks:
+      - front
+      - back
+
 volumes:
   passdata:
     driver: local
