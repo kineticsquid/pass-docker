@@ -136,4 +136,4 @@ create_local_metadata_schema
 # Start jetty
 cd ${WORKDIR}
 
-java -Djetty.http.port=${DSPACE_PORT} -jar /usr/local/jetty/start.jar
+java -Djetty.http.port=${DSPACE_PORT} -Dorg.jboss.logging.provider=slf4j -jar /usr/local/jetty/start.jar
