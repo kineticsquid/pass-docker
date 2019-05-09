@@ -202,7 +202,7 @@ services:
 # To override configuration, create a file named './repositories.json', edit to suit, and uncomment below
 #    volumes:
 #      - ./packagers.properties:/packagers.properties
- 
+
 
   authz:
     build: ./authz
@@ -264,7 +264,7 @@ services:
       - back
 
   doiservice:
-    image: oapass/doi-service:version0.0.2@sha256:2fd2676923c1390db3b32f78e658868c95a7288c15be1965cdc3fea6bc429bc4
+    image: oapass/doi-service:version0.0.2@sha256:08e8fc7dbd0eb366cf049dd80dd45ab983c155fa6a34ccd32b3dc2315332f65e
     container_name: doiservice
     env_file: .env
     ports:
