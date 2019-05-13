@@ -45,11 +45,14 @@ RUN mkdir ${DSPACE_BUILD_DIR} && \
         openjdk8 \
         git && \
     rm -rf /var/cache/apk && \
-    rm -rf ~/.m2
+    rm -rf ~/.m2 && \
+    rm /var/lib/jetty/webapps/swordv2/WEB-INF/lib/commons-logging-1.2.jar
 
 ADD wait-and-init-db.sh /wait-and-init-db.sh
 
 ADD import.xml /import.xml
+
+ADD log4j.properties /dspace/config/log4j.properties
 
 RUN chown jetty /wait-and-init-db.sh && chmod 550 /wait-and-init-db.sh && chown ${DSPACE_USER} /import.xml
 
