@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5
-    image: oapass/fcrepo:4.7.5-3.4@sha256:3e39b01edf56c149279cfc51b647df335c01f9ec38036f1724f337ae35d68fe8
+    image: oapass/fcrepo:4.7.5-3.4-1@sha256:56faf95a9753f2548665de0154888221a7c02ae2158489d08ec5499ed7ceb3fd
     container_name: fcrepo
     env_file: .env
     ports:
@@ -206,7 +206,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.4.3-3.2@sha256:8739851bee894a77d207e420fe86b64b6df1fd02f17cbcc60275513026d13f3d
+    image: oapass/authz:0.4.4-3.4@sha256:a8f97298b613708775f22ad70a0dca59005d15143c77292533c51110933b7fde
     container_name: authz
     env_file: .env
     networks:
@@ -233,7 +233,7 @@ services:
 
   notification:
     build: notification-services/0.0.2-3.2
-    image: oapass/notification-services:0.0.2-3.2@sha256:7a693ce4005c88bdf93104d1cea1caec569dbb994ad8eaa07150dcd815a0e002
+    image: oapass/notification-services:0.0.2-3.2-1@sha256:5475490671d2c630f89265c44736f74d4520b84cf5b239c29b5c74678762a2e9
     container_name: notification
     networks:
       - back
