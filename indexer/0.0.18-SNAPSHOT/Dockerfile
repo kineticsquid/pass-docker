@@ -1,4 +1,4 @@
-FROM openjdk:8u151-jre-alpine3.7@sha256:795d1c079217bdcbff740874b78ddea80d5df858b3999951a33871ee61de15ce
+FROM openjdk:8u212-jre-alpine3.9@sha256:5c5867cd2d4d198d1e53562c8202dfa388832b6f7d8276e69eae212b326c7777
 
 ENV PI_VERSION=0.0.18 \
 PI_MAX_ATTEMPTS=20 \
@@ -16,6 +16,7 @@ RUN apk add --no-cache ca-certificates wget gettext curl && \
         | sha1sum -c -  && \
     wget https://oa-pass.github.io/pass-data-model/src/main/resources/esconfig-${ESCONFIG_VERSION}.json && \
     rm -rf /var/cache/apk/ && \
-    chmod 700 wait_and_start.sh 
+    chmod 700 wait_and_start.sh && \
+    echo "networkaddress.cache.ttl=10" >> ${JAVA_HOME}/lib/security/java.security
 
 CMD ./wait_and_start.sh pass-indexer-cli-${PI_VERSION}-SNAPSHOT-shaded.jar

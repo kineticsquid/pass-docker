@@ -145,7 +145,7 @@ services:
 
   indexer:
     build: ./indexer/0.0.18-SNAPSHOT
-    image: oapass/indexer:0.0.18-3.4@sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d
+    image: oapass/indexer:0.0.18-3.4-1@sha256:3375ea702e0a1c7a5e0e7e06635d28e49af436aeb1c3d88a03d4cb494d7b40bf
     container_name: indexer
     env_file: .env
     networks:
@@ -233,7 +233,7 @@ services:
 
   notification:
     build: notification-services/0.0.2-3.2
-    image: oapass/notification-services:0.0.2-3.2@sha256:7a693ce4005c88bdf93104d1cea1caec569dbb994ad8eaa07150dcd815a0e002
+    image: oapass/notification-services:0.0.2-3.2-1@sha256:5475490671d2c630f89265c44736f74d4520b84cf5b239c29b5c74678762a2e9
     container_name: notification
     networks:
       - back
