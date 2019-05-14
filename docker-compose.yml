@@ -40,7 +40,7 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20181220-5a50f87@sha256:fbc6379cd3ad03fdc6f87b3c46cef1bf0d0b0e5987e76f92c8079d87a8980af7
+    image: oapass/ember:20190514-ab7204f@sha256:86356247d5e57e5f551ff8b8648317d65333dcd8f135051bef9e4bf275f3817a
     container_name: ember
     env_file: .env
     networks:
@@ -187,8 +187,8 @@ services:
   #    - back
 
   deposit:
-    build: ./deposit-services/0.1.0-3.2
-    image: oapass/deposit-services:0.1.0-3.2-1@sha256:fbe0f70af890ab97a0b2ab6c8d3ad058f7117d81c029b0a1980d037e9a7adc33
+    build: ./deposit-services/1.0.0-3.4
+    image: oapass/deposit-pass-docker:1.0.0-3.4-SNAPSHOT@sha256:3ec7c322518150a236369ed91a100f54c65d641ca9239ef46228d852237b8bfa
     container_name: deposit
     env_file: .env
     environment:
@@ -244,7 +244,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.2.1@sha256:e19e5909155d605d465ca70df55acb14cdeac8a1ffe5bbb2de44b3298d734013
+    image: oapass/schema-service:v0.2.1-1-gb28397@sha256:3a2435f58e7125ff2f5ad150c40fe6767ab1e1be428401b225f5204ed4d8cdda
     container_name: schemaservice
     env_file: .env
     ports:
