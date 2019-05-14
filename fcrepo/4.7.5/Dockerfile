@@ -1,8 +1,8 @@
-FROM tomcat:8.5.39-jre8-alpine@sha256:fa2bce34c65dc57162d4764f1a3ce7c734c926616b692d9afbcf57496e1f9d4c
+FROM tomcat:8.5.40-jre8-alpine@sha256:3bfda84777039e5150a74bfdff71979d1cb7106d74382a735a80f18b5d6d2ebb
 
 ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6 \
-PASS_AUTHZ_VERSION=0.4.3 \
+PASS_AUTHZ_VERSION=0.4.4 \
 JMS_ADDON_VERSION=0.0.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
@@ -73,15 +73,15 @@ RUN apk update && \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
         http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
-    echo "5452244709c27e4ced16a4d306c98bb9e27e1c69 *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
+    echo "622ad18d2f062e761426a5b0ec71f222794e5fbd *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar \
         http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-roles/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
-    echo "ccddd9161eb8b81edfb45104fb87a9217f5d2004 *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
+    echo "671c6f3d086124f2033ac51794d95a250a222d28 *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
         http://central.maven.org/maven2/org/dataconservancy/pass/pass-user-service/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
-    echo "ddde99f6a56deda705023a1d96b75407b2917a60 *${CATALINA_HOME}/webapps/pass-user-service.war" \
+    echo "48c13c3848d0b50370cdedb8fbcd0c5d3816199d *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
     unzip ${CATALINA_HOME}/webapps/pass-user-service.war -d ${CATALINA_HOME}/webapps/pass-user-service  && \
@@ -130,7 +130,8 @@ RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
     rm ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5.jar && \
     wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar \
       https://github.com/OA-PASS/fcrepo-module-auth-rbacl/releases/download/fixes-4.7.5-0/fcrepo-auth-roles-common-4.7.5.jar && \
-    echo "21d21474ca15fa69741dd9bf66a0f39962eff8bd *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar"
+    echo "21d21474ca15fa69741dd9bf66a0f39962eff8bd *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar" && \
+    echo "networkaddress.cache.ttl=10" >> ${JAVA_HOME}/lib/security/java.security
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
