@@ -72,6 +72,13 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 - PASS_DEPOSIT_QUEUE_DEPOSIT_NAME: the name of the queue (managed by the ActiveMQ container) that emits messages relating to `Deposit` resources
 
 A [full](https://github.com/OA-PASS/deposit-services#production-configuration-variables) listing of supported variables for Deposit Services are found [here](https://github.com/OA-PASS/deposit-services#production-configuration-variables).
+### Policy service variables
+
+- PASS_EXTERNAL_FEDORA_BASEURL:  External (public) PASS baseurl (e.g. https://pass.local/fcrepo/rest)
+- PASS_FEDORA_BASEURL: Internal (private) PASS baseurl (e.g. http://localhost:8080/fcrepo/rest)
+- PASS_FEDORA_USER:  Username for basic auth to Fedora (default: "fedoraAdmin")
+- PASS_FEDORA_PASSWORD: Password for basic auth to Fedora (default: "moo")
+- POLICY_FILE: Location of the policy DSL file.  Baked-in values are `docker.json` (default), and `aws.json` (works in the AWS environment)
   
 ### Postgres-related variables
 
