@@ -254,7 +254,7 @@ services:
       - back
   
   policyservice:
-    image: oapass/policy-service:v0.1.1@sha256:7eec368c7da024c1a3a955e80c2185928f86188e2e870ed9bf11846dc0153980
+    image: oapass/policy-service:v0.1.2@sha256:b361bc7dd9d366465f7683052e038e5ec93ef77a48e69176590c84044ce7d804
     container_name: policyservice
     env_file: .env
     ports:
