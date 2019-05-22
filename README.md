@@ -26,11 +26,10 @@ Configuring the Docker images allows you to:
 To configure the Docker images, open up the `.env` file and make any necessary changes.  A brief description of the variables are below:
 
 ### NIHMS Submission package-related variables
--FTP_HOST: NIHMS ftp server
--FTP_PORT: NIHMS ftp port (default 21)
--FTP_USER: NIHMS ftp username
--FTP_PASS: NIHMS FTP pasword
-
+  - FTP_HOST: NIHMS ftp server
+  - FTP_PORT: NIHMS ftp port (default 21)
+  - FTP_USER: NIHMS ftp username
+  - FTP_PASS: NIHMS FTP pasword
 
 ### Ember application-related variables
   
@@ -56,7 +55,6 @@ To configure the Docker images, open up the `.env` file and make any necessary c
   - FCREPO_TOMCAT_AUTH_LOGGING_ENABLED: if set to `true`, instructs Tomcat to log additional information regarding authentication and authorization
   - FCREPO_JMS_CONFIGURATION: Defines the JMS broker configuration for Fedora.  A value of `classpath:/pass-jms-external.xml` specifies an external activemq.
 
-
 ### DSpace-related variables
 
   - DSPACE_HOST: the host name DSpace will use when generating HTTP responses, defaults to `localhost` (`docker-machine` users _must_ set this to the IP address of their docker-machine)
@@ -65,10 +63,15 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 ### Deposit-related variables
 
 - DSPACE_BASEURI: The baseURI (protocol, host, port) of the DSpace instance to deposit into (default: `http://pass.local:8181`)
-- DSPACE_USERNAME: DSpace username
-- DSPACE_PASSWORD: DSpace password
+- DSPACE_USERNAME: SWORD DSpace username
+- DSPACE_PASSWORD: SWORD DSpace password
 - DSPACE_COLLECTION_HANDLE:  Handle of the collection to deposit into (default: `123456789/2`)
 
+- DEPOSIT_SERVICES_DEBUG_PORT: the port that Deposit Services will listen to for the purposes of attaching a Java debugger (this env var may not work)
+- PASS_DEPOSIT_QUEUE_SUBMISSION_NAME: the name of the queue (managed by the ActiveMQ container) that emits messages relating to `Submission` resources
+- PASS_DEPOSIT_QUEUE_DEPOSIT_NAME: the name of the queue (managed by the ActiveMQ container) that emits messages relating to `Deposit` resources
+
+A [full](https://github.com/OA-PASS/deposit-services#production-configuration-variables) listing of supported variables for Deposit Services are found [here](https://github.com/OA-PASS/deposit-services#production-configuration-variables).
   
 ### Postgres-related variables
 
