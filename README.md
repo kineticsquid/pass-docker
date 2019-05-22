@@ -80,6 +80,16 @@ A [full](https://github.com/OA-PASS/deposit-services#production-configuration-va
 - PASS_FEDORA_PASSWORD: Password for basic auth to Fedora (default: "moo")
 - SCHEMA_SERVICE_PORT: The port the schema service is served on (default: random)
 
+### DOI service variables
+The service will look for an environment variable called PASS_DOI_SERVICE_MAILTO to specify a value on the User-Agent header on the Crossref request. If not present, the default is pass@jhu.edu. The service will require the following environment variables for the java client for Fedora if the defaults are not to be used:
+
+- PASS_FEDORA_USER
+- PASS_FEDORA_PASSWORD
+- PASS_FEDORA_BASEURL
+- PASS_ELASTICSEARCH_URL
+- PASS_ELASTICSEARCH_LIMIT
+
+In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate internal Journal ids to the external form presented to clients
 
 ### Policy service variables
 
