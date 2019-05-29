@@ -16,7 +16,7 @@ services:
       - back
     volumes:
       - passdata:/data
-    depends_on: 
+    depends_on:
       - assets
       - activemq
 
@@ -164,13 +164,13 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - passdata:/usr/share/elasticsearch/data   
-    ports: 
+      - passdata:/usr/share/elasticsearch/data
+    ports:
       - "${ES_PORT}:${ES_PORT}"
     networks:
       - front
       - back
-    depends_on: 
+    depends_on:
       - assets
 
   assets:
@@ -178,7 +178,7 @@ services:
     build: ./assets
     volumes:
       - passdata:/data
-  
+
   #bootstrap:
   #  image: oapass/bootstrap
   #  build: ./bootstrap
@@ -244,7 +244,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.3.0@sha256:2823e9ee3870f0000ba60205cf0c6df6e9c66244ce357ee6e61d2bac9fc034f2
+    image: oapass/schema-service:v0.3.1@sha256:9276b5262e964f19ee0bc9be9eedb82c237349afe6d934ba84b5a152bab44bc5
     container_name: schemaservice
     env_file: .env
     ports:
@@ -252,7 +252,7 @@ services:
     networks:
       - front
       - back
-  
+
   policyservice:
     image: oapass/policy-service:v0.1.2@sha256:b361bc7dd9d366465f7683052e038e5ec93ef77a48e69176590c84044ce7d804
     container_name: policyservice
