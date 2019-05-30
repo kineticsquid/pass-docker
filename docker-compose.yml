@@ -40,7 +40,10 @@ services:
       args:
         EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
         EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-    image: oapass/ember:20190514-ab7204f@sha256:86356247d5e57e5f551ff8b8648317d65333dcd8f135051bef9e4bf275f3817a
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL}"
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
+    image: oapass/ember:20190530-48465ee@sha256:79e7a87a46d7ac198f28fd3419f31e9bd914d0f450ad92619b21c4a146dbde02
     container_name: ember
     env_file: .env
     networks:
