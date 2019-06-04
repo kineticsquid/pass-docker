@@ -43,7 +43,7 @@ services:
         POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
         USER_SERVICE_URL: "${USER_SERVICE_URL}"
         DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-    image: oapass/ember:20190604-3dad8d5:@sha256:6b7dfec99c144903935e1d007ea6364fa613392b20f130c969735984b970afcb
+    image: oapass/ember:20190604-3dad8d5@sha256:6b7dfec99c144903935e1d007ea6364fa613392b20f130c969735984b970afcb
     container_name: ember
     env_file: .env
     networks:
