@@ -14,13 +14,14 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     FEDORA_ADAPTER_BASE=/fcrepo/rest/ \
     FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
     FEDORA_ADAPTER_ES=/es/ \
-    FEDORA_ADAPTER_PASSWORD="" \    
+    FEDORA_ADAPTER_PASSWORD="" \
     FEDORA_ADAPTER_USER="" \
     USER_SERVICE_URL=${USER_SERVICE_URL:-/pass-user-service/whoami} \
     SCHEMA_SERVICE_URL=${SCHEMA_SERVICE_URL:-/schemaservice} \
     DOI_SERVICE_URL=${DOI_SERVICE_URL:-/doiservice/journal} \
     POLICY_SERVICE_URL=${POLICY_SERVICE_URL:-/policies} \
-    EMBER_ROOT_URL=${EMBER_ROOT_URL:-/app/}
+    EMBER_ROOT_URL=${EMBER_ROOT_URL:-/app/} \
+    METADATA_SCHEMA_URI=${METADATA_SCHEMA_URI:-https://oa-pass.github.com/metadata-schemas/jhu/global.json}
 
 RUN apk add --no-cache nodejs-npm git && \
     mkdir -p ${EMBER_BUILD_DIR} && \

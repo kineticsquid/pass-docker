@@ -1,8 +1,8 @@
 # Purpose
 
 This repository serves as the canonical environment for demonstrating integration of the [PASS Ember application](https://github.com/oa-pass/pass-ember) with its dependant services.  This repository provides two things:
-1. Docker images that are the basis for the production deployment of PASS, pushed to the [`pass` organization](https://hub.docker.com/u/pass/dashboard/) in Docker Hub 
-1. Provides a `docker-compose` orchestration that configures and launches PASS for developers 
+1. Docker images that are the basis for the production deployment of PASS, pushed to the [`pass` organization](https://hub.docker.com/u/pass/dashboard/) in Docker Hub
+1. Provides a `docker-compose` orchestration that configures and launches PASS for developers
 
 # Instructions
 
@@ -32,12 +32,13 @@ To configure the Docker images, open up the `.env` file and make any necessary c
   - FTP_PASS: NIHMS FTP pasword
 
 ### Ember application-related variables
-  
+
   - EMBER_PORT: the Ember HTTP application is served on this port
   - The Ember code base will be downloaded and built from `EMBER_GIT_REPO`, using the branch or tag defined in `EMBER_GIT_BRANCH`
   - DOI_SERVICE_URL: The relative URL of the DOI service, used at `ember` image _build time_, not run time (default: `/doiservice/journal`)
   - POLICY_SERVICE_URL: The relative URL of the schema service, used at `ember` image _build time_, not run time (default: `/policyservice`)
   - USER_SERVICE_URL: The relative URL of the user service, used at `ember` image _build time_, not run time (default: `/pass-user-service/whoami`)
+  - METADATA_SCHEMA_URI: URL to the metadata global schema. Gets added to metadata blob (default: `https://oa-pass.github.io/metadata-schemas/jhu/global.json`)
 
 
 ### Fedora-related variables
@@ -143,7 +144,7 @@ In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate inte
 - JMS_BROKERURL: (URI, default `tcp://localhost:61616`) JMS broker connection URL.
 - JMS_USERNAME: (String, no default). JMS connection username. Leave undefined if it is not password protected.
 - JMS_PASSWORD: (String, no default). JMS connection password. Leave undefined if it is not password protected.
-  
+
 ### Postgres-related variables
 
   - POSTGRES_DB_PORT: the port that the Postgres database is exposed on, defaults to `6543`
@@ -161,7 +162,7 @@ In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate inte
   - PI_FEDORA_INTERNAL_BASE: Internal URI for Fedora. Used to test if it is up.
   - PI_ES_BASE: URL to base of Elasticsearch. Used to test if it is up.
   - PI_ES_INDEX: URL to Elasticsearch index where Fedora resources will be indexed.
-  - PI_ES_CONFIG: URL to Elasticsearch index where Fedora resources will be indexed.  
+  - PI_ES_CONFIG: URL to Elasticsearch index where Fedora resources will be indexed.
   - PI_FEDORA_JMS_BROKER: location of Fedora JMS broker.
   - PI_FEDORA_JMS_QUEUE: name of Fedora JMS queue
   - PI_TYPE_PREFIX: prefix of Fedora resource type which indicates resource should be indexed
@@ -182,7 +183,7 @@ In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate inte
 - `MAIL_MSP`: Mail submission port, defaults to `11587`.  This is the port you should use when defining an SMTP mail relay for your application.  _Does not use SSL or TLS, and no authentication is required_
 - `OVERRIDE_HOSTNAME`: Set the hostname for the container, defaults to `mail.jhu.edu`.  (This is _not_ the value you use when configuring an email client to talk to the mail container, this is a variable used internally by the mail server itself)
 - `ENABLE_SPAMASSASSIN`: `1` enables SA, defaults to `0`.
-- `ENABLE_CLAMAV`: `1` enables CLAMAV, defaults to `0`. 
+- `ENABLE_CLAMAV`: `1` enables CLAMAV, defaults to `0`.
 - `ENABLE_FAIL2BAN`: `1` enables fail2ban, defaults to `0`.
 - `ENABLE_POSTGREY`: `1` enables postgrey, defaults to `0`.
 - `ENABLE_SASLAUTHD`: `1` enables SASL auth, defaults to `0`.
@@ -225,7 +226,7 @@ Supported environment variables (system property analogs) and default values are
 - `PASS_NOTIFICATION_SMTP_PORT` (`pass.notification.smtp.port`): SMTP port used by NS to send email (`${pass.notification.smtp.port:587}`)
 - `PASS_NOTIFICATION_SMTP_USER` (`pass.notification.smtp.user`): user used to connect to the SMTP relay (`<empty string>`)
 - `PASS_NOTIFICATION_SMTP_PASS` (`pass.notification.smtp.pass`): password used to connect to the SMTP relay (`<empty string>`)
-- `PASS_NOTIFICATION_SMTP_TRANSPORT` (`pass.notification.smtp.transport`): transport used to communicate with the SMTP relay, one of `SMTP`, `SMTPS`, `SMTP_TLS` (`${pass.notification.smtp.transport:SMTP}`)  
+- `PASS_NOTIFICATION_SMTP_TRANSPORT` (`pass.notification.smtp.transport`): transport used to communicate with the SMTP relay, one of `SMTP`, `SMTPS`, `SMTP_TLS` (`${pass.notification.smtp.transport:SMTP}`)
 - `PASS_NOTIFICATION_MAILER_DEBUG` (`pass.notification.mailer.debug`): enable debugging for the Java Mail API (`false`)
 - `PASS_NOTIFICATION_CONFIGURATION` (`pass.notification.configuration`): location of the Notification Service runtime configuration file (`classpath:/notification.json`)
 - `PASS_NOTIFICATION_HTTP_AGENT` (`pass.notification.http.agent`): user agent string used by the PASS Java Client when communicating with the Fedora repository or ES (`pass-notification/x.y.z`)
@@ -286,7 +287,7 @@ If you wish, you can configure an outgoing SMTP server, but that is not necessar
 - Do *not* use SSL or TLS
 - No username or password is required (do not use SMTP auth)
 
-**Note:** Sometimes there is trouble when initially connecting to the mail server using IMAP SSL.  You must be able to accept a fake certificate in your mail reader before continuing to communicate with the IMAP server.  This is sometimes problematic.  For example, in Mac Mail, it takes a long time (2-3 minutes?) for Mac Mail to prompt for the acceptance of the SSL certificate.  This behavior may be related to issue [45](https://github.com/OA-PASS/notification-services/issues/45).  The hostname presented by the SSL certificate is not an RFC-valid DNS hostname, and may cause some trouble.  
+**Note:** Sometimes there is trouble when initially connecting to the mail server using IMAP SSL.  You must be able to accept a fake certificate in your mail reader before continuing to communicate with the IMAP server.  This is sometimes problematic.  For example, in Mac Mail, it takes a long time (2-3 minutes?) for Mac Mail to prompt for the acceptance of the SSL certificate.  This behavior may be related to issue [45](https://github.com/OA-PASS/notification-services/issues/45).  The hostname presented by the SSL certificate is not an RFC-valid DNS hostname, and may cause some trouble.
 
 The Mac Mail "Connection Doctor", combined with the log output from the `pass-docker` `mail` container (`docker logs mail`) can help troubleshoot the underlying problem.
 
@@ -304,7 +305,7 @@ If the images deployed to Docker Hub are up-to-date, then you do not need to bui
     - If the build executes quickly, and you see references to cached image layers, then that means that Docker believes the image is already up-to-date (i.e. nothing has changed in the `Dockerfile` for the image).
 
 >Invoke `docker-compose build --no-cache` to insure that content included in the images by `ADD`, `COPY` or GitHub source checkouts is up-to-date
-  
+
 <h2><a id="start" anchor="#start">Starting Docker</a></h2>
 
 1. Run `docker-compose up`
@@ -317,7 +318,7 @@ You'll be prompted to log in as necessary.  Use one of the [Shibboleth users](#s
 
 After starting the demo with the defaults, the following services shoud be accessible directly to developers:
 
-  - Ember application: [https://pass.local/app](https://pass.local/app). _See [Shibboleth users](#shibboleth-users) below for login options_ 
+  - Ember application: [https://pass.local/app](https://pass.local/app). _See [Shibboleth users](#shibboleth-users) below for login options_
   - Internal FTP server: `localhost:21`, username: `nihmsftpuser` password: `nihmsftppass`
   - HTTP POST submission trigger: `localhost:8081`
   - Fedora: `http://localhost:8080/fcrepo/rest`
@@ -331,7 +332,7 @@ After starting the demo with the defaults, the following services shoud be acces
       - Not behind the Shibboleth SP
   - Postgres database, exposed at port `6543`
       - DSpace database name `dspace`, username `dspace`, no password
-	  
+
 >(**N.B.** `docker-machine` users will need to substitute the IP address of their Docker machine in place of `localhost`)
 
 ### Shibboleth users
@@ -383,13 +384,13 @@ By default, the internal FTP server is used.  To use the NIH test FTP server, ex
 
 ### Prerequisites for Pushing Images
 
-To push the images to Docker Hub, you must have a Docker Hub account, and have write permissions to the [PASS repository](https://hub.docker.com/u/pass/dashboard/).  
+To push the images to Docker Hub, you must have a Docker Hub account, and have write permissions to the [PASS repository](https://hub.docker.com/u/pass/dashboard/).
 
 ### Image Naming and Tags
 
-Images are identified by: `<repository prefix>/<image name>:<image tag>`, where `<repository prefix>` is the string `pass`: e.g. `pass/ember-fcrepo:0.0.1-demo` 
+Images are identified by: `<repository prefix>/<image name>:<image tag>`, where `<repository prefix>` is the string `pass`: e.g. `pass/ember-fcrepo:0.0.1-demo`
 
-Image _tags_ are similar to tags in a version control system:  arbitrary strings that resolve a stable set of content.  Tags in Docker can be overwritten, just like tags in a VCS.  
+Image _tags_ are similar to tags in a version control system:  arbitrary strings that resolve a stable set of content.  Tags in Docker can be overwritten, just like tags in a VCS.
 
 > **Care should be taken when pushing images: overwriting a tag is something that should be done with caution**
 
@@ -401,7 +402,7 @@ Tags are per-image, not per-repository.  That means each image can have its own 
 The [Ember application](ember-fcrepo) may have its own versioning scheme based on feature set:
   - `pass/ember-fcrepo:0.0.1-demo`
   - `pass/ember-fcrepo:0.0.2-demo`
-  - `pass/ember-fcrepo:1.0.0`   
+  - `pass/ember-fcrepo:1.0.0`
 
 ### Pushing Images
 
@@ -415,14 +416,14 @@ The [Ember application](ember-fcrepo) may have its own versioning scheme based o
 
 1. [Build](#build) the images
     - > $ `docker images ls | grep 'pass/'` should return a list of images, including the image names and tags chosen in the previous step
-    
-1. (Optional) [Start](#start) Docker and test the newly-built images    
+
+1. (Optional) [Start](#start) Docker and test the newly-built images
 
 1. Push each image individually, specified as `pass/<image name>:<image tag>`
     - > $ `docker push pass/ember-fcrepo:0.0.1-demo`
     - > $ `docker push pass/nihms-submission:1.0.0-SNAPSHOT-demo`
-    - > $ # push more images ... 
-    
+    - > $ # push more images ...
+
 1. If `docker-compose.yml` was updated in step (1), be sure to commit  those changes to Git, and push.
     - > N.B. do _not_ push local changes to `.env`
 
