@@ -113,6 +113,7 @@ A [full](https://github.com/OA-PASS/deposit-services#production-configuration-va
 - PASS_FEDORA_USER:  Username for basic auth to Fedora (default: "fedoraAdmin")
 - PASS_FEDORA_PASSWORD: Password for basic auth to Fedora (default: "moo")
 - SCHEMA_SERVICE_PORT: The port the schema service is served on (default: `8086`)
+- SCHEMA_SERVICE_MERGE: (OPTIONAL) (boolean) If this parameter is specified and set to `true` then all responses made by the schema service will merge all resulting schemas into a single schema.
 
 ### DOI service variables
 The service will look for an environment variable called PASS_DOI_SERVICE_MAILTO to specify a value on the User-Agent header on the Crossref request. If not present, the default is pass@jhu.edu. The service will require the following environment variables for the java client for Fedora if the defaults are not to be used:
