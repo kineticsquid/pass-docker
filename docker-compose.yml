@@ -44,7 +44,7 @@ services:
         USER_SERVICE_URL: "${USER_SERVICE_URL}"
         DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-    image: oapass/ember:20190612-a7a9c04@sha256:f985c26c3b2926cb544d704ec9d3b658dfea32087b7d9cd747f1619028e5d1f5
+    image: oapass/ember:20190716-790edea@sha256:be72ac710c28b6c33e2a77a9f01632de41d6b4e1286694ab17bbd2a6e9f8f9cb
     container_name: ember
     env_file: .env
     networks:
