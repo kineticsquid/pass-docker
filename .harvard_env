@@ -87,6 +87,7 @@ PI_ES_INDEX=http://elasticsearch:9200/pass/
 PI_FEDORA_JMS_QUEUE=Consumer.indexer.VirtualTopic.pass.docker
 PI_TYPE_PREFIX=http://oapass.org/ns/pass#
 PI_LOG_LEVEL=info
+PI_ES_CONFIG=https://raw.githubusercontent.com/emetsger/pass-data-model/dash/src/main/resources/esconfig-3.5.json
 
 # Deposit Services
 DEPOSIT_DEBUG_PORT=5007
