@@ -178,7 +178,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:harvard-2019-07-08_3.4@sha256:05e065f7fc181d5bc70066ecc28a4a0259fb7534536fa64af068ee40c60d3146
+    image: birkland/assets:harvard-base-2019-08-15_3.4@sha256:110ede89b664f64bd3c763534a50a1bd35ea9253fd271edae6f30dc9b5cb574e
     build: ./assets
     volumes:
       - passdata-harvard:/data
