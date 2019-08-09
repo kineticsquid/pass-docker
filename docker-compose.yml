@@ -248,7 +248,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.5.2@sha256:572dcfe965c5588564de22accd1ecaca3d3b141ba1097c9830026420ca3557c4
+    image: oapass/schema-service:v0.6.0@sha256:0076f00bfa55dc1818d20859efca2e119e2bf23eb3972bd2cac7200a9dcd8844
     container_name: schemaservice
     env_file: .env
     ports:
