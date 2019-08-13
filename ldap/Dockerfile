@@ -2,13 +2,15 @@ FROM centos@sha256:2671f7a3eea36ce43609e9fe7435ade83094291055f1c96d9d1d1d7c0b986
 
 MAINTAINER John Gasper <jgasper@unicon.net>
 
+ARG TENANT
+
 RUN yum install -y epel-release \
     && yum update -y \
     && yum install -y 389-ds-base 389-adminutil \
     && yum clean all
 
-COPY ds-setup.inf /ds-setup.inf
-COPY users.ldif /users.ldif
+COPY common/ds-setup.inf /ds-setup.inf
+COPY ${TENANT}/users.ldif /users.ldif
 
 # The 389-ds setup will fail because the hostname can't reliable be determined, so we'll bypass it and then install.
 RUN useradd ldapadmin \

@@ -1,0 +1,86 @@
+dn: cn=admin,dc=pass
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+userPassword: password
+description: LDAP administrator
+
+dn: uid=faculty1,ou=People,dc=pass
+uid: faculty1
+uidNumber: 7002
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+givenName: Faculty
+sn: Hasgrants
+cn: Faculty Hasgrants
+mail: facultyWithGrants@harvard.edu
+userPassword: moo
+departmentNumber: UC8KV5
+employeeNumber: 00003343
+displayName: Faculty Hasgrants
+employeeType: FACULTY
+homeDirectory: /home/faculty1
+
+dn: uid=faculty2,ou=People,dc=pass
+uid: faculty2
+uidNumber: 7003
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+givenName: Faculty
+sn: Hasnogrants
+cn: Faculty Hasnogrants
+mail: facultyWithNoGrants@harvard.edu
+userPassword: moo
+departmentNumber: FAKE0001
+employeeNumber: 2040608
+displayName: Faculty Hasnogrants
+employeeType: FACULTY
+homeDirectory: /home/faculty2
+
+dn: uid=nih-user,ou=People,dc=pass
+uid: nih-user
+uidNumber: 7004
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+givenName: Nihu
+sn: Ser
+cn: Nihu Ser
+mail: nihuser@harvard.edu
+userPassword: moo
+departmentNumber: KYWJIT
+employeeNumber: 00001421
+displayName: Nihu Ser
+employeeType: FACULTY
+homeDirectory: /home/nih-user
+
+dn: uid=incomplete-nih-user,ou=People,dc=pass
+uid: incomplete-nih-user
+uidNumber: 7006
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+givenName: Incomplete
+sn: Nihuser
+cn: Incomplete Nihuser
+mail: incompletenihuser@harvard.edu
+userPassword: moo
+employeeNumber: 00023666
+departmentNumber: SDH72F
+displayName: Incomplete Nihuser
+employeeType: FACULTY
+homeDirectory: /home/incomplete-nih-user

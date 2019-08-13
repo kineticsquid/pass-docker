@@ -89,8 +89,11 @@ services:
      - "443:443"
 
   idp:
-    build: ./idp/3.3.2
-    image: oapass/idp:20181012@sha256:59d920bd4c6a51d12c0961717f38d743710f1bd8221c2b6c8dda6746ac224d7b
+    build:
+      context: ./idp
+      args:
+        TENANT: harvard
+    image: oapass/idp:20190813-harvard
     container_name: idp
     depends_on:
      - ldap
@@ -110,15 +113,18 @@ services:
      - source: idp_sealer
 
   ldap:
-    build: ./ldap/
-    image: oapass/ldap:20181106@sha256:065b91e74de5565df7d4459590c51986368ee157f73d81eb10232c7dadcb98e4
+    build:
+      context: ./ldap
+      args:
+        TENANT: harvard
+    image: oapass/ldap:20190813-harvard
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20190614@sha256:a62e5e4db801bd9ca966eacece61e8e5f4b56df2f9a30d33a1484c28ce5b678e
+    image: oapass/sp:20190813
     container_name: sp
     networks:
      - back
