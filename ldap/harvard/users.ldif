@@ -14,12 +14,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Faculty
 sn: Hasgrants
 cn: Faculty Hasgrants
 mail: facultyWithGrants@harvard.edu
 userPassword: moo
-departmentNumber: UC8KV5
+eduPersonUniqueId: UC8KV5
 employeeNumber: 00003343
 displayName: Faculty Hasgrants
 employeeType: FACULTY
@@ -34,12 +35,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Faculty
 sn: Hasnogrants
 cn: Faculty Hasnogrants
 mail: facultyWithNoGrants@harvard.edu
 userPassword: moo
-departmentNumber: FAKE0001
+eduPersonUniqueId: FAKE0001
 employeeNumber: 2040608
 displayName: Faculty Hasnogrants
 employeeType: FACULTY
@@ -54,12 +56,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Nihu
 sn: Ser
 cn: Nihu Ser
 mail: nihuser@harvard.edu
 userPassword: moo
-departmentNumber: KYWJIT
+eduPersonUniqueId: KYWJIT
 employeeNumber: 00001421
 displayName: Nihu Ser
 employeeType: FACULTY
@@ -74,13 +77,14 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Incomplete
 sn: Nihuser
 cn: Incomplete Nihuser
 mail: incompletenihuser@harvard.edu
 userPassword: moo
 employeeNumber: 00023666
-departmentNumber: SDH72F
+eduPersonUniqueId: SDH72F
 displayName: Incomplete Nihuser
 employeeType: FACULTY
 homeDirectory: /home/incomplete-nih-user

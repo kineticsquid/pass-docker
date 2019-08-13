@@ -22,6 +22,10 @@
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
 
+        <AttributeRule attributeID="eduPersonUniqueId">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+
         <AttributeRule attributeID="uid">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
