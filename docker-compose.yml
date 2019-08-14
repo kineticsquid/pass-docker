@@ -93,7 +93,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: oapass/idp:20190813-jhu
+    image: oapass/idp:20190813-jhu@sha256:f7a37180964e0e90e1db15440846a39c39659f20999a11c556b99f43d65c7fcb
     container_name: idp
     depends_on:
      - ldap
@@ -117,14 +117,14 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:20190813-jhu
+    image: oapass/ldap:20190813-jhu@sha256:a5547be7962dabfaff604475e20001f631ad2450a21590bd0a3bd68b3e976b94
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20190813
+    image: oapass/sp:20190813@sha256:d75554dd82191ec3201494a2c0db5ba632d0e37141bba6561b5d48fdee916f38
     container_name: sp
     networks:
      - back

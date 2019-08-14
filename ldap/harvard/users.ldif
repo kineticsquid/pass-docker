@@ -21,7 +21,7 @@ cn: Faculty Hasgrants
 mail: facultyWithGrants@harvard.edu
 userPassword: moo
 eduPersonUniqueId: UC8KV5
-employeeNumber: 00003343
+employeeNumber: 70528568
 displayName: Faculty Hasgrants
 employeeType: FACULTY
 homeDirectory: /home/faculty1
@@ -63,7 +63,7 @@ cn: Nihu Ser
 mail: nihuser@harvard.edu
 userPassword: moo
 eduPersonUniqueId: KYWJIT
-employeeNumber: 00001421
+employeeNumber: 50332799
 displayName: Nihu Ser
 employeeType: FACULTY
 homeDirectory: /home/nih-user
@@ -83,7 +83,7 @@ sn: Nihuser
 cn: Incomplete Nihuser
 mail: incompletenihuser@harvard.edu
 userPassword: moo
-employeeNumber: 00023666
+employeeNumber: 70501813
 eduPersonUniqueId: SDH72F
 displayName: Incomplete Nihuser
 employeeType: FACULTY
