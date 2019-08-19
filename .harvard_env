@@ -6,10 +6,11 @@ FTP_PASS=nihmsftppass
 
 # For testing with NIH-administered FTP staging server
 # (comment out the above FTP_* variables, add correct password)
+# TODO obtain Harvard credentials
 #FTP_HOST=ftp-private.ncbi.nlm.nih.gov
 #FTP_PORT=21
-#FTP_USER=JHU_DC_TEST
-#FTP_PASS=<password>
+#FTP_USER=TODO
+#FTP_PASS=TODO
 
 # Static html server runtime config
 STATIC_HTML_PORT=82
@@ -66,9 +67,9 @@ PASS_FEDORA_PASSWORD=moo
 DSPACE_HOST=pass.local
 DSPACE_PORT=8181
 DSPACE_BASEURI=http://pass.local:8181
-DSPACE_USERNAME=dspace-admin@oapass.org
-DSPACE_PASSWORD=foobar
-DSPACE_COLLECTION_HANDLE=123456789/2
+DSPACE_SUBMITTER_USERNAME=submitter@oapass.org
+DSPACE_SUBMITTER_PASSWORD=moo
+DSPACE_COLLECTION_WORKFLOW_HANDLE=123456789/3
 
 # Postgres config
 POSTGRES_DB_PORT=6543

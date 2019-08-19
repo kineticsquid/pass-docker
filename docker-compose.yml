@@ -197,12 +197,16 @@ services:
   #    - back
 
   deposit:
-    build: ./deposit-services/1.0.0-3.4
-    image: oapass/deposit-pass-docker:1.0.0-3.4@sha256:8a2a02f0f3d58a10d4b46ced70ba53e267d4077bb7f7c29d780a9aaeab73b076
+    build:
+      context: ./deposit-services
+      args:
+        # The providers image is released by the github.com/oa-pass/jhu-package-providers repository
+        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.0.1@sha256:15efaa68fdabe8c3df6438fbff5e0a38bad5132a2844a9c320b95d5fdb6be5c7
+    image: oapass/deposit-pass-docker:1.0.0-3.4@sha256:b1572ec55fae9a0f544fabd19e2ad0ac2d89f0a05f53e4acb0e852eb7e01b897
     container_name: deposit
     env_file: .env
     environment:
-      - PASS_DEPOSIT_REPOSITORY_CONFIGURATION=file:/repositories.json
+      - PASS_DEPOSIT_REPOSITORY_CONFIGURATION=file:/repositories-jhu.json
     ports:
       - "${DEPOSIT_DEBUG_PORT}:5007"
     networks:
