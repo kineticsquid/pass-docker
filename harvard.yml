@@ -262,7 +262,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.5.2@sha256:572dcfe965c5588564de22accd1ecaca3d3b141ba1097c9830026420ca3557c4
+    image: oapass/schema-service:v0.6.0-1-g60e99b8@sha256:9c8cee614b5ce399068a383cece5ced4396372023cc3477561e2e7df2474dfae
     container_name: schemaservice
     env_file: .harvard_env
     ports:
@@ -272,7 +272,7 @@ services:
       - back
 
   policyservice:
-    image: oapass/policy-service:v0.1.2@sha256:b361bc7dd9d366465f7683052e038e5ec93ef77a48e69176590c84044ce7d804
+    image: oapass/policy-service:v0.2.0@sha256:8a2f4236b700077511f240fc302dc40450dafdb58db4570b20aa31be7a80ae93
     container_name: policyservice
     env_file: .harvard_env
     ports:
