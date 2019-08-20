@@ -3,6 +3,7 @@ FROM jetty:9.4.7-jre8-alpine
 ARG DSPACE_BUILD_DIR=/dspace-build
 ARG DSPACE_INSTALL_DIR=/dspace
 ARG DSPACE_USER=jetty
+ARG DSPACE_GROUP=jetty
 ARG DSPACE_GIT_REPO=${DSPACE_GIT_REPO:-https://github.com/DSpace/DSpace}
 ARG DSPACE_GIT_BRANCH=${DSPACE_GIT_BRANCH:-dspace-6.2}
 
@@ -34,10 +35,17 @@ RUN mkdir ${DSPACE_BUILD_DIR} && \
     ant fresh_install && \
     grep ${DSPACE_USER} /etc/passwd || adduser -D ${DSPACE_USER} ; \
     mkdir -p ${DSPACE_INSTALL_DIR} && \
+    # Copy only the webapps we use to /var/lib/jetty/webapps
     cp -r ${DSPACE_INSTALL_DIR}/webapps/xmlui/ /var/lib/jetty/webapps && \
     cp -r ${DSPACE_INSTALL_DIR}/webapps/swordv2/ /var/lib/jetty/webapps && \
+    cp -r ${DSPACE_INSTALL_DIR}/webapps/oai/ /var/lib/jetty/webapps && \
+    cp -r ${DSPACE_INSTALL_DIR}/webapps/solr/ /var/lib/jetty/webapps && \
     chown -R ${DSPACE_USER} ${DSPACE_INSTALL_DIR} && \
     chown -R jetty /var/lib/jetty/webapps/* && \
+    # Remove the webapps that we don't use to slim down the Docker image
+    rm -rf /dspace/webapps && \
+    # Remove logging library that messes up logging
+    rm /var/lib/jetty/webapps/swordv2/WEB-INF/lib/commons-logging-1.2.jar && \
     cd / && \
     rm -rf ${DSPACE_BUILD_DIR} && \
     apk del maven \
@@ -45,14 +53,16 @@ RUN mkdir ${DSPACE_BUILD_DIR} && \
         openjdk8 \
         git && \
     rm -rf /var/cache/apk && \
-    rm -rf ~/.m2 && \
-    rm /var/lib/jetty/webapps/swordv2/WEB-INF/lib/commons-logging-1.2.jar
+    rm -rf ~/.m2
 
 ADD wait-and-init-db.sh /wait-and-init-db.sh
 
 ADD import.xml /import.xml
 
 ADD log4j.properties /dspace/config/log4j.properties
+
+# Overwrite the default Solr web.xml with ours, which removes the localhost restriction filter
+ADD solr-web.xml /var/lib/jetty/webapps/solr/WEB-INF/web.xml
 
 RUN chown jetty /wait-and-init-db.sh && chmod 550 /wait-and-init-db.sh && chown ${DSPACE_USER} /import.xml
 

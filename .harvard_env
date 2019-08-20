@@ -94,6 +94,9 @@ PI_ES_CONFIG=https://raw.githubusercontent.com/emetsger/pass-data-model/dash/src
 DEPOSIT_DEBUG_PORT=5007
 PASS_DEPOSIT_QUEUE_SUBMISSION_NAME=Consumer.submission.VirtualTopic.pass.docker
 PASS_DEPOSIT_QUEUE_DEPOSIT_NAME=Consumer.deposit.VirtualTopic.pass.docker
+PASS_DEPOSIT_OAICLIENT_DASH_OAIBASEURL=http://dspace:8181/oai/request
+PASS_DEPOSIT_PROVIDER_DASH_COPYBASEURL=http://pass.local:8181/
+PASS_DEPOSIT_JOBS_DEFAULT_INTERVAL_MS=30000
 
 # Authorization Listener
 PASS_AUTHZ_QUEUE=Consumer.authz.VirtualTopic.pass.docker

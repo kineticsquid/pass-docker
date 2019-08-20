@@ -133,7 +133,7 @@ services:
 
   dspace:
     build: ./dspace/6.2
-    image: oapass/dspace:20190730@sha256:6fe25b4e902a23c0a5e5e878e7764499e31d4280b68df273d7d0bd5172dfbe22
+    image: oapass/dspace:20190822@sha256:ebc2700c6332e2ab16c2818eee633ee90cade6e9bcac7b01b3a2ec037f4111a6
     container_name: dspace
     env_file: .harvard_env
     ports:
@@ -208,6 +208,9 @@ services:
     env_file: .harvard_env
     environment:
       - PASS_DEPOSIT_REPOSITORY_CONFIGURATION=file:/repositories-harvard.json
+      - LOGGING_LEVEL_org.dataconservancy.pass.deposit=DEBUG
+      - LOGGING_LEVEL_ORG_DATACONSERVANCY_PASS_DEPOSIT=TRACE
+      - LOGGING_LEVEL_ORG_DATACONSERVANCY_PASS_DEPOSIT_MESSAGING=TRACE
     ports:
       - "${DEPOSIT_DEBUG_PORT}:5007"
     networks:
