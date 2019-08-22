@@ -33,12 +33,15 @@ To configure the Docker images, open up the `.env` file and make any necessary c
 
 ### Ember application-related variables
 
+It is important to note that the Ember application does not actually read environment variables at runtime. Instead, values for environment variables are baked into the Ember app at during the build. Ember will actually embed its environment context into the application's HTML by adding it to the rendered document `<head>`. This means that in order to change any variable that the Ember app relies on, you will need to rebuild the app and create a new Docker image.
+
   - EMBER_PORT: the Ember HTTP application is served on this port
   - The Ember code base will be downloaded and built from `EMBER_GIT_REPO`, using the branch or tag defined in `EMBER_GIT_BRANCH`
   - DOI_SERVICE_URL: The relative URL of the DOI service, used at `ember` image _build time_, not run time (default: `/doiservice/journal`)
   - POLICY_SERVICE_URL: The relative URL of the schema service, used at `ember` image _build time_, not run time (default: `/policyservice`)
   - USER_SERVICE_URL: The relative URL of the user service, used at `ember` image _build time_, not run time (default: `/pass-user-service/whoami`)
   - METADATA_SCHEMA_URI: URL to the metadata global schema. Gets added to metadata blob (default: `https://oa-pass.github.io/metadata-schemas/jhu/global.json`)
+  - STATIC_CONFIG_URI: The relative URI of the static branding configuration file. This is important to allow the Ember app to be able to retrieve branding stylesheets, images, and other static assets. (_default: `/config.json`_)
 
 
 ### Fedora-related variables
