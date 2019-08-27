@@ -38,13 +38,13 @@ services:
     build:
       context: ./ember
       args:
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL}"
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-    image: oapass/ember:20190730-0c1a7e9@sha256:42241712789783d48a4eed0d2c6f99193822c571742e6d30c2744f02e58bb9aa
+        EMBER_GIT_REPO: "https://github.com/emetsger/pass-ember"
+        EMBER_GIT_BRANCH: "64ccd5e106baf8544b3402f40ab695e38094a95a"
+        POLICY_SERVICE_URL: "/policyservice"
+        USER_SERVICE_URL: "/pass-user-service/whoami"
+        DOI_SERVICE_URL: "/doiservice/journal"
+        METADATA_SCHEMA_URI: "https://oa-pass.github.io/metadata-schemas/harvard/global.json"
+    image: oapass/ember:20190827-64ccd5e@sha256:91efc624b14f65a12e99ac92756e51d1dc7c0484d190ed550018163a609cdc9d
     container_name: ember
     env_file: .harvard_env
     networks:
@@ -54,9 +54,9 @@ services:
     build:
       context: ./static-html
       args:
-        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
-        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:20181116-4ab9eb3@sha256:2c5a8f315783ab41205aaead6c82c6148f9d6334b1dc33b7bf31033cf008d2d6
+        STATIC_HTML_GIT_REPO: "https://github.com/OA-PASS/pass-ui-static.git"
+        STATIC_HTML_GIT_BRANCH: "9bb6ba1992af982b3b95271ade112ec2aec74877"
+    image: oapass/static-html:20190827-9bb6ba@sha256:9127226d9be93dc89547a821863ac0a5d50adb493bc2a76989d77eb2d7b69084
     container_name: static-html
     env_file: .harvard_env
     ports:

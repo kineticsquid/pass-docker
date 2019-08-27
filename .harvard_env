@@ -15,16 +15,8 @@ FTP_PASS=nihmsftppass
 # Static html server runtime config
 STATIC_HTML_PORT=82
 
-# Static html server build-time config
-STATIC_HTML_GIT_REPO=https://github.com/OA-PASS/pass-ui-static.git
-STATIC_HTML_GIT_BRANCH=4ab9eb389c0ebfaac99a697056b7e3b3559bdd91
-
 # Ember app runtime config
 EMBER_PORT=81
-
-# Ember app build-time config
-EMBER_GIT_REPO=https://github.com/OA-PASS/pass-ember
-EMBER_GIT_BRANCH=0c1a7e971847cc4b2f1a96b3afa5f8f5e835f460
 
 EMBER_ROOT_URL=/app/
 
