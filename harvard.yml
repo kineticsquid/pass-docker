@@ -224,7 +224,7 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.4.5-3.4@sha256:5ef2579e8094a3eb86d3765a6c910c8ce86a3a0352f821e751d647b4d97c5cc1
+    image: oapass/authz:0.5.0-3.5@sha256:c1568ddc81a8731255ddd41a966e86cb2070854d13ffad15f54c9b3b3b63ab03
     container_name: authz
     env_file: .harvard_env
     networks:
