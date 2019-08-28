@@ -6,7 +6,7 @@ This repository serves as the canonical environment for demonstrating integratio
 
 # Instructions
 
-These instructions are for starting PASS with `docker-compose`.  If you have Docker already installed and want to start up the demo ASAP, jump to [starting Docker](#start).
+These instructions are for starting PASS with `docker-compose`.  If you have Docker already installed and want to start up the demo ASAP, jump to [starting Docker](#start).  Documentation related to supporting runtime environments for different institutions is [here](INSTITUTIONS.md).
 
 <h2><a id="prereq" href="#prereq">Prerequisites</a></h2>
 
