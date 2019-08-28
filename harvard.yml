@@ -55,8 +55,8 @@ services:
       context: ./static-html
       args:
         STATIC_HTML_GIT_REPO: "https://github.com/OA-PASS/pass-ui-static.git"
-        STATIC_HTML_GIT_BRANCH: "9bb6ba1992af982b3b95271ade112ec2aec74877"
-    image: oapass/static-html:20190827-9bb6ba@sha256:9127226d9be93dc89547a821863ac0a5d50adb493bc2a76989d77eb2d7b69084
+        STATIC_HTML_GIT_BRANCH: "dffd0fd0309f21112a8b89c3895f12a967355319"
+    image: oapass/static-html:20190828-dffd0fd@sha256:630ae1637b8a13e5e1f610c859d33d6509fe8ec2b8726f1a2fa37ade4e1b9354
     container_name: static-html
     env_file: .harvard_env
     ports:
