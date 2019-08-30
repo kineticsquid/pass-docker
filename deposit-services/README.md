@@ -15,7 +15,7 @@ The runtime configuration file included in this image configures JScholarship an
 
 Deposit Services is composed of a hierarchy of images:
 
-* `oapass/deposit-pass-docker` (maintained [here](./Dockerfile), in `pass-docker`) depends on:
+* `oapass/deposit-pass-docker` (maintained [here](Dockerfile), in `pass-docker`) depends on:
     * `oapass/deposit-services-providers` (maintained [here][0] in [jhu-package-providers][1]) depends on:
         * `oapass/deposit-services-core` (maintained [here][2] in [deposit-services][3])
 
@@ -63,7 +63,7 @@ Next, `jhu-package-providers` is released with the `maven-release-plugin`, and d
 
 * `oapass/deposit-pass-docker`
     * Maintained in [`pass-docker`][5]
-    * [`Dockerfile`](./Dockerfile)
+    * [`Dockerfile`](Dockerfile)
     * Docker Hub: https://cloud.docker.com/u/oapass/repository/docker/oapass/deposit-pass-docker
     * Deposit Services runtime configuration: [`repositories.json`][6]
 * `oapass/deposit-services-providers`
@@ -84,7 +84,7 @@ Next, `jhu-package-providers` is released with the `maven-release-plugin`, and d
 [3]: https://github.com/OA-PASS/deposit-services/
 [4]: https://github.com/OA-PASS/deposit-services/blob/master/deposit-messaging/src/main/docker/bin/aws_entrypoint.sh
 [5]: https://github.com/OA-PASS/pass-docker/
-[6]: ./repositories.json
+[6]: 1.0.0-3.4/repositories.json
 [7]: https://github.com/OA-PASS/deposit-services/blob/master/.travis.yml#L30
 [8]: https://github.com/OA-PASS/deposit-services/blob/master/trigger-dependent-build
 [9]: https://github.com/OA-PASS/jhu-package-providers/tree/0.0.1/jscholarship-package-provider

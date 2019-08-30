@@ -74,6 +74,7 @@ function perform_runtime_config() {
     sed -e "s:^db.url = .*:db.url = jdbc\:postgresql\://${DSPACE_DB_HOST}\:${POSTGRES_DB_PORT}/${DSPACE_DB_NAME}:"  -i local.cfg
     sed -e "s:^db.username = .*:db.username = ${DSPACE_DB_USER}:"  -i local.cfg
     sed -e "s:^db.password = .*:db.password = ${DSPACE_DB_PASS}:"  -i local.cfg
+    sed -e "s:^solr.server = .*:solr.server = http\://localhost\:${DSPACE_PORT}/solr:" -i local.cfg
     sed -e "s:^loglevel.dspace=.*:loglevel.dspace=DEBUG:" -i log4j.properties
 
     # enable mediated deposit (could lock it down a bit more by whitelisting users), enable verbose SWORD statements.
@@ -104,6 +105,7 @@ function create_dash_metadata_schema() {
     # dash.funder.award
     # dash.funder.identifier
     # dash.funder.name
+    # dash.affiliation.other
 
     local DASH_SCHEMA_NAMESPACE=http://dash.harvard.edu
     local DASH_SCHEMA_SHORTID=dash
@@ -126,6 +128,7 @@ function create_dash_metadata_schema() {
         perform_query "INSERT INTO ${FIELD_REGISTRY_TABLE} (metadata_schema_id, element, qualifier) VALUES ('${DASH_SCHEMA_ID}', 'funder', 'award')"
         perform_query "INSERT INTO ${FIELD_REGISTRY_TABLE} (metadata_schema_id, element, qualifier) VALUES ('${DASH_SCHEMA_ID}', 'funder', 'identifier')"
         perform_query "INSERT INTO ${FIELD_REGISTRY_TABLE} (metadata_schema_id, element, qualifier) VALUES ('${DASH_SCHEMA_ID}', 'funder', 'name')"
+        perform_query "INSERT INTO ${FIELD_REGISTRY_TABLE} (metadata_schema_id, element, qualifier) VALUES ('${DASH_SCHEMA_ID}', 'affiliation', 'other')"
     fi
     return 0
 }
@@ -135,7 +138,6 @@ function update_dc_metadata_schema() {
     local DC_SCHEMA_ID=1
     local IDENTIFIER_DOI_PRESENT=`perform_query "SELECT count(*) from ${FIELD_REGISTRY_TABLE} WHERE metadata_schema_id = '${DC_SCHEMA_ID}' AND element = 'identifier' and qualifier = 'doi'" | sed -n 3p | sed -e 's: ::g'`
     local SOURCE_JOURNAL_PRESENT=`perform_query "SELECT count(*) from ${FIELD_REGISTRY_TABLE} WHERE metadata_schema_id = '${DC_SCHEMA_ID}' AND element = 'source' and qualifier = 'journal'" | sed -n 3p | sed -e 's: ::g'`
-    local SOURCE_VOLUME_PRESENT=`perform_query "SELECT count(*) from ${FIELD_REGISTRY_TABLE} WHERE metadata_schema_id = '${DC_SCHEMA_ID}' AND element = 'source' and qualifier = 'volume'" | sed -n 3p | sed -e 's: ::g'`
 
     if [ ${IDENTIFIER_DOI_PRESENT:-0} == 0 ] ;
     then
@@ -146,11 +148,6 @@ function update_dc_metadata_schema() {
     then
         (>&2 echo ">>> Updating DC metadata registry ...")
         perform_query "INSERT INTO ${FIELD_REGISTRY_TABLE} (metadata_schema_id, element, qualifier) VALUES ('${DC_SCHEMA_ID}', 'source', 'journal')"
-    fi
-    if [ ${SOURCE_VOLUME_PRESENT:-0} == 0 ] ;
-    then
-        (>&2 echo ">>> Updating DC metadata registry ...")
-        perform_query "INSERT INTO ${FIELD_REGISTRY_TABLE} (metadata_schema_id, element, qualifier) VALUES ('${DC_SCHEMA_ID}', 'source', 'volume')"
     fi
     return 0
 
@@ -330,6 +327,9 @@ create_dash_metadata_schema
 
 # Add additional elements to the DC metadata schema
 update_dc_metadata_schema
+
+# Update the OAI index in the background every 60 seconds
+cd /dspace/bin && (while true ; do ./dspace oai import 2>&1 > /dspace/log/oai-index.log; sleep 60 ; done) &
 
 # Start jetty
 cd ${WORKDIR}

@@ -5,9 +5,9 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5
-    image: oapass/fcrepo:4.7.5-3.4-2@sha256:581f71675a1adab1568ea1924f8a83df974b228c3fd6181f83fbd157bab806d9
+    image: oapass/fcrepo:4.7.5-3.5@sha256:bb44fff182ace1d0d57372f297cbab8cc04c662db2d10a061213178b7c0c9bba
     container_name: fcrepo
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${FCREPO_PORT}:${FCREPO_PORT}"
       - "${FCREPO_DEBUG_PORT}:${FCREPO_DEBUG_PORT}"
@@ -15,7 +15,7 @@ services:
       - front
       - back
     volumes:
-      - passdata:/data
+      - passdata-harvard:/data
     depends_on:
       - assets
       - activemq
@@ -25,7 +25,7 @@ services:
       context: ./activemq
     image: oapass/activemq:20180618@sha256:e3cd47a1bc4c21899fc34e5ac7198f6c069f4148296bad0ce619cc2bdda5f435
     container_name: activemq
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${ACTIVEMQ_JMS_PORT}:${ACTIVEMQ_JMS_PORT}"
       - "${ACTIVEMQ_STOMP_PORT}:${ACTIVEMQ_STOMP_PORT}"
@@ -38,15 +38,15 @@ services:
     build:
       context: ./ember
       args:
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL}"
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-    image: oapass/ember:20190822-25a682c@sha256:602c72b66a5d018171bd402980e36fa90c7b11e21a1af2446e782c6a19a58fc4
+        EMBER_GIT_REPO: "https://github.com/emetsger/pass-ember"
+        EMBER_GIT_BRANCH: "64ccd5e106baf8544b3402f40ab695e38094a95a"
+        POLICY_SERVICE_URL: "/policyservice"
+        USER_SERVICE_URL: "/pass-user-service/whoami"
+        DOI_SERVICE_URL: "/doiservice/journal"
+        METADATA_SCHEMA_URI: "https://oa-pass.github.io/metadata-schemas/harvard/global.json"
+    image: oapass/ember:20190827-64ccd5e@sha256:91efc624b14f65a12e99ac92756e51d1dc7c0484d190ed550018163a609cdc9d
     container_name: ember
-    env_file: .env
+    env_file: .harvard_env
     networks:
       - back
 
@@ -54,11 +54,11 @@ services:
     build:
       context: ./static-html
       args:
-        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
-        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:20190822-bad963d@sha256:181a4b8bc0e5e4c69fa9ed37f2ec9d0192f628614656ebab40cd471334ed4aba
+        STATIC_HTML_GIT_REPO: "https://github.com/OA-PASS/pass-ui-static.git"
+        STATIC_HTML_GIT_BRANCH: "9e3e3443cbf42f03994619cbd86e021b67685895"
+    image: oapass/static-html:20190829-9e3e344@sha256:33b5d79fbdc3adda35b536eedac9897a14b751a44c50d96367021789119e485e
     container_name: static-html
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
     networks:
@@ -69,7 +69,7 @@ services:
     build: ./ftpserver/0.0.1-demo
     image: oapass/ftpserver@sha256:145f7e3bb494deeb1e1c587f34f0f54649f22d6ef0c107bacd022b0308146ddb
     container_name: ftpserver
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${FTP_PORT}:${FTP_PORT}"
       - "30000-30010:30000-30010"
@@ -92,8 +92,8 @@ services:
     build:
       context: ./idp
       args:
-        TENANT: jhu
-    image: oapass/idp:20190813-jhu@sha256:f7a37180964e0e90e1db15440846a39c39659f20999a11c556b99f43d65c7fcb
+        TENANT: harvard
+    image: oapass/idp:20190821-harvard@sha256:8d5de05ef52eb2b7ad8822087c55bd1ea4069ecb3545cd4712a85469c7665a82
     container_name: idp
     depends_on:
      - ldap
@@ -116,8 +116,8 @@ services:
     build:
       context: ./ldap
       args:
-        TENANT: jhu
-    image: oapass/ldap:20190813-jhu@sha256:a5547be7962dabfaff604475e20001f631ad2450a21590bd0a3bd68b3e976b94
+        TENANT: harvard
+    image: oapass/ldap:20190821-harvard@sha256:15cd758aa16b7cd59ba8c457b9981b261848d3a2901b9eacb36fb686ab301566
     container_name: ldap
     networks:
      - back
@@ -133,9 +133,9 @@ services:
 
   dspace:
     build: ./dspace/6.2
-    image: oapass/dspace:20190820@sha256:f1be8af0d23a90edc2e768700bc2ed8369c73134ce37412518090ddd667ac35f
+    image: oapass/dspace:20190822@sha256:ebc2700c6332e2ab16c2818eee633ee90cade6e9bcac7b01b3a2ec037f4111a6
     container_name: dspace
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${DSPACE_PORT}:${DSPACE_PORT}"
     networks:
@@ -147,7 +147,7 @@ services:
     build: ./postgres/10.3
     image: oapass/postgres@sha256:a16b49990b5ee111efdbce63eefa4a56ae1257d16114ecaeb584117074deefaa
     container_name: postgres
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}"
     networks:
@@ -157,14 +157,14 @@ services:
     build: ./indexer/0.0.18-SNAPSHOT
     image: oapass/indexer:0.0.18-3.4-1@sha256:3375ea702e0a1c7a5e0e7e06635d28e49af436aeb1c3d88a03d4cb494d7b40bf
     container_name: indexer
-    env_file: .env
+    env_file: .harvard_env
     networks:
       - back
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3@sha256:ccfad77c0731c010e6ff8c43b4ab50f5ce90c0fa4e65846530779c5c6707c20a
     container_name: elasticsearch
-    env_file: .env
+    env_file: .harvard_env
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
@@ -174,7 +174,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - passdata:/usr/share/elasticsearch/data
+      - passdata-harvard:/usr/share/elasticsearch/data
     ports:
       - "${ES_PORT}:${ES_PORT}"
     networks:
@@ -184,10 +184,10 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2019-04-08_3.4@sha256:7ec44bd52d7cf635ad05a3f509cf7439e187b7768b8a05abae81b49744ec9d5f
+    image: birkland/assets:harvard-base-2019-08-28_3.4@sha256:8e0ff1b51063663b4e48512622acc2edcac78e65e8f88dfd8ee101903939fe23
     build: ./assets
     volumes:
-      - passdata:/data
+      - passdata-harvard:/data
 
   #bootstrap:
   #  image: oapass/bootstrap
@@ -201,12 +201,16 @@ services:
       context: ./deposit-services
       args:
         # The providers image is released by the github.com/oa-pass/jhu-package-providers repository
-        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.0.1@sha256:15efaa68fdabe8c3df6438fbff5e0a38bad5132a2844a9c320b95d5fdb6be5c7
-    image: oapass/deposit-pass-docker:1.0.0-3.4@sha256:b1572ec55fae9a0f544fabd19e2ad0ac2d89f0a05f53e4acb0e852eb7e01b897
+        # Version 0.0.2-SNAPSHOT includes the DASH package provider
+        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.0.2-SNAPSHOT@sha256:84315c59593f497a70fde2e01c7c2ed08de5f8a389ecbc33db9bc301d74d7d15
+    image: oapass/deposit-pass-docker:1.1.0-3.5-SNAPSHOT@sha256:784a766cf9533136dd58b18a09e956a9b8bbe0b0d2519f7141f3cc4e26cdff0e
     container_name: deposit
-    env_file: .env
+    env_file: .harvard_env
     environment:
-      - PASS_DEPOSIT_REPOSITORY_CONFIGURATION=file:/repositories-jhu.json
+      - PASS_DEPOSIT_REPOSITORY_CONFIGURATION=file:/repositories-harvard.json
+      - LOGGING_LEVEL_org.dataconservancy.pass.deposit=DEBUG
+      - LOGGING_LEVEL_ORG_DATACONSERVANCY_PASS_DEPOSIT=TRACE
+      - LOGGING_LEVEL_ORG_DATACONSERVANCY_PASS_DEPOSIT_MESSAGING=TRACE
     ports:
       - "${DEPOSIT_DEBUG_PORT}:5007"
     networks:
@@ -220,9 +224,9 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.4.5-3.4@sha256:5ef2579e8094a3eb86d3765a6c910c8ce86a3a0352f821e751d647b4d97c5cc1
+    image: oapass/authz:0.5.0-3.5@sha256:c1568ddc81a8731255ddd41a966e86cb2070854d13ffad15f54c9b3b3b63ab03
     container_name: authz
-    env_file: .env
+    env_file: .harvard_env
     networks:
       - back
 
@@ -238,10 +242,10 @@ services:
       - "${MAIL_IMAPS}:993"
       - "${MAIL_MSP}:587"
     volumes:
-      - maildata:/var/mail
-      - mailstate:/var/mail-state
+      - maildata-harvard:/var/mail
+      - mailstate-harvard:/var/mail-state
       - ./mail/config/:/tmp/docker-mailserver/
-    env_file: .env
+    env_file: .harvard_env
     depends_on:
       - ldap
 
@@ -253,14 +257,14 @@ services:
       - back
     ports:
       - "${NOTIFICATION_DEBUG_PORT}:5011"
-    env_file: .env
+    env_file: .harvard_env
     environment:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.6.0@sha256:0076f00bfa55dc1818d20859efca2e119e2bf23eb3972bd2cac7200a9dcd8844
+    image: oapass/schema-service:v0.6.0-1-g60e99b8@sha256:9c8cee614b5ce399068a383cece5ced4396372023cc3477561e2e7df2474dfae
     container_name: schemaservice
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${SCHEMA_SERVICE_PORT}:${SCHEMA_SERVICE_PORT}"
     networks:
@@ -268,9 +272,9 @@ services:
       - back
 
   policyservice:
-    image: oapass/policy-service:v0.1.2@sha256:b361bc7dd9d366465f7683052e038e5ec93ef77a48e69176590c84044ce7d804
+    image: oapass/policy-service:v0.2.0@sha256:8a2f4236b700077511f240fc302dc40450dafdb58db4570b20aa31be7a80ae93
     container_name: policyservice
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${POLICY_SERVICE_PORT}:${POLICY_SERVICE_PORT}"
     networks:
@@ -280,7 +284,7 @@ services:
   doiservice:
     image: oapass/doi-service:version1.0.0@sha256:a82a1b60b4bae17b9a5628ed3d65501000d576ef3ba6bc3ffe4cbf9138eba82d
     container_name: doiservice
-    env_file: .env
+    env_file: .harvard_env
     ports:
       - "${PASS_DOI_SERVICE_PORT}:8080"
     networks:
@@ -288,11 +292,11 @@ services:
       - back
 
 volumes:
-  passdata:
+  passdata-harvard:
     driver: local
-  mailstate:
+  mailstate-harvard:
     driver: local
-  maildata:
+  maildata-harvard:
     driver: local
 
 networks:

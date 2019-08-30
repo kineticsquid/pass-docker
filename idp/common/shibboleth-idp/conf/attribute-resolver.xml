@@ -210,13 +210,13 @@
         <resolver:AttributeEncoder xsi:type="enc:SAML1String" name="urn:mace:dir:attribute-def:eduPersonPrimaryAffiliation" encodeType="false" />
         <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.5" friendlyName="eduPersonPrimaryAffiliation" encodeType="false" />
     </resolver:AttributeDefinition>
-
-    <resolver:AttributeDefinition xsi:type="ad:Scoped" id="eduPersonUniqueId" scope="%{idp.scope}" sourceAttributeID="localUniqueId">
+-->
+    <resolver:AttributeDefinition xsi:type="ad:Scoped" id="eduPersonUniqueId" scope="%{idp.scope}" sourceAttributeID="eduPersonUniqueId">
         <resolver:Dependency ref="myLDAP" />
         <resolver:AttributeEncoder xsi:type="enc:SAML1ScopedString" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.13" encodeType="false" />
         <resolver:AttributeEncoder xsi:type="enc:SAML2ScopedString" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.13" friendlyName="eduPersonUniqueId" encodeType="false" />
     </resolver:AttributeDefinition>
--->
+
     <resolver:AttributeDefinition xsi:type="ad:Scoped" id="eduPersonPrincipalName" scope="%{idp.scope}" sourceAttributeID="uid">
         <resolver:Dependency ref="myLDAP" />
         <resolver:AttributeEncoder xsi:type="enc:SAML1ScopedString" name="urn:mace:dir:attribute-def:eduPersonPrincipalName" encodeType="false" />

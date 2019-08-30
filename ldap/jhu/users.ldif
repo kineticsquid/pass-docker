@@ -14,12 +14,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Staff
 sn: Hasgrants
 cn: Staff Hasgrants
 mail: staffWithGrants@jhu.edu
 userPassword: moo
-departmentNumber: 3PD4GS
+eduPersonUniqueId: 3PD4GS
 employeeNumber: 00017179
 displayName: Staff Hasgrants
 employeeType: STAFF
@@ -34,12 +35,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Staff
 sn: Hasnogrants
 cn: Staff Hasnogrants
 mail: staffWithNoGrants@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0002
+eduPersonUniqueId: FAKE0002
 employeeNumber: 1020304
 displayName: Staff Hasnogrants
 employeeType: STAFF
@@ -54,12 +56,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Faculty
 sn: Hasgrants
 cn: Faculty Hasgrants
 mail: facultyWithGrants@jhu.edu
 userPassword: moo
-departmentNumber: UC8KV5
+eduPersonUniqueId: UC8KV5
 employeeNumber: 00003343
 displayName: Faculty Hasgrants
 employeeType: FACULTY
@@ -74,12 +77,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Faculty
 sn: Hasnogrants
 cn: Faculty Hasnogrants
 mail: facultyWithNoGrants@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0001
+eduPersonUniqueId: FAKE0001
 employeeNumber: 2040608
 displayName: Faculty Hasnogrants
 employeeType: FACULTY
@@ -94,12 +98,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Nihu
 sn: Ser
 cn: Nihu Ser
 mail: nihuser@jhu.edu
 userPassword: moo
-departmentNumber: KYWJIT
+eduPersonUniqueId: KYWJIT
 employeeNumber: 00001421
 displayName: Nihu Ser
 employeeType: FACULTY
@@ -114,12 +119,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Ed
 sn: User
 cn: Ed User
 mail: eduser@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0006
+eduPersonUniqueId: FAKE0006
 employeeNumber: 00010090
 displayName: Ed User
 employeeType: FACULTY
@@ -134,13 +140,14 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Incomplete
 sn: Nihuser
 cn: Incomplete Nihuser
 mail: incompletenihuser@jhu.edu
 userPassword: moo
 employeeNumber: 00023666
-departmentNumber: SDH72F
+eduPersonUniqueId: SDH72F
 displayName: Incomplete Nihuser
 employeeType: FACULTY
 homeDirectory: /home/incomplete-nih-user
@@ -154,13 +161,14 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Usai
 sn: Duser
 cn: Usai Duser
 mail: usaiduser@jhu.edu
 userPassword: moo
 employeeNumber: 00003088
-departmentNumber: KYN456
+eduPersonUniqueId: KYN456
 displayName: Usai Duser
 employeeType: FACULTY
 homeDirectory: /home/usaid-user
@@ -174,12 +182,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Grant
 sn: Admin
 cn: Grant Admin
 mail: grant-admin@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0003
+eduPersonUniqueId: FAKE0003
 employeeNumber: 99000001
 displayName: Grant Admin
 employeeType: STAFF
@@ -194,12 +203,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Grant
 sn: Admin
 cn: Grant Admin
 mail: grant-admin-submitter@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0004
+eduPersonUniqueId: FAKE0004
 employeeNumber: 99000002
 displayName: Grant Admin + Submitter
 employeeType: STAFF
@@ -214,12 +224,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Super
 sn: User
 cn: Superuser
 mail: superuser@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0005
+eduPersonUniqueId: FAKE0005
 employeeNumber: 99000003
 displayName: Superuser
 employeeType: STAFF
@@ -234,12 +245,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Notification Prod
 sn: Prod
 cn: Notification Prod CC
 mail: notification-prod-cc@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0005
+eduPersonUniqueId: FAKE0005
 employeeNumber: 99000003
 displayName: Notification Prod
 employeeType: STAFF
@@ -254,12 +266,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: Notification Demo
 sn: Demo
 cn: Notification Demo CC
 mail: notification-demo-cc@jhu.edu
 userPassword: moo
-departmentNumber: FAKE0005
+eduPersonUniqueId: FAKE0005
 employeeNumber: 99000003
 displayName: Notification Demo
 employeeType: STAFF
@@ -274,12 +287,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: New
 sn: Submitter
 cn: New Submitter
 mail: newsubmitter1@jhu.edu
 userPassword: moo
-departmentNumber: NEWSUB0001
+eduPersonUniqueId: NEWSUB0001
 employeeNumber: 999900001
 displayName: New Submitter I
 employeeType: FACULTY
@@ -294,12 +308,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: New
 sn: Submitter
 cn: New Submitter 2
 mail: newsubmitter2@jhu.edu
 userPassword: moo
-departmentNumber: NEWSUB0002
+eduPersonUniqueId: NEWSUB0002
 employeeNumber: 999900002
 displayName: New Submitter II
 employeeType: FACULTY
@@ -314,12 +329,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: New
 sn: Submitter
 cn: New Submitter 3
 mail: newsubmitter3@jhu.edu
 userPassword: moo
-departmentNumber: NEWSUB0003
+eduPersonUniqueId: NEWSUB0003
 employeeNumber: 999900003
 displayName: New Submitter III
 employeeType: FACULTY
@@ -334,12 +350,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: New
 sn: Submitter
 cn: New Submitter 4
 mail: newsubmitter4@jhu.edu
 userPassword: moo
-departmentNumber: NEWSUB0004
+eduPersonUniqueId: NEWSUB0004
 employeeNumber: 999900004
 displayName: New Submitter IV
 employeeType: FACULTY
@@ -354,12 +371,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: New
 sn: Submitter
 cn: New Submitter 5
 mail: newsubmitter5@jhu.edu
 userPassword: moo
-departmentNumber: NEWSUB0005
+eduPersonUniqueId: NEWSUB0005
 employeeNumber: 999900005
 displayName: New Submitter V
 employeeType: FACULTY
@@ -374,12 +392,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: No
 sn: Email
 cn: No Email
 mail: noEmail1@jhu.edu
 userPassword: moo
-departmentNumber: ST4LBJ
+eduPersonUniqueId: ST4LBJ
 employeeNumber: 00087442
 displayName: No Email I
 employeeType: STAFF
@@ -394,12 +413,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: No
 sn: Email
 cn: No Email
 mail: noEmail2@jhu.edu
 userPassword: moo
-departmentNumber: V0AE4J
+eduPersonUniqueId: V0AE4J
 employeeNumber: 00054756
 displayName: No Email II
 employeeType: FACULTY
@@ -414,12 +434,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: No
 sn: Email
 cn: No Email
 mail: noEmail3@jhu.edu
 userPassword: moo
-departmentNumber: K0X3RY
+eduPersonUniqueId: K0X3RY
 employeeNumber: 00053342
 displayName: No Email III
 employeeType: STAFF
@@ -434,12 +455,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: No
 sn: Email
 cn: No Email
 mail: noEmail4@jhu.edu
 userPassword: moo
-departmentNumber: 71NETB
+eduPersonUniqueId: 71NETB
 employeeNumber: 00054068
 displayName: No Email IV
 employeeType: STAFF
@@ -454,12 +476,13 @@ objectClass: person
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
+objectClass: eduPerson
 givenName: No
 sn: Email
 cn: No Email
 mail: noEmail5@jhu.edu
 userPassword: moo
-departmentNumber: P44N8C
+eduPersonUniqueId: P44N8C
 employeeNumber: 00101877
 displayName: No Email V
 employeeType: STAFF
