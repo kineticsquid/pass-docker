@@ -44,7 +44,7 @@ services:
         USER_SERVICE_URL: "${USER_SERVICE_URL}"
         DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-    image: oapass/ember:20190822-25a682c@sha256:602c72b66a5d018171bd402980e36fa90c7b11e21a1af2446e782c6a19a58fc4
+    image: oapass/ember:20190904-aca28b9@sha256:2029f1bfc25fb7aef6c071f6e78b4918aad80316f49709d168a86bdde64df572
     container_name: ember
     env_file: .env
     networks:
@@ -56,7 +56,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:20190822-bad963d@sha256:181a4b8bc0e5e4c69fa9ed37f2ec9d0192f628614656ebab40cd471334ed4aba
+    image: oapass/static-html:jhu-20190904-d83d6d6@sha256:17de34be36db80289fff66e05994d2ab5821b03232148eb727b39380949659e6
     container_name: static-html
     env_file: .env
     ports:
