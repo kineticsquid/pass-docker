@@ -191,6 +191,8 @@ In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate inte
 - `ACTIVEMQ_JMS_PORT` Openwire wire protocol (ActiveMQ native) port e.g. `61616`
 - `ACTIVEMQ_STOMP_PORT`= STOMP wire protocol (text-based) port e.g. `61613`
 - `ACTIVEMQ_WEBCONSOLE_PORT`= HTTP port for the ActiveMQ web console (admin/admin) e.g. `8161`
+- `ACTIVEMQ_USER`= Username for ActiveMQ clients (default `messaging`), will prefer SPRING_ACTIVEMQ_USER
+- `ACTIVEMQ_PASSWORD`=  Password for ActiveMQ clients (default `moo`), will prefer  SPRING_ACTIVEMQ_PASSWORD
 
 ### Mail-related variables
 

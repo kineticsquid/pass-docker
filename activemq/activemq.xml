@@ -41,7 +41,7 @@
         <plugins>
             <simpleAuthenticationPlugin>
                 <users>
-                    <authenticationUser username="messaging" password="moo" groups="admins,producers,consumers" />
+                    <authenticationUser username="${ACTIVEMQ_USER}" password="${ACTIVEMQ_PASSWORD}" groups="admins,producers,consumers" />
                 </users>
             </simpleAuthenticationPlugin>
             <authorizationPlugin>

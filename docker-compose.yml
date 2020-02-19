@@ -23,7 +23,7 @@ services:
   activemq:
     build:
       context: ./activemq
-    image: oapass/activemq:20180618@sha256:e3cd47a1bc4c21899fc34e5ac7198f6c069f4148296bad0ce619cc2bdda5f435
+    image: oapass/activemq:20200219@sha256:e2351a4ce0d55fd7f016aeca37d789288dc8805fe8bf082b5ede28f7c18e5027
     container_name: activemq
     env_file: .env
     ports:
