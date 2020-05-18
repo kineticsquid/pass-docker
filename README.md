@@ -42,6 +42,8 @@ It is important to note that the Ember application does not actually read enviro
   - USER_SERVICE_URL: The relative URL of the user service, used at `ember` image _build time_, not run time (default: `/pass-user-service/whoami`)
   - METADATA_SCHEMA_URI: URL to the metadata global schema. Gets added to metadata blob (default: `https://oa-pass.github.io/metadata-schemas/jhu/global.json`)
   - STATIC_CONFIG_URI: The relative URI of the static branding configuration file. This is important to allow the Ember app to be able to retrieve branding stylesheets, images, and other static assets. (_default: `/config.json`_)
+  - MANUSCRIPT_SERVICE_LOOKUP_URL: the endpoint for looking up manuscripts by DOI (default: `/downloadservice/lookup`)
+  - MANUSCRIPT_SERVICE_DOWNLOAD_URL: the endpoint for downloading selected manuscripts into fedora (default: `/downloadservice/download`)
 
 
 ### Fedora-related variables
@@ -109,6 +111,7 @@ The following can be set to change log levels in pass-authz-lister. These variab
 - DSPACE_USERNAME: SWORD DSpace username
 - DSPACE_PASSWORD: SWORD DSpace password
 - DSPACE_COLLECTION_HANDLE:  Handle of the collection to deposit into (default: `123456789/2`)
+- DSPACE_COVID_HANDLE: Handle of the collection to deposit COVID-19 related submissions to (default: `123456789/4`)
 - DSPACE_SUBMITTER_USERNAME: SWORD DSpace username who is allowed to submit to the collection identified by `DSPACE_COLLECTION_WORKFLOW_HANDLE`
 - DSPACE_SUBMITTER_PASSWORD: Password for the user identified by `DSPACE_SUBMITTER_USERNAME`
 - DSPACE_COLLECTION_WORKFLOW_HANDLE: Handle of the collection which has workflows enabled.  Deposits to this collection must be approved by the DSpace administrator before they are accepted into the DSpace archive.
@@ -150,6 +153,18 @@ In addition we need PASS_EXTERNAL_FEDORA_BASEURL to be present to translate inte
 - PASS_FEDORA_PASSWORD: Password for basic auth to Fedora (default: "moo")
 - POLICY_SERVICE_PORT: The port the schema service is served on (default: `8088`)
 - POLICY_FILE: Location of the policy DSL file.  Baked-in values are `docker.json` (default), and `aws.json` (works in the AWS environment)
+
+### Download service variables
+
+- DOWNLOAD_SERVICE_PORT: Port to serve the download service on (default: `6502`)
+- DOWNLOAD_SERVICE_DEST: Fedora container URI where binaries will be downloaded into (default: http://fcrepo:8080/fcrepo/rest/files) 
+- DOWNLOAD_SERVICE_MAXREDIRECTS: Number of redirects that the http client will allow before halting (default: `20`)
+- UNPAYWALL_REQUEST_EMAIL: E-mail address that will be sent with unpaywall requests (can be any validly formatted email address, e.g. admin@oa-pass.org)
+- UNPAYWALL_BASEURI: BaseURL of the unpaywall service (e.g. https://api.unpaywall.org/v2).
+- PASS_EXTERNAL_FEDORA_BASEURL:  External (public) PASS baseurl (e.g. https://pass.local/fcrepo/rest/, _note_ the trailing slash is necessary)
+- PASS_FEDORA_BASEURL: Internal (private) PASS baseurl (e.g. http://localhost:8080/fcrepo/rest)
+- PASS_FEDORA_USER:  Username for basic auth to Fedora (default: "fedoraAdmin")
+- PASS_FEDORA_PASSWORD: Password for basic auth to Fedora (default: "moo")
 
 ### Authz service variables
 

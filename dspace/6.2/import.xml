@@ -25,5 +25,9 @@
       <name>Collection Two</name>
       <description>A Collection used for testing workflow-based submissions</description>
     </collection>
+    <collection>
+      <name>COVID-19</name>
+      <description>A Collection used for testing Submission hints</description>
+    </collection>
   </community>
 </import_structure>

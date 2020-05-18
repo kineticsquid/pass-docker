@@ -41,7 +41,10 @@
         "default-collection": "${dspace.baseuri}/swordv2/collection/${dspace.collection.handle}",
         "on-behalf-of": null,
         "deposit-receipt": true,
-        "user-agent": "pass-deposit/${deposit.services.version}"
+        "user-agent": "pass-deposit/${deposit.services.version}",
+        "collection-hints": {
+          "covid": "${dspace.baseuri}/swordv2/collection/${dspace.covid.handle}"
+        }
       }
     }
   },

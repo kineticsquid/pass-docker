@@ -44,7 +44,9 @@ services:
         USER_SERVICE_URL: "${USER_SERVICE_URL}"
         DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-    image: oapass/ember:20190904-aca28b9@sha256:2029f1bfc25fb7aef6c071f6e78b4918aad80316f49709d168a86bdde64df572
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
+    image: oapass/ember:20200512-08b32ec2@sha256:cadb40e3924625bb8737ee0d7f607c712e7dc5ed5fcff7fdae3900a231598098
     container_name: ember
     env_file: .env
     networks:
@@ -56,7 +58,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: oapass/static-html:jhu-20191028-7a4181c@sha256:66a14aa47f1cbdcaadd740bffaf6bd2acb519c63a9b8e147f15d7d2b3c84af26
+    image: oapass/static-html:jhu-20200513-8666f05@sha256:be3eba2c1a02b1a0ee9c708d00454fb7df1651b886f2ea1d643c062acd1ecf06
     container_name: static-html
     env_file: .env
     ports:
@@ -79,7 +81,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:201900508@sha256:a915ada2286a551d32b0494d4ce874ba7fe204c07f029cc9bba5e05b2a9087fc
+    image: oapass/httpd-proxy:20200507@sha256:e8ad2e759fe270998efc80bdcacbeb3f965b4b83d875478e36b0ce4c104bb2d3
     container_name: proxy
     networks:
      - front
@@ -124,7 +126,7 @@ services:
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20190813@sha256:d75554dd82191ec3201494a2c0db5ba632d0e37141bba6561b5d48fdee916f38
+    image: oapass/sp:20200507@sha256:03d652dc51adf919f6f6982bbb5b32188bd8a8053600271dfe0cf9022c2d31fd
     container_name: sp
     networks:
      - back
@@ -133,7 +135,7 @@ services:
 
   dspace:
     build: ./dspace/6.2
-    image: oapass/dspace:20190820@sha256:f1be8af0d23a90edc2e768700bc2ed8369c73134ce37412518090ddd667ac35f
+    image: oapass/dspace:20200419@sha256:99df12f10846f2a2d62058cf4eef631393d7949a343b233a9e487d54fd82a483
     container_name: dspace
     env_file: .env
     ports:
@@ -201,8 +203,8 @@ services:
       context: ./deposit-services
       args:
         # The providers image is released by the github.com/oa-pass/jhu-package-providers repository
-        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.0.1@sha256:15efaa68fdabe8c3df6438fbff5e0a38bad5132a2844a9c320b95d5fdb6be5c7
-    image: oapass/deposit-pass-docker:1.0.0-3.4@sha256:b1572ec55fae9a0f544fabd19e2ad0ac2d89f0a05f53e4acb0e852eb7e01b897
+        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.0.2@sha256:8a1aac5b188c5923d68dd520f6d9679bba66ac7ad64761f2b4c4f7f751e113f3
+    image: oapass/deposit-pass-docker:1.0.1-3.4@sha256:748b1815ac3b4a1557e305f0d3a2421cc9da6d837a1b6a2699a48214f11824b8
     container_name: deposit
     env_file: .env
     environment:
@@ -258,7 +260,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.6.0@sha256:0076f00bfa55dc1818d20859efca2e119e2bf23eb3972bd2cac7200a9dcd8844
+    image: oapass/schema-service:v0.6.1-3-gaa6d2f8@sha256:127b8b640b2c4669a6ca89f52677b54997bf0ea32a5e5f5d3e386537d3cf1e68
     container_name: schemaservice
     env_file: .env
     ports:
@@ -283,6 +285,16 @@ services:
     env_file: .env
     ports:
       - "${PASS_DOI_SERVICE_PORT}:8080"
+    networks:
+      - front
+      - back
+  
+  downloadservice:
+    image: oapass/download-service:v1.0.2@sha256:53312fcca42a87668a46b34500f7f0153d65fdc5535df1dace755ad6bb3d90ba
+    container_name: downloadservice
+    env_file: .env
+    ports:
+      - "${DOWNLOAD_SERVICE_PORT}:${DOWNLOAD_SERVICE_PORT}"
     networks:
       - front
       - back
