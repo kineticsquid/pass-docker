@@ -46,7 +46,7 @@ services:
         METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
         MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
         MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-    image: oapass/ember:20200609-4e5fa797@sha256:9d4611745403d1304d2a165b9fad4a7d3bc3a9ae490674b76fe687b3f2ae14e6
+    image: oapass/ember:20200610-0a9e9f5a@sha256:543325ff9bfff70ab1a7c88dfb917f76b42497c54fc87723e9af3cfca8df867f
     container_name: ember
     env_file: .env
     networks:
