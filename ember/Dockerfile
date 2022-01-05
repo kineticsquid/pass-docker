@@ -31,11 +31,10 @@ RUN apk add --no-cache git && \
     cd ${EMBER_BUILD_DIR} && \
     git clone ${EMBER_GIT_REPO} . && \
     git checkout ${EMBER_GIT_BRANCH} && \
-    yarn global add ember-cli && \
     yarn install && \
     echo "Build environment: " && \
     env | sort && \
-    yarn run build --environment=production && \
+    yarn run -B ember build --environment=production && \
     yarn cache clean
 
 FROM nginx:1.13.12-alpine
