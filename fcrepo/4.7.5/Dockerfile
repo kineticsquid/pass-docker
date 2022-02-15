@@ -4,6 +4,7 @@ ENV FCREPO_VERSION=4.7.5 \
 JSONLD_ADDON_VERSION=0.0.6 \
 PASS_AUTHZ_VERSION=0.5.0 \
 JMS_ADDON_VERSION=0.0.2 \
+POSTGRESQL_VERSION=42.3.2 \
 FCREPO_HOME=${CATALINA_HOME}/fcrepo4-data \
 FCREPO_HOST=fcrepo \
 FCREPO_PORT=8080 \
@@ -63,26 +64,26 @@ RUN apk update && \
     pip install awscli && \
     export FCREPO_WAR=fcrepo-webapp-${FCREPO_VERSION}.war && \
     wget -O ${CATALINA_HOME}/webapps/fcrepo.war \
-    http://central.maven.org/maven2/org/fcrepo/fcrepo-webapp-plus/${FCREPO_VERSION}/fcrepo-webapp-plus-${FCREPO_VERSION}.war && \
+    https://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp-plus/${FCREPO_VERSION}/fcrepo-webapp-plus-${FCREPO_VERSION}.war && \
     #https://github.com/fcrepo4-exts/fcrepo-webapp-plus/releases/download/fcrepo-webapp-plus-${FCREPO_VERSION}/fcrepo-webapp-plus-webac-${FCREPO_VERSION}.war && \
     echo "95cd04e17eebfc9af5dd7a0968293f92bfd75bf0 *${CATALINA_HOME}/webapps/fcrepo.war" \
         | sha1sum -c -  && \
     echo "org.apache.catalina.webresources.Cache.level = SEVERE" \
       >> ${CATALINA_HOME}/conf/logging.properties && \
     wget -O ${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar \
-        http://central.maven.org/maven2/org/dataconservancy/fcrepo/jsonld-addon-filters/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
+        https://repo1.maven.org/maven2/org/dataconservancy/fcrepo/jsonld-addon-filters/${JSONLD_ADDON_VERSION}/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar && \
     echo "53883365d715e64bf55ec0e433a2266f9374254e *${CATALINA_HOME}/lib/jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar \
-        http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
+        https://repo1.maven.org/maven2/org/dataconservancy/pass/pass-authz-core/${PASS_AUTHZ_VERSION}/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar && \
     echo "0a0d326ebcd4f47398d5b2c126c49d46153325ab *${CATALINA_HOME}/lib/pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar" \
        | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar \
-        http://central.maven.org/maven2/org/dataconservancy/pass/pass-authz-roles/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
+        https://repo1.maven.org/maven2/org/dataconservancy/pass/pass-authz-roles/${PASS_AUTHZ_VERSION}/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar && \
     echo "d3f52226bf86e76fc3ebe9d90a82f4ba4f0aeb6d *${CATALINA_HOME}/lib/pass-authz-roles-${PASS_AUTHZ_VERSION}.jar" \
         | sha1sum -c -  && \
     wget -O ${CATALINA_HOME}/webapps/pass-user-service.war \
-        http://central.maven.org/maven2/org/dataconservancy/pass/pass-user-service/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
+        https://repo1.maven.org/maven2/org/dataconservancy/pass/pass-user-service/${PASS_AUTHZ_VERSION}/pass-user-service-${PASS_AUTHZ_VERSION}.war && \
     echo "c603c201fc60b3fb3ae3ac89f4d4e1e5d8f55d5d *${CATALINA_HOME}/webapps/pass-user-service.war" \
         | sha1sum -c -  && \
     mkdir ${CATALINA_HOME}/webapps/pass-user-service && \
@@ -135,7 +136,12 @@ RUN wget -O ${COMPACTION_PRELOAD_FILE_PASS_STATIC_2_0} \
     wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar \
       https://github.com/OA-PASS/fcrepo-module-auth-rbacl/releases/download/fixes-4.7.5-0/fcrepo-auth-roles-common-4.7.5.jar && \
     echo "21d21474ca15fa69741dd9bf66a0f39962eff8bd *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/fcrepo-auth-roles-common-4.7.5-fixes-01.jar" && \
-    echo "networkaddress.cache.ttl=10" >> ${JAVA_HOME}/lib/security/java.security
+    echo "networkaddress.cache.ttl=10" >> ${JAVA_HOME}/lib/security/java.security &&\
+    wget -O ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/postgresql-${POSTGRESQL_VERSION}.jar \
+        https://repo1.maven.org/maven2/org/postgresql/postgresql/${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.jar && \
+    echo "8fd7a20f008a58b97b26ba5c5084ee61602203aa *${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/postgresql-${POSTGRESQL_VERSION}.jar" \
+        | sha1sum -c - && \
+    rm ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/lib/postgresql-9.4.1211.jar
 
 COPY WEB-INF/ ${CATALINA_HOME}/webapps/fcrepo/WEB-INF/
 
