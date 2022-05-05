@@ -9,7 +9,7 @@ ARG DOI_SERVICE_URL
 ARG POLICY_SERVICE_URL
 
 ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
-    EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/OA-PASS/pass-ember} \
+    EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/eclipse-pass/pass-ui} \
     EMBER_BUILD_DIR=/ember \
     FEDORA_ADAPTER_BASE=/fcrepo/rest/ \
     FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
