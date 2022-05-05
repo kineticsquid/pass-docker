@@ -12,7 +12,7 @@ These instructions are for starting PASS with `docker-compose`.  If you have Doc
 
 1. Create a "hosts" entry (`C:\Windows\System32\Drivers\etc\hosts` for windows, `/etc/hosts` for *nix) that aliases the hostname `pass.local` to your loopback address (`127.0.0.1`) or to your docker-machine address (e.g. `192.168.99.100`)
 2. A working Docker installation: Docker for Mac, Docker for Windows, Docker Linux, or Docker Machine
-3. Checkout (i.e. clone) this repository: `git clone https://github.com/OA-PASS/pass-demo-docker`
+3. Checkout (i.e. clone) this repository: `git clone https://github.com/eclipse-pass/pass-docker`
 4. `cd` into `pass-demo-docker`
 
 > Docker Machine users should remember to set the appropriate environment variables in order to select an active machine (e.g. `eval $(docker-machine env default)`), and insure the selected machine is running (e.g. `docker-machine ls`, `docker-machine start default`)
