@@ -15,9 +15,9 @@ jobs:
           pwd
           ls -la
 
-      - name: Stop Existing App
-        run: |
-          docker-compose down
+      # - name: Stop Existing App
+      #   run: |
+      #     docker-compose down
 
       - name: Build App
         run: |
