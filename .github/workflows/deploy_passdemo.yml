@@ -1,0 +1,10 @@
+name: Deploy passdemo
+
+on: workflow_dispatch
+
+jobs:
+  deploy_code:
+     runs-on: passdemo
+     steps:
+      - name: Show working dir
+        run: pwd
