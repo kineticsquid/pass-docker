@@ -14,11 +14,12 @@ jobs:
           echo "🐧 This job is now running on a ${{ runner.os }}"
           pwd
           ls -la
+          docker info
 
       # - name: Stop Existing App
       #   run: |
       #     docker-compose down
 
-      - name: Build App
-        run: |
-          docker-compose pull
+      # - name: Build App
+      #   run: |
+      #     docker-compose pull
