@@ -6,5 +6,11 @@ jobs:
   deploy_code:
      runs-on: passdemo
      steps:
-      - name: Show working dir
-        run: pwd
+      - uses: actions/checkout@v2
+
+      - name: Sanity Check
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🐧 This job is now running on a ${{ runner.os }}"
+          pwd
+          git log -1
