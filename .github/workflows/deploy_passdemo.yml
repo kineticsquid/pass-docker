@@ -14,7 +14,8 @@ jobs:
           echo "🐧 This job is now running on a ${{ runner.os }}"
           pwd
           ls -la
-          docker info
+          echo "Iam $USER"
+          ls -la /var/run/docker.sock
 
       # - name: Stop Existing App
       #   run: |
