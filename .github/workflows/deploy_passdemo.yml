@@ -27,3 +27,7 @@ jobs:
       - name: Build App
         run: |
           docker-compose pull
+
+      - name: Run App
+        run: |
+          docker-compose up -d
