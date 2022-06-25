@@ -15,7 +15,8 @@ jobs:
           pwd
           ls -la
           echo "Iam $USER"
-          ls -la /var/run/docker.sock
+          groups
+          docker info
 
       # - name: Stop Existing App
       #   run: |
