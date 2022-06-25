@@ -8,20 +8,22 @@ jobs:
      steps:
       - uses: actions/checkout@v2
 
-      - name: Sanity Check
+      - name: Code Sanity Check
         run: |
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
           echo "🐧 This job is now running on a ${{ runner.os }}"
           pwd
           ls -la
-          echo "Iam $USER"
+
+      - name: Docker Sanity Check
+        run: |
           groups
           docker info
 
-      # - name: Stop Existing App
-      #   run: |
-      #     docker-compose down
+      - name: Stop Existing App
+        run: |
+          docker-compose down
 
-      # - name: Build App
-      #   run: |
-      #     docker-compose pull
+      - name: Build App
+        run: |
+          docker-compose pull
