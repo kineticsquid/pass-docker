@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ldap
+  name: ldap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ldap
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/back: "true"
+        io.kompose.service: ldap
+    spec:
+      containers:
+        - image: oapass/ldap:20200610-jhu@sha256:44d56b80763c8f11d5db082d3bd2ab78614fcb8e7b6544a146b48d098a2672ce
+          name: ldap
+          resources: {}
+      restartPolicy: Always
+status: {}

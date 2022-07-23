@@ -1,0 +1,286 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: authz
+  name: authz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: authz
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/back: "true"
+        io.kompose.service: authz
+    spec:
+      containers:
+        - env:
+            - name: ACTIVEMQ_JMS_PORT
+              value: "61616"
+            - name: ACTIVEMQ_STOMP_PORT
+              value: "61613"
+            - name: ACTIVEMQ_WEBCONSOLE_PORT
+              value: "8161"
+            - name: DEPOSIT_DEBUG_PORT
+              value: "5007"
+            - name: DMS_DEBUG
+              value: "0"
+            - name: DOI_SERVICE_URL
+              value: /doiservice/journal
+            - name: DOWNLOAD_SERVICE_DEST
+              value: http://fcrepo:8080/fcrepo/rest/files
+            - name: DOWNLOAD_SERVICE_MAXREDIRECTS
+              value: "20"
+            - name: DOWNLOAD_SERVICE_PORT
+              value: "6502"
+            - name: DSPACE_BASEURI
+              value: http://pass.local:8181
+            - name: DSPACE_COLLECTION_HANDLE
+              value: 123456789/2
+            - name: DSPACE_COVID_HANDLE
+              value: 123456789/4
+            - name: DSPACE_HOST
+              value: pass.local
+            - name: DSPACE_PASSWORD
+              value: foobar
+            - name: DSPACE_PORT
+              value: "8181"
+            - name: DSPACE_USERNAME
+              value: dspace-admin@oapass.org
+            - name: EMBER_GIT_BRANCH
+              value: 08b87e4c84016e6a44921a48d4266305fb8d0a5e
+            - name: EMBER_GIT_REPO
+              value: https://github.com/eclipse-pass/pass-ui
+            - name: EMBER_PORT
+              value: "81"
+            - name: EMBER_ROOT_URL
+              value: /app/
+            - name: ENABLE_CLAMAV
+              value: "0"
+            - name: ENABLE_FAIL2BAN
+              value: "0"
+            - name: ENABLE_LDAP
+              value: "1"
+            - name: ENABLE_POSTGREY
+              value: "0"
+            - name: ENABLE_SASLAUTHD
+              value: "0"
+            - name: ENABLE_SPAMASSASSIN
+              value: "0"
+            - name: ES_PORT
+              value: "9200"
+            - name: FCREPO_DEBUG_PORT
+              value: "5006"
+            - name: FCREPO_HOME
+              value: /data
+            - name: FCREPO_HOST
+              value: fcrepo
+            - name: FCREPO_JMS_BASEURL
+              value: http://fcrepo:8080/fcrepo/rest
+            - name: FCREPO_JMS_CONFIGURATION
+              value: classpath:/pass-jms-external.xml
+            - name: FCREPO_JMS_DESTINATION
+              value: VirtualTopic.pass.docker
+            - name: FCREPO_LOGBACK_LOCATION
+              value: webapps/fcrepo/WEB-INF/classes/logback.xml
+            - name: FCREPO_LOG_JMS
+              value: INFO
+            - name: FCREPO_LOG_LEVEL
+              value: INFO
+            - name: FCREPO_PORT
+              value: "8080"
+            - name: FTP_HOST
+              value: ftpserver
+            - name: FTP_PASS
+              value: nihmsftppass
+            - name: FTP_PORT
+              value: "21"
+            - name: FTP_USER
+              value: nihmsftpuser
+            - name: LDAP_BIND_DN
+              value: cn=admin,dc=pass
+            - name: LDAP_BIND_PW
+              value: password
+            - name: LDAP_QUERY_FILTER_ALIAS
+              value: (&(objectClass=posixAccount)(mailAlias=%s))
+            - name: LDAP_QUERY_FILTER_DOMAIN
+              value: (|(mail=*@%s)(mailalias=*@%s)(mailGroupMember=*@%s))
+            - name: LDAP_QUERY_FILTER_GROUP
+              value: (&(objectClass=posixAccount)(mailGroupMember=%s))
+            - name: LDAP_QUERY_FILTER_USER
+              value: (&(objectClass=posixAccount)(mail=%s))
+            - name: LDAP_SEARCH_BASE
+              value: ou=People,dc=pass
+            - name: LDAP_SERVER_HOST
+              value: ldap
+            - name: MAIL_IMAPS
+              value: "11993"
+            - name: MAIL_MSP
+              value: "11587"
+            - name: MAIL_SMTP
+              value: "11025"
+            - name: MANUSCRIPT_SERVICE_DOWNLOAD_URL
+              value: /downloadservice/download
+            - name: MANUSCRIPT_SERVICE_LOOKUP_URL
+              value: /downloadservice/lookup
+            - name: METADATA_SCHEMA_URI
+              value: https://oa-pass.github.io/metadata-schemas/jhu/global.json
+            - name: NOTIFICATION_DEBUG_PORT
+              value: "5011"
+            - name: NOTIFICATION_OPTS
+              value: -Dorg.dataconservancy.pass.notification.level=DEBUG
+            - name: ONE_DIR
+              value: "1"
+            - name: OVERRIDE_HOSTNAME
+              value: mail.jhu.edu
+            - name: PASS_AUTHZ_QUEUE
+              value: Consumer.authz.VirtualTopic.pass.docker
+            - name: PASS_DEPOSIT_QUEUE_DEPOSIT_NAME
+              value: Consumer.deposit.VirtualTopic.pass.docker
+            - name: PASS_DEPOSIT_QUEUE_SUBMISSION_NAME
+              value: Consumer.submission.VirtualTopic.pass.docker
+            - name: PASS_DOI_SERVICE_PORT
+              value: "8090"
+            - name: PASS_ELASTICSEARCH_URL
+              value: http://elasticsearch:9200
+            - name: PASS_EXTERNAL_FEDORA_BASEURL
+              value: https://pass.local/fcrepo/rest/
+            - name: PASS_FEDORA_BASEURL
+              value: http://fcrepo:8080/fcrepo/rest/
+            - name: PASS_FEDORA_PASSWORD
+              value: moo
+            - name: PASS_FEDORA_USER
+              value: fedoraAdmin
+            - name: PASS_LINK_HOST
+              value: pass.local
+            - name: PASS_LINK_SCHEME
+              value: https
+            - name: PASS_LINK_USERTOKEN_GENERATOR_KEY
+              value: BETKPFHWGGDIEWIIYKYQ33LUS4
+            - name: PASS_NOTIFICATION_CONFIGURATION
+              value: file:/notification.json
+            - name: PASS_NOTIFICATION_DEMO_FROM_ADDRESS
+              value: noreply@pass.jh.edu
+            - name: PASS_NOTIFICATION_DEMO_GLOBAL_BCC_ADDRESS
+              value: notification-demo-bcc@jhu.edu
+            - name: PASS_NOTIFICATION_DEMO_GLOBAL_CC_ADDRESS
+              value: notification-demo-cc@jhu.edu
+            - name: PASS_NOTIFICATION_MODE
+              value: DEMO
+            - name: PASS_NOTIFICATION_PRODUCTION_FROM_ADDRESS
+              value: noreply@pass.jh.edu
+            - name: PASS_NOTIFICATION_PRODUCTION_GLOBAL_BCC_ADDRESS
+              value: notification-demo-bcc@jhu.edu
+            - name: PASS_NOTIFICATION_PRODUCTION_GLOBAL_CC_ADDRESS
+            - name: PASS_NOTIFICATION_QUEUE_EVENT_NAME
+              value: Consumer.event.VirtualTopic.pass.docker
+            - name: PASS_NOTIFICATION_SMTP_HOST
+              value: mail
+            - name: PASS_NOTIFICATION_SMTP_PASS
+            - name: PASS_NOTIFICATION_SMTP_PORT
+              value: "587"
+            - name: PASS_NOTIFICATION_SMTP_TRANSPORT
+              value: SMTP
+            - name: PASS_NOTIFICATION_SMTP_USER
+            - name: PASS_NOTIFICATION_TEMPLATE_APPROVAL_INVITE_BODY
+              value: file:/templates/approval-invite-body.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_APPROVAL_INVITE_FOOTER
+              value: file:/templates/footer.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_APPROVAL_INVITE_SUBJECT
+              value: file:/templates/approval-invite-subject.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_APPROVAL_REQUESTED_BODY
+              value: file:/templates/approval-requested-body.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_APPROVAL_REQUESTED_FOOTER
+              value: file:/templates/footer.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_APPROVAL_REQUESTED_SUBJECT
+              value: file:/templates/approval-requested-subject.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_CHANGES_REQUESTED_BODY
+              value: file:/templates/changes-requested-body.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_CHANGES_REQUESTED_FOOTER
+              value: file:/templates/footer.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_CHANGES_REQUESTED_SUBJECT
+              value: file:/templates/changes-requested-subject.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_SUBMISSION_CANCELLED_BODY
+              value: file:/templates/submission-cancelled-body.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_SUBMISSION_CANCELLED_FOOTER
+              value: file:/templates/footer.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_SUBMISSION_CANCELLED_SUBJECT
+              value: file:/templates/submission-cancelled-subject.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_SUBMISSION_SUBMITTED_BODY
+              value: file:/templates/submission-submitted-body.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_SUBMISSION_SUBMITTED_FOOTER
+              value: file:/templates/footer.hbr
+            - name: PASS_NOTIFICATION_TEMPLATE_SUBMISSION_SUBMITTED_SUBJECT
+              value: file:/templates/submission-submitted-subject.hbr
+            - name: PASS_USER_TOKEN_KEY
+              value: BETKPFHWGGDIEWIIYKYQ33LUS4
+            - name: PI_ES_BASE
+              value: http://elasticsearch:9200/
+            - name: PI_ES_INDEX
+              value: http://elasticsearch:9200/pass/
+            - name: PI_FEDORA_INTERNAL_BASE
+              value: http://fcrepo:8080/fcrepo/rest/
+            - name: PI_FEDORA_JMS_QUEUE
+              value: Consumer.indexer.VirtualTopic.pass.docker
+            - name: PI_FEDORA_PASS
+              value: moo
+            - name: PI_FEDORA_USER
+              value: fedoraAdmin
+            - name: PI_LOG_LEVEL
+              value: info
+            - name: PI_TYPE_PREFIX
+              value: http://oapass.org/ns/pass#
+            - name: POLICY_SERVICE_PORT
+              value: "8088"
+            - name: POLICY_SERVICE_URL
+              value: /policyservice
+            - name: POSTGRES_DB_PORT
+              value: "6543"
+            - name: POSTMASTER_ADDRESS
+              value: root
+            - name: SCHEMA_SERVICE_PORT
+              value: "8086"
+            - name: SMTP_ONLY
+              value: "0"
+            - name: SPRING_ACTIVEMQ_BROKER_URL
+              value: failover:(tcp://activemq:61616)?trackMessages=true&maxCacheSize=100000000
+            - name: SPRING_ACTIVEMQ_PASSWORD
+              value: moo
+            - name: SPRING_ACTIVEMQ_USER
+              value: messaging
+            - name: SSL_CERT_PATH
+              value: /tmp/docker-mailserver/cert.pem
+            - name: SSL_KEY_PATH
+              value: /tmp/docker-mailserver/key.rsa
+            - name: SSL_TYPE
+              value: manual
+            - name: STATIC_CONFIG_URI
+              value: /config.json
+            - name: STATIC_HTML_GIT_BRANCH
+              value: 3683b71cb95ba4208843c152754ad7443038d68a
+            - name: STATIC_HTML_GIT_REPO
+              value: https://github.com/eclipse-pass/pass-ui-public
+            - name: STATIC_HTML_PORT
+              value: "82"
+            - name: TLS_LEVEL
+              value: intermediate
+            - name: UNPAYWALL_BASEURI
+              value: https://api.unpaywall.org/v2
+            - name: UNPAYWALL_REQUEST_EMAIL
+              value: admin@oa-pass.org
+          image: oapass/authz:0.4.5-3.4@sha256:5ef2579e8094a3eb86d3765a6c910c8ce86a3a0352f821e751d647b4d97c5cc1
+          name: authz
+          resources: {}
+      restartPolicy: Always
+status: {}

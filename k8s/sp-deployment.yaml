@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: sp
+  name: sp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: sp
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/back: "true"
+        io.kompose.service: sp
+    spec:
+      containers:
+        - image: oapass/sp:20200507@sha256:03d652dc51adf919f6f6982bbb5b32188bd8a8053600271dfe0cf9022c2d31fd
+          name: sp
+          resources: {}
+          volumeMounts:
+            - mountPath: /run/secrets/sp_key
+              name: sp-key
+      restartPolicy: Always
+      volumes:
+        - name: sp-key
+          secret:
+            items:
+              - key: sp-key
+                path: sp-key
+            secretName: sp-key
+status: {}

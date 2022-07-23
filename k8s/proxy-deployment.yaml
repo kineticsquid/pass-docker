@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: proxy
+  name: proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: proxy
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/back: "true"
+        io.kompose.network/front: "true"
+        io.kompose.service: proxy
+    spec:
+      containers:
+        - image: oapass/httpd-proxy:20200507@sha256:e8ad2e759fe270998efc80bdcacbeb3f965b4b83d875478e36b0ce4c104bb2d3
+          name: proxy
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          resources: {}
+      restartPolicy: Always
+status: {}

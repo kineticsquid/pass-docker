@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: static-html
+  name: static-html
+spec:
+  ports:
+    - name: "82"
+      port: 82
+      targetPort: 82
+  selector:
+    io.kompose.service: static-html
+status:
+  loadBalancer: {}
