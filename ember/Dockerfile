@@ -1,4 +1,4 @@
-FROM node:10.20.1-alpine3.11 as ember-builder
+FROM node:fermium-alpine3.15 as ember-builder
 
 ARG EMBER_GIT_REPO
 ARG EMBER_GIT_BRANCH
@@ -8,7 +8,7 @@ ARG SCHEMA_SERVICE_URL
 ARG DOI_SERVICE_URL
 ARG POLICY_SERVICE_URL
 
-ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
+ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-main} \
     EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/eclipse-pass/pass-ui} \
     EMBER_BUILD_DIR=/ember \
     FEDORA_ADAPTER_BASE=/fcrepo/rest/ \
@@ -25,7 +25,7 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-master} \
     MANUSCRIPT_SERVICE_LOOKUP_URL=${MANUSCRIPT_SERVICE_LOOKUP_URL:-/downloadservice/lookup} \
     MANUSCRIPT_SERVICE_DOWNLOAD_URL=${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-/downloadservice/download}
 
-RUN apk add --no-cache git && \
+RUN apk add --no-cache git python2 g++ make && \
     node -v && npm -v && yarn -v && \
     mkdir -p ${EMBER_BUILD_DIR} && \
     cd ${EMBER_BUILD_DIR} && \
