@@ -5,7 +5,7 @@ services:
   fcrepo:
     build:
       context: ./fcrepo/4.7.5
-    image: oapass/fcrepo:4.7.5-3.4-0.4.5@sha256:2e572514cb18c3b06a9a2e45e9c63e083e3335fec9db4a4ee8ce99ca2dfa13ff
+    image: oapass/fcrepo:0.1.0@sha256:56730754843aec0a3d48bfcefd13d72f1bb34708aea9b47d2280d2da61a1eb54
     container_name: fcrepo
     env_file: .env
     ports:
@@ -23,7 +23,7 @@ services:
   activemq:
     build:
       context: ./activemq
-    image: oapass/activemq:20200219@sha256:e2351a4ce0d55fd7f016aeca37d789288dc8805fe8bf082b5ede28f7c18e5027
+    image: oapass/activemq:0.1.0@sha256:370189e32b1d34374a0ad15619f356f8d089e7c9000a79fc2de4e078cc23228c
     container_name: activemq
     env_file: .env
     ports:
@@ -68,8 +68,8 @@ services:
       - front
 
   ftpserver:
-    build: ./ftpserver/0.0.1-demo
-    image: oapass/ftpserver@sha256:145f7e3bb494deeb1e1c587f34f0f54649f22d6ef0c107bacd022b0308146ddb
+    build: ./ftpserver
+    image: oapass/ftpserver:0.1.0@sha256:f095b1944aca9c7dd8f68641f682dcba36a0d779b3ba8cb79475a84e4632ab57
     container_name: ftpserver
     env_file: .env
     ports:
@@ -81,7 +81,7 @@ services:
 
   proxy:
     build: ./httpd-proxy/
-    image: oapass/httpd-proxy:20200507@sha256:e8ad2e759fe270998efc80bdcacbeb3f965b4b83d875478e36b0ce4c104bb2d3
+    image: oapass/httpd-proxy:0.1.0@sha256:ef5fa38fdf4ba14ed4edd27282d95377946eb25abde3fc97dc817324d200f5a8
     container_name: proxy
     networks:
      - front
@@ -95,7 +95,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: oapass/idp:20190813-jhu@sha256:f7a37180964e0e90e1db15440846a39c39659f20999a11c556b99f43d65c7fcb
+    image: oapass/idp:0.1.0@sha256:6028785e1f6b4e35f7d21f9fd4fd11127d628a1e3aef54665a3d53145045d065
     container_name: idp
     depends_on:
      - ldap
@@ -119,14 +119,14 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:20200610-jhu@sha256:44d56b80763c8f11d5db082d3bd2ab78614fcb8e7b6544a146b48d098a2672ce
+    image: oapass/ldap:0.1.0@sha256:fd66cb1255b81b81ae602d1ccf56d8534e80a6ee27bccc1de014efab58cbf28c
     container_name: ldap
     networks:
      - back
 
   sp:
     build: ./sp/2.6.1
-    image: oapass/sp:20200507@sha256:03d652dc51adf919f6f6982bbb5b32188bd8a8053600271dfe0cf9022c2d31fd
+    image: oapass/sp:0.1.0@sha256:3fbdc2d8e7d5e42eda947ead953b78934d7621441a10533261d11b49eea144d7
     container_name: sp
     networks:
      - back
@@ -135,7 +135,7 @@ services:
 
   dspace:
     build: ./dspace/6.2
-    image: oapass/dspace:20200419@sha256:99df12f10846f2a2d62058cf4eef631393d7949a343b233a9e487d54fd82a483
+    image: oapass/dspace:0.1.0@sha256:ffb21fc796f0ff0149fe89958c0cc425826325b96b2b8336522b9028e44876c9
     container_name: dspace
     env_file: .env
     ports:
@@ -147,7 +147,7 @@ services:
 
   postgres:
     build: ./postgres/10.3
-    image: oapass/postgres@sha256:a16b49990b5ee111efdbce63eefa4a56ae1257d16114ecaeb584117074deefaa
+    image: oapass/postgres:0.1.0@sha256:ace6225676b8da663fb3eff8de7b0d21ff5fec564875b108580fb16e31573711
     container_name: postgres
     env_file: .env
     ports:
@@ -156,8 +156,8 @@ services:
       - back
 
   indexer:
-    build: ./indexer/0.0.18-SNAPSHOT
-    image: oapass/indexer:0.0.18-3.4-1@sha256:3375ea702e0a1c7a5e0e7e06635d28e49af436aeb1c3d88a03d4cb494d7b40bf
+    build: ./indexer
+    image: oapass/indexer:0.1.0@sha256:48364e4341ff476a92d31cd391158d832f6ba01e66fa50c79f67d3595930289b
     container_name: indexer
     env_file: .env
     networks:
@@ -203,8 +203,8 @@ services:
       context: ./deposit-services
       args:
         # The providers image is released by the github.com/oa-pass/jhu-package-providers repository
-        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.0.2@sha256:8a1aac5b188c5923d68dd520f6d9679bba66ac7ad64761f2b4c4f7f751e113f3
-    image: oapass/deposit-pass-docker:1.0.1-3.4@sha256:748b1815ac3b4a1557e305f0d3a2421cc9da6d837a1b6a2699a48214f11824b8
+        PROVIDERS_IMAGE: oapass/deposit-services-providers:0.1.0@sha256:1493014d0f2d90d5ca93a4b2abe2fbbecf8af06f9997f0a0f12d521d41b27afe
+    image: oapass/deposit-pass-docker:0.1.0@sha256:ed8178788a8fe73cb2f72a38255104e0595ea8760f91573f2b56499e4ac0e82f
     container_name: deposit
     env_file: .env
     environment:
@@ -222,14 +222,14 @@ services:
 
   authz:
     build: ./authz
-    image: oapass/authz:0.4.5-3.4@sha256:5ef2579e8094a3eb86d3765a6c910c8ce86a3a0352f821e751d647b4d97c5cc1
+    image: oapass/authz:0.1.0@sha256:a691d3979f5e939f963d2d521f05399852b8b4dbdcb098c3e8070808e29c9da7
     container_name: authz
     env_file: .env
     networks:
       - back
 
   mail:
-    image: oapass/docker-mailserver:20181105@sha256:4dc4d836cfd5fbcbc7819a2f1195366e0fb5d0436b4d632f6a14b9251766a6b3
+    image: oapass/docker-mailserver:0.1.0@sha256:5be8a080a8f7d70c3d8a315f2241ca49ea9051c9efbb940a9099cf64f2bf975d
     hostname: mail
     domainname: jhu.edu
     container_name: mail
@@ -248,8 +248,8 @@ services:
       - ldap
 
   notification:
-    build: notification-services/0.1.0-3.4
-    image: oapass/notification-services:0.1.0-3.4-SNAPSHOT@sha256:a7ce9069f92d2a2c8a0ab2558718f8f21097880272af20a4868a31a013d78da5
+    build: notification-services
+    image: oapass/notification-services:0.1.0@sha256:34c3fa003e1422c0028ec6319fd6de6bdeb89e86d6d743b99f1e4059b4cca610
     container_name: notification
     networks:
       - back
@@ -260,7 +260,7 @@ services:
       - PASS_NOTIFICATION_CONFIGURATION=file:/notification.json
 
   schemaservice:
-    image: oapass/schema-service:v0.6.1-3-gaa6d2f8@sha256:127b8b640b2c4669a6ca89f52677b54997bf0ea32a5e5f5d3e386537d3cf1e68
+    image: oapass/schema-service:0.1.0@sha256:673104043615f4204c77ba89836e833270a6003641f862aacdf8a0aeab240c0f
     container_name: schemaservice
     env_file: .env
     ports:
@@ -270,7 +270,7 @@ services:
       - back
 
   policyservice:
-    image: oapass/policy-service:v0.1.2@sha256:b361bc7dd9d366465f7683052e038e5ec93ef77a48e69176590c84044ce7d804
+    image: oapass/policy-service:0.1.0@sha256:7c31dabd7dbb3a09ca47f19efe6a1b2aa9cea66ffe21775279ca8189358d4bfa
     container_name: policyservice
     env_file: .env
     ports:
@@ -280,7 +280,7 @@ services:
       - back
 
   doiservice:
-    image: oapass/doi-service:version1.0.0@sha256:a82a1b60b4bae17b9a5628ed3d65501000d576ef3ba6bc3ffe4cbf9138eba82d
+    image: oapass/doi-service:0.1.0@sha256:6b7ec4910216ba0c8368cb0f516c835132236d7626f6453000dd42dfa8b87281
     container_name: doiservice
     env_file: .env
     ports:
@@ -290,7 +290,7 @@ services:
       - back
 
   downloadservice:
-    image: oapass/download-service:v1.0.2@sha256:53312fcca42a87668a46b34500f7f0153d65fdc5535df1dace755ad6bb3d90ba
+    image: oapass/download-service:0.1.0@sha256:1156fe0847d84f2c24399a19b0a91fd334c7016880d398fa536cb5217b14ea81
     container_name: downloadservice
     env_file: .env
     ports:
