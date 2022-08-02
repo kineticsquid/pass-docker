@@ -32,52 +32,30 @@ spec:
               value: password
             - name: JETTY_MAX_HEAP
               value: 64m
-          image: oapass/idp:20190813-jhu@sha256:f7a37180964e0e90e1db15440846a39c39659f20999a11c556b99f43d65c7fcb
+          image: ghcr.io/eclipse-pass/idp:v0.1
           name: idp
           ports:
             - containerPort: 4443
           resources: {}
           volumeMounts:
-            - mountPath: /run/secrets/idp_backchannel
-              name: idp-backchannel
-            - mountPath: /run/secrets/idp_browser
-              name: idp-browser
-            - mountPath: /run/secrets/idp_encryption
-              name: idp-encryption
-            - mountPath: /run/secrets/idp_signing
-              name: idp-signing
-            - mountPath: /run/secrets/idp_sealer
-              name: idp-sealer
+            - mountPath: /run/secrets/idp
+              name: idp-secrets
       restartPolicy: Always
       volumes:
-        - name: idp-backchannel
+        - name: idp-secrets
           secret:
             items:
-              - key: idp-backchannel
-                path: idp-backchannel
-            secretName: idp-backchannel
-        - name: idp-browser
-          secret:
-            items:
-              - key: idp-browser
-                path: idp-browser
-            secretName: idp-browser
-        - name: idp-encryption
-          secret:
-            items:
-              - key: idp-encryption
-                path: idp-encryption
-            secretName: idp-encryption
-        - name: idp-signing
-          secret:
-            items:
-              - key: idp-signing
-                path: idp-signing
-            secretName: idp-signing
-        - name: idp-sealer
-          secret:
-            items:
-              - key: idp-sealer
-                path: idp-sealer
-            secretName: idp-sealer
+              - key: idp_backchannel
+                path: idp_backchannel
+              - key: idp_browser
+                path: idp_browser
+              - key: idp_encryption
+                path: idp_encryption
+              - key: idp_signing
+                path: idp_signing
+              - key: idp_sealer
+                path: idp_sealer
+            secretName: idp-secrets
+      imagePullSecrets:
+      - name: regcred
 status: {}
