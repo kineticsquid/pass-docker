@@ -20,8 +20,8 @@ sn: Hasgrants
 cn: Staff Hasgrants
 mail: staffWithGrants@jhu.edu
 userPassword: moo
-eduPersonUniqueId: 3PD4GS
-employeeNumber: 00017179
+eduPersonUniqueId: FAKESWG
+employeeNumber: 906502
 displayName: Staff Hasgrants
 employeeType: STAFF
 homeDirectory: /home/staff1
@@ -62,8 +62,8 @@ sn: Hasgrants
 cn: Faculty Hasgrants
 mail: facultyWithGrants@jhu.edu
 userPassword: moo
-eduPersonUniqueId: UC8KV5
-employeeNumber: 00003343
+eduPersonUniqueId: MF150
+employeeNumber: 150
 displayName: Faculty Hasgrants
 employeeType: FACULTY
 homeDirectory: /home/faculty1
@@ -104,8 +104,8 @@ sn: Ser
 cn: Nihu Ser
 mail: nihuser@jhu.edu
 userPassword: moo
-eduPersonUniqueId: KYWJIT
-employeeNumber: 00001421
+eduPersonUniqueId: NIHUSER
+employeeNumber: 118110
 displayName: Nihu Ser
 employeeType: FACULTY
 homeDirectory: /home/nih-user

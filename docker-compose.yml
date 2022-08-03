@@ -119,7 +119,7 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:0.1.0@sha256:fd66cb1255b81b81ae602d1ccf56d8534e80a6ee27bccc1de014efab58cbf28c
+    image: oapass/ldap:0.1.0@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
     container_name: ldap
     networks:
      - back
@@ -186,7 +186,7 @@ services:
       - assets
 
   assets:
-    image: birkland/assets:2019-04-08_3.4@sha256:7ec44bd52d7cf635ad05a3f509cf7439e187b7768b8a05abae81b49744ec9d5f
+    image: oapass/assets:0.1.0@sha256:f3936f9708acf0c0dfc8088b651438a48a56474a784aef8f473292cfff8f73a2
     build: ./assets
     volumes:
       - passdata:/data
