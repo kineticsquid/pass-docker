@@ -25,18 +25,21 @@ spec:
         io.kompose.service: sp
     spec:
       containers:
-        - image: oapass/sp:20200507@sha256:03d652dc51adf919f6f6982bbb5b32188bd8a8053600271dfe0cf9022c2d31fd
+        # - image: oapass/sp:20200507@sha256:03d652dc51adf919f6f6982bbb5b32188bd8a8053600271dfe0cf9022c2d31fd
+        - image: ghcr.io/eclipse-pass/sp:v0
           name: sp
           resources: {}
           volumeMounts:
-            - mountPath: /run/secrets/sp_key
-              name: sp-key
+            - mountPath: /run/secrets/sp
+              name: sp-secrets
       restartPolicy: Always
       volumes:
-        - name: sp-key
+        - name: sp-secrets
           secret:
             items:
-              - key: sp-key
-                path: sp-key
-            secretName: sp-key
+              - key: sp_key
+                path: sp_key
+            secretName: sp-secrets
+      imagePullSecrets:
+      - name: regcred
 status: {}
