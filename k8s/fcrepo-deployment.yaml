@@ -289,10 +289,10 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /data
-              name: passdata
+              name: fcrepo-volume
       restartPolicy: Always
       volumes:
-        - name: passdata
+        - name: fcrepo-volume
           persistentVolumeClaim:
-            claimName: passdata
+            claimName: fcrepo-volume
 status: {}
