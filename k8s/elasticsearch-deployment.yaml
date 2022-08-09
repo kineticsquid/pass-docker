@@ -296,6 +296,8 @@ spec:
             - mountPath: /usr/share/elasticsearch/data
               name: passdata
       restartPolicy: Always
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: passdata
           persistentVolumeClaim:
