@@ -25,8 +25,10 @@ spec:
         io.kompose.service: ldap
     spec:
       containers:
-        - image: oapass/ldap:20200610-jhu@sha256:44d56b80763c8f11d5db082d3bd2ab78614fcb8e7b6544a146b48d098a2672ce
+        - image: oapass/ldap:20210809-jhu-anon@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
           name: ldap
           resources: {}
       restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
 status: {}
