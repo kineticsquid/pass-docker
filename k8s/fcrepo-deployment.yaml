@@ -288,11 +288,13 @@ spec:
             - containerPort: 5006
           resources: {}
           volumeMounts:
-            - mountPath: /data
-              name: fcrepo-volume
+            - mountPath: "/data"
+              name: fcrepo-pvc
       restartPolicy: Always
+      securityContext:
+        fsGroup: 1000
       volumes:
-        - name: fcrepo-volume
+        - name: fcrepo-pvc
           persistentVolumeClaim:
-            claimName: fcrepo-volume
+            claimName: passdata
 status: {}
