@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: idp
+  name: idp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: idp
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/back: "true"
+        io.kompose.service: idp
+    spec:
+      containers:
+        - env:
+            - name: JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD
+              value: password
+            - name: JETTY_BROWSER_SSL_KEYSTORE_PASSWORD
+              value: password
+            - name: JETTY_MAX_HEAP
+              value: 64m
+          image: ghcr.io/eclipse-pass/idp:v0.1
+          name: idp
+          ports:
+            - containerPort: 4443
+          resources: {}
+          volumeMounts:
+            - mountPath: /run/secrets/idp
+              name: idp-secrets
+      restartPolicy: Always
+      volumes:
+        - name: idp-secrets
+          secret:
+            items:
+              - key: idp_backchannel
+                path: idp_backchannel
+              - key: idp_browser
+                path: idp_browser
+              - key: idp_encryption
+                path: idp_encryption
+              - key: idp_signing
+                path: idp_signing
+              - key: idp_sealer
+                path: idp_sealer
+            secretName: idp-secrets
+      imagePullSecrets:
+      - name: regcred
+status: {}

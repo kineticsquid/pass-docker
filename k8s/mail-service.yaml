@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-k8s.yaml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mail
+  name: mail
+spec:
+  ports:
+    - name: "11025"
+      port: 11025
+      targetPort: 25
+    - name: "11993"
+      port: 11993
+      targetPort: 993
+    - name: "11587"
+      port: 11587
+      targetPort: 587
+  selector:
+    io.kompose.service: mail
+status:
+  loadBalancer: {}
