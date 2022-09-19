@@ -1,0 +1,42 @@
+name: Deploy passnightly
+
+on:
+  workflow_dispatch:
+  push:
+    # PRs merged into main get deployed
+    branches:
+      - main
+  schedule:
+    # Nightly at 2am (not sure who's 2am though, probably UTC)
+    # This will "reset" the data nightly even if no PRs merged
+    - cron: "0 2 * * *"
+
+jobs:
+  deploy_code:
+     runs-on: passnightly
+     steps:
+      - uses: actions/checkout@v2
+
+      - name: Code Sanity Check
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🐧 This job is now running on a ${{ runner.os }}"
+          pwd
+          ls -la
+
+      - name: Docker Sanity Check
+        run: |
+          groups
+          docker info
+
+      - name: Stop Existing App
+        run: |
+          docker-compose down
+
+      - name: Build App
+        run: |
+          docker-compose pull
+
+      - name: Run App
+        run: |
+          docker-compose up -d
