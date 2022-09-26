@@ -11,11 +11,6 @@ ARG POLICY_SERVICE_URL
 ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-main} \
     EMBER_GIT_REPO=${EMBER_GIT_REPO:-https://github.com/eclipse-pass/pass-ui} \
     EMBER_BUILD_DIR=/ember \
-    FEDORA_ADAPTER_BASE=/fcrepo/rest/ \
-    FEDORA_ADAPTER_DATA=http://oapass.org/ns/pass# \
-    FEDORA_ADAPTER_ES=/es/ \
-    FEDORA_ADAPTER_PASSWORD="" \
-    FEDORA_ADAPTER_USER="" \
     USER_SERVICE_URL=${USER_SERVICE_URL:-/pass-user-service/whoami} \
     SCHEMA_SERVICE_URL=${SCHEMA_SERVICE_URL:-/schemaservice} \
     DOI_SERVICE_URL=${DOI_SERVICE_URL:-/doiservice/journal} \
@@ -23,7 +18,11 @@ ENV EMBER_GIT_BRANCH=${EMBER_GIT_BRANCH:-main} \
     EMBER_ROOT_URL=${EMBER_ROOT_URL:-/app/} \
     METADATA_SCHEMA_URI=${METADATA_SCHEMA_URI:-https://oa-pass.github.com/metadata-schemas/jhu/global.json} \
     MANUSCRIPT_SERVICE_LOOKUP_URL=${MANUSCRIPT_SERVICE_LOOKUP_URL:-/downloadservice/lookup} \
-    MANUSCRIPT_SERVICE_DOWNLOAD_URL=${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-/downloadservice/download}
+    MANUSCRIPT_SERVICE_DOWNLOAD_URL=${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-/downloadservice/download} \
+    PASS_API_URL=${PASS_API_URL:-https://localhost} \
+    PASS_API_NAMESPACE=${PASS_API_NAMESPACE:-/api/v1} \
+    STATIC_CONFIG_URL=${STATIC_CONFIG_URL:-/app/config.json}
+
 
 RUN apk add --no-cache git python2 g++ make && \
     node -v && npm -v && yarn -v && \

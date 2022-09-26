@@ -1,0 +1,64 @@
+###################################################
+# Elide config ####################################
+###################################################
+ELIDE_POSTGRES_PORT=5432
+ELIDE_API_PORT=8080
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+
+JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/pass
+JDBC_DATABASE_USERNAME=pass
+JDBC_DATABASE_PASSWORD=moo
+
+###################################################
+# Ember/UI config #################################
+###################################################
+# Ember app runtime config
+EMBER_PORT=81
+PASS_API_URL=https://localhost
+PASS_API_NAMESPACE=api/v1
+
+# Ember app build-time config
+EMBER_GIT_REPO=https://github.com/eclipse-pass/pass-ui
+EMBER_GIT_BRANCH=main
+
+EMBER_ROOT_URL=/app
+
+STATIC_CONFIG_URL=/app/config.json
+
+# DOI_SERVICE_URL=/doiservice/journal
+# MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
+# MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
+# POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
+# POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories
+# SCHEMA_SERVICE_URL=/schemaservice
+# USER_SERVICE_URL=/pass-user-service/whoami
+
+###################################################
+# Auth / Proxy config #############################
+###################################################
+ELIDE_API_URL=http://elide:8080/
+ELIDE_NAMESPACE=api/v1/
+
+EMBER_URL=http://ember:81/
+
+PASSWORD="moo"
+PASSPORT_STRATEGY="local"
+NODE_ENV="development"
+AUTH_PORT=3000
+
+AUTH_LOGIN=/login
+AUTH_LOGIN_SUCCESS=/app/auth-callback
+AUTH_LOGIN_FAILURE=/login
+AUTH_LOGOUT=/logout
+AUTH_LOGOUT_REDIRECT=/login
+
+SESSION_SECRET="J6@NXHe!6ANivq*kp2xVL.hmuMsPQ@2XWTJpzN3YANXDNFGfVUmm.m_gEvXaLstuoPCZQwUv4CmFb-4jo*VyARkBpPqLzqFi2aiX"
+
+###################################################
+# Sample data loader ##############################
+# Must specify. Can differ from other values ######
+###################################################
+LOADER_API_HOST=http://elide
+LOADER_API_PORT=8080
+LOADER_API_NAMESPACE=api/v1
