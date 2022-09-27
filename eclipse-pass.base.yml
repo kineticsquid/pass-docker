@@ -1,0 +1,64 @@
+version: '3.8'
+
+# The base docker-compose file for eclipse-pass.org deployments
+# DO NOT CALL THIS directly, instead look at specific environments
+#
+#  - eclipse-pass.demo.yml
+#  - eclipse-pass.nightly.yml
+services:
+  auth:
+    image: ghcr.io/eclipse-pass/auth:0.1.0@sha256:b5c026fc5276d5181b5ef7cc7da171212996ea0f426835988d439d3f979be304
+    networks:
+      - front
+      - back
+
+  elide:
+    image: ghcr.io/eclipse-pass/elide:0.2.0@sha256:de7aac5ad37b7b908f27ebad51f877e1f72078f45f1b26762e822c17b80af8af
+    networks:
+      - back
+    depends_on:
+      - postgres
+  
+  ember:
+    image: ghcr.io/eclipse-pass/pass-ui:0.1.0@sha256:d70814535e6c42c74ad0f15163e68aea165e484292e790f9c591a00569767844
+    container_name: ember
+    networks:
+      - back # is 'back' in the main docker-compose, use this or 'front'?
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    networks:
+      - back
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
+  
+  proxy:
+    build: ./demo-proxy/
+    image: ghcr.io/eclipse-pass/proxy:0.1.0@sha256:92cbd8ffedf716bd71c32a0c069a79712c19071a92e5dd5fc317f5be2f5c78d3
+    container_name: proxy
+    networks:
+      - front
+      - back
+    ports:
+      - "80:80"
+      - "443:443"
+
+  # loader:
+  #   image: ghcr.io/eclipse-pass/demo-loader:0.0.2@sha256:82efd5b465241c3e5f50cbcf4ca30e7e3d4d375a4abe05b7e0348542c85d5d0a
+  #   container_name: loader
+  #   networks:
+  #     - back
+  #   depends_on:
+  #     - elide
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge

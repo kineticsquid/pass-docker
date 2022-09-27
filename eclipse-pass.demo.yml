@@ -1,0 +1,29 @@
+version: '3.8'
+
+# Manages the demo.eclipse-pass.org deploy
+# `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up`
+services:
+  auth:
+    env_file: .eclipse-pass.demo_env
+
+  elide:
+    env_file: .eclipse-pass.demo_env
+  
+  ember:
+    env_file: .eclipse-pass.demo_env
+
+  postgres:
+    env_file: .eclipse-pass.demo_env
+  
+  # loader:
+  #   env_file: .eclipse-pass.demo_env
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
