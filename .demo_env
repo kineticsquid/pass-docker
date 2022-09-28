@@ -15,7 +15,6 @@ JDBC_DATABASE_PASSWORD=moo
 ###################################################
 # Ember app runtime config
 EMBER_PORT=81
-PASS_API_URL=https://localhost
 PASS_API_NAMESPACE=api/v1
 
 # Ember app build-time config
@@ -42,18 +41,32 @@ ELIDE_NAMESPACE=api/v1/
 
 EMBER_URL=http://ember:81/
 
-PASSWORD="moo"
-PASSPORT_STRATEGY="local"
+PASSPORT_STRATEGY="multiSaml"
 NODE_ENV="development"
 AUTH_PORT=3000
 
-AUTH_LOGIN=/login
+FORCE_AUTHN=true
+SAML_CERT="MIIDFDCCAfygAwIBAgIVAN3vv+b7KN5Se9m1RZsCllp/B/hdMA0GCSqGSIb3DQEBCwUAMBUxEzARBgNVBAMMCmlkcHRlc3RiZWQwHhcNMTUxMjExMDIyMDE0WhcNMzUxMjExMDIyMDE0WjAVMRMwEQYDVQQDDAppZHB0ZXN0YmVkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh91caeY0Q85uhaUyqFwP2bMjwMFxMzRlAoqBHd7gu6eo4duaeLz1BaoR2XTBpNNvFR5oHH+TkKahVDGeH5+kcnIpxI8JPdsZml1srvf2Z6dzJsulJZUdpqnngycTkGtZgEoC1vmYVky2BSAIIifmdh6s0epbHnMGLsHzMKfJCb/Q6dYzRWTCPtzE2VMuQqqWgeyMr7u14x/Vqr9RPEFsgY8GIu5jzB6AyUIwrLg+MNkv6aIdcHwxYTGL7ijfy6rSWrgBflQoYRYNEnseK0ZHgJahz4ovCag6wZAoPpBsuYlY7lEr89Ucb6NHx3uqGMsXlDFdE4QwfDLLhCYHPvJ0uwIDAQABo1swWTAdBgNVHQ4EFgQUAkOgED3iYdmvQEOMm6u/JmD/UTQwOAYDVR0RBDEwL4IKaWRwdGVzdGJlZIYhaHR0cHM6Ly9pZHB0ZXN0YmVkL2lkcC9zaGliYm9sZXRoMA0GCSqGSIb3DQEBCwUAA4IBAQBIdd4YWlnvJjql8+zKKgmWgIY7U8DA8e6QcbAf8f8cdE33RSnjI63Xsv/y9GfmbAVAD6RIAXPFFeRYJ08GOxGI9axfNaKdlsklJ9bk4ducHqgCSWYVer3sRQBjxyOfSTvk9YCJvdJVQRJLcCvxwKakFCsOSnV3t9OvN86Ak+fKPVB5j2fM/0fZKqjn3iqgdNPTLXPsuJLJO5lITRiBa4onmVelAiCstI9PQiaEck+oAHnMTnC9JE/BDHv3e4rwq3LznlqPw0GSd7xqNTdMDwNOWjkuOr3sGpWS8ms/ZHHXV1Vd22uPe70is00xrv14zLifcc8oj5DYzOhYRifRXgHX"
+SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"
+SAML_ISSUER="https://sp.pass/shibboleth"
+ACS_URL="/Shibboleth.sso/SAML2/POST/:idpId"
+IDENTIFIER_FORMAT=""
+
+AUTH_LOGIN="/login/:idpId"
 AUTH_LOGIN_SUCCESS=/app/auth-callback
-AUTH_LOGIN_FAILURE=/login
+AUTH_LOGIN_FAILURE=/
 AUTH_LOGOUT=/logout
-AUTH_LOGOUT_REDIRECT=/login
+AUTH_LOGOUT_REDIRECT=/
 
 SESSION_SECRET="J6@NXHe!6ANivq*kp2xVL.hmuMsPQ@2XWTJpzN3YANXDNFGfVUmm.m_gEvXaLstuoPCZQwUv4CmFb-4jo*VyARkBpPqLzqFi2aiX"
+
+FCREPO_URL="http://fcrepo:8080"
+USER_SERVICE_URL="http://fcrepo:8080"
+ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"
+SCHEMA_SERVICE_URL="http://schemaservice:8086"
+POLICY_SERVICE_URL="http://policyservice:8088"
+DOI_SERVICE_URL="http://doiservice:8080/"
+DOWNLOAD_SERVICE_URL="http://downloadservice:6502"
 
 ###################################################
 # Sample data loader ##############################
@@ -62,3 +75,45 @@ SESSION_SECRET="J6@NXHe!6ANivq*kp2xVL.hmuMsPQ@2XWTJpzN3YANXDNFGfVUmm.m_gEvXaLstu
 LOADER_API_HOST=http://elide
 LOADER_API_PORT=8080
 LOADER_API_NAMESPACE=api/v1
+
+###################################################
+# Static HTML config ##############################
+###################################################
+
+# Static html server runtime config
+STATIC_CONFIG_URI=/config.json
+STATIC_HTML_PORT=82
+
+# Static html server build-time config
+STATIC_HTML_GIT_REPO=https://github.com/eclipse-pass/pass-ui-public
+STATIC_HTML_GIT_BRANCH=04a320a945071a9e424a390117e076c1dd703103
+
+###################################################
+# LDAP / Mail server config #######################
+###################################################
+MAIL_SMTP=11025
+MAIL_IMAPS=11993
+MAIL_MSP=11587
+OVERRIDE_HOSTNAME=mail.jhu.edu
+ENABLE_SPAMASSASSIN=0
+ENABLE_CLAMAV=0
+ENABLE_FAIL2BAN=0
+ENABLE_POSTGREY=0
+SMTP_ONLY=0
+ONE_DIR=1
+DMS_DEBUG=0
+ENABLE_LDAP=1
+TLS_LEVEL=intermediate
+LDAP_SERVER_HOST=ldap
+LDAP_SEARCH_BASE=ou=People,dc=pass
+LDAP_BIND_DN=cn=admin,dc=pass
+LDAP_BIND_PW=password
+LDAP_QUERY_FILTER_USER=(&(objectClass=posixAccount)(mail=%s))
+LDAP_QUERY_FILTER_GROUP=(&(objectClass=posixAccount)(mailGroupMember=%s))
+LDAP_QUERY_FILTER_ALIAS=(&(objectClass=posixAccount)(mailAlias=%s))
+LDAP_QUERY_FILTER_DOMAIN=(|(mail=*@%s)(mailalias=*@%s)(mailGroupMember=*@%s))
+ENABLE_SASLAUTHD=0
+POSTMASTER_ADDRESS=root
+SSL_TYPE=manual
+SSL_CERT_PATH=/tmp/docker-mailserver/cert.pem
+SSL_KEY_PATH=/tmp/docker-mailserver/key.rsa

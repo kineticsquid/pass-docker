@@ -5,7 +5,8 @@ version: '3.8'
 #   `docker-compose -f demo.yml --env-file=.demo_env up`
 services:
   auth:
-    image: ghcr.io/eclipse-pass/auth:0.1.0@sha256:b5c026fc5276d5181b5ef7cc7da171212996ea0f426835988d439d3f979be304
+    build: ./sp
+    image: moopauth
     env_file: .demo_env
     networks:
       - front
@@ -20,7 +21,7 @@ services:
       - postgres
   
   ember:
-    image: ghcr.io/eclipse-pass/pass-ui:0.1.0@sha256:d70814535e6c42c74ad0f15163e68aea165e484292e790f9c591a00569767844
+    image: eclipse-pass/ui:local
     env_file: .demo_env
     container_name: ember
     networks:
@@ -38,7 +39,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.1.0@sha256:92cbd8ffedf716bd71c32a0c069a79712c19071a92e5dd5fc317f5be2f5c78d3
+    image: mooproxy
     container_name: proxy
     networks:
       - front
@@ -47,14 +48,62 @@ services:
       - "80:80"
       - "443:443"
 
-  # loader:
-  #   image: ghcr.io/eclipse-pass/demo-loader:0.0.2@sha256:82efd5b465241c3e5f50cbcf4ca30e7e3d4d375a4abe05b7e0348542c85d5d0a
-  #   env_file: .demo_env
-  #   container_name: loader
-  #   networks:
-  #     - back
-  #   depends_on:
-  #     - elide
+  static-html:
+    build:
+      context: ./static-html
+      args:
+        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
+        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
+    image: staticmoo
+    container_name: static-html
+    env_file: .demo_env
+    ports:
+      - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
+    networks:
+      - front
+
+  idp:
+    build:
+      context: ./idp
+      args:
+        TENANT: jhu
+    image: hihellomoo
+    container_name: idp
+    depends_on:
+     - ldap
+    environment:
+     - JETTY_MAX_HEAP=64m
+     - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
+     - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    expose:
+     - "4443"
+    networks:
+     - back
+    secrets:
+     - source: idp_backchannel
+     - source: idp_browser
+     - source: idp_encryption
+     - source: idp_signing
+     - source: idp_sealer
+
+  ldap:
+    build:
+      context: ./ldap
+      args:
+        TENANT: jhu
+    image: oapass/ldap:0.1.0@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
+    container_name: ldap
+    networks:
+     - back
+
+  loader:
+    image: ghcr.io/eclipse-pass/demo-loader:0.0.2@sha256:82efd5b465241c3e5f50cbcf4ca30e7e3d4d375a4abe05b7e0348542c85d5d0a
+    env_file: .demo_env
+    container_name: loader
+    networks:
+      - back
+    depends_on:
+      - elide
 
 volumes:
   db:
@@ -65,3 +114,17 @@ networks:
     driver: bridge
   back:
     driver: bridge
+
+secrets:
+  idp_backchannel:
+    file: ./secrets/idp/idp-backchannel.p12
+  idp_browser:
+    file: ./secrets/idp/idp-browser.p12
+  idp_encryption:
+    file: ./secrets/idp/idp-encryption.key
+  idp_signing:
+    file: ./secrets/idp/idp-signing.key
+  idp_sealer:
+    file: ./secrets/idp/sealer.jks
+  sp_key:
+    file: ./secrets/sp/sp-key.pem
