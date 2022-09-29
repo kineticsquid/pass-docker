@@ -51,6 +51,7 @@ SIGNING_CERT_SP="MIIC6zCCAdOgAwIBAgIJAOy0nki3WAOVMA0GCSqGSIb3DQEBBQUAMBcxFTATBgN
 SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"
 SAML_ISSUER="https://sp.pass/shibboleth"
 ACS_URL="/Shibboleth.sso/SAML2/POST/:idpId"
+METADATA_URL="/metadata/:idpId"
 IDENTIFIER_FORMAT=""
 
 AUTH_LOGIN="/login/:idpId"
