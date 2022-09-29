@@ -1,8 +1,8 @@
 ###################################################
-# Elide config ####################################
+# PASS_CORE config ####################################
 ###################################################
-ELIDE_POSTGRES_PORT=5432
-ELIDE_API_PORT=8080
+PASS_CORE_POSTGRES_PORT=5432
+PASS_CORE_API_PORT=8080
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 
@@ -11,17 +11,17 @@ JDBC_DATABASE_USERNAME=pass
 JDBC_DATABASE_PASSWORD=moo
 
 ###################################################
-# Ember/UI config #################################
+# PASS_UI config #################################
 ###################################################
 # Ember app runtime config
-EMBER_PORT=81
+PASS_UI_PORT=81
 PASS_API_NAMESPACE=api/v1
 
-# Ember app build-time config
-EMBER_GIT_REPO=https://github.com/eclipse-pass/pass-ui
-EMBER_GIT_BRANCH=main
+# PASS_UI app build-time config
+PASS_UI_GIT_REPO=https://github.com/eclipse-pass/pass-ui
+PASS_UI_GIT_BRANCH=main
 
-EMBER_ROOT_URL=/app
+PASS_UI_ROOT_URL=/app
 
 STATIC_CONFIG_URL=/app/config.json
 
@@ -36,10 +36,10 @@ STATIC_CONFIG_URL=/app/config.json
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
-ELIDE_API_URL=http://elide:8080/
-ELIDE_NAMESPACE=api/v1/
+PASS_CORE_API_URL=http://pass-core:8080/
+PASS_CORE_NAMESPACE=api/v1/
 
-EMBER_URL=http://ember:81/
+PASS_UI_URL=http://pass-ui:81/
 
 PASSPORT_STRATEGY="multiSaml"
 NODE_ENV="development"
@@ -74,7 +74,7 @@ DOWNLOAD_SERVICE_URL="http://downloadservice:6502"
 # Sample data loader ##############################
 # Must specify. Can differ from other values ######
 ###################################################
-LOADER_API_HOST=http://elide
+LOADER_API_HOST=http://pass-core
 LOADER_API_PORT=8080
 LOADER_API_NAMESPACE=api/v1
 
