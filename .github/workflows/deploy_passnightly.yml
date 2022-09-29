@@ -35,8 +35,8 @@ jobs:
 
       - name: Build App
         run: |
-          docker-compose pull
+          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml pull
 
       # - name: Run App
       #   run: |
-      #     docker-compose up -d
+      #     docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml up -d
