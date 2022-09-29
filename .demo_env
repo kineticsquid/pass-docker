@@ -88,7 +88,7 @@ STATIC_HTML_PORT=82
 
 # Static html server build-time config
 STATIC_HTML_GIT_REPO=https://github.com/eclipse-pass/pass-ui-public
-STATIC_HTML_GIT_BRANCH=04a320a945071a9e424a390117e076c1dd703103
+STATIC_HTML_GIT_BRANCH=3b5a7be6db6a7b0b7a69da0ce6f5a84abada4a6e
 
 ###################################################
 # LDAP / Mail server config #######################

@@ -6,24 +6,26 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: moopauth
+    image: ghcr.io/eclipse-pass/auth:0.1.1@sha256:a35038bb7a6403830fedb22bda545dc21b3ad8a093f26bdbecbf2c0a4f9cff86
     env_file: .demo_env
+    container_name: auth
     networks:
       - front
       - back
 
-  elide:
+  pass-core:
     image: ghcr.io/eclipse-pass/elide:0.2.0@sha256:de7aac5ad37b7b908f27ebad51f877e1f72078f45f1b26762e822c17b80af8af
     env_file: .demo_env
+    container_name: pass-core
     networks:
       - back
     depends_on:
       - postgres
   
-  ember:
-    image: eclipse-pass/ui:local
+  pass-ui:
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:1eaac304cb392e97e939d00fb05877f0da3daf1d157b29fc4a75c1b849c8b291
     env_file: .demo_env
-    container_name: ember
+    container_name: pass-ui
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?
 
@@ -39,7 +41,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: mooproxy
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:5c9deba60e95e7aaf0db38b17523272bb01bdf26e92aeff77bdb5b9463a212af
     container_name: proxy
     networks:
       - front
@@ -48,14 +50,14 @@ services:
       - "80:80"
       - "443:443"
 
-  static-html:
+  pass-ui-public:
     build:
       context: ./static-html
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: staticmoo
-    container_name: static-html
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:59288c8687050d3d8822b9b4b8903db599ce9ef44a392f8c151620fd
+    container_name: pass-ui-public
     env_file: .demo_env
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
@@ -67,7 +69,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: hihellomoo
+    image: ghcr.io/eclipse-pass/idp:0.2.0
     container_name: idp
     depends_on:
      - ldap
