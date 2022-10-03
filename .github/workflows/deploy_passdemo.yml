@@ -28,6 +28,6 @@ jobs:
         run: |
           docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml pull
 
-      # - name: Run App
-      #   run: |
-      #     docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up -d
+      - name: Run App
+        run: |
+          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up -d
