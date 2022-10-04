@@ -22,7 +22,7 @@ jobs:
 
       - name: Stop Existing App
         run: |
-          docker-compose down
+          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml down
 
       - name: Build App
         run: |
