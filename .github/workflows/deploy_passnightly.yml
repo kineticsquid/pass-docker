@@ -31,7 +31,7 @@ jobs:
 
       - name: Stop Existing App
         run: |
-          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml down
+          (docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml down || true)
 
       - name: Build App
         run: |
