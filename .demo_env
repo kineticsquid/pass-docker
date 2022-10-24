@@ -1,6 +1,7 @@
 ###################################################
 # PASS_CORE config ####################################
 ###################################################
+PASS_CORE_BASE_URL=https://pass.local
 PASS_CORE_POSTGRES_PORT=5432
 PASS_CORE_API_PORT=8080
 POSTGRES_USER=postgres
@@ -11,11 +12,12 @@ JDBC_DATABASE_USERNAME=pass
 JDBC_DATABASE_PASSWORD=moo
 
 ###################################################
-# PASS_UI config #################################
+# PASS_UI config ##################################
+# ## Changes here require new image build #########
 ###################################################
 # Ember app runtime config
 PASS_UI_PORT=81
-PASS_API_NAMESPACE=api/v1
+PASS_API_NAMESPACE=data
 
 # PASS_UI app build-time config
 PASS_UI_GIT_REPO=https://github.com/eclipse-pass/pass-ui
@@ -25,19 +27,19 @@ PASS_UI_ROOT_URL=/app
 
 STATIC_CONFIG_URL=/app/config.json
 
-# DOI_SERVICE_URL=/doiservice/journal
-# MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
-# MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
-# POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
-# POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories
-# SCHEMA_SERVICE_URL=/schemaservice
-# USER_SERVICE_URL=/pass-user-service/whoami
+DOI_SERVICE_URL=/doiservice/journal
+MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
+MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
+POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
+POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories
+SCHEMA_SERVICE_URL=/schemaservice
+USER_SERVICE_URL=/pass-user-service/whoami
 
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
 PASS_CORE_API_URL=http://pass-core:8080/
-PASS_CORE_NAMESPACE=api/v1/
+PASS_CORE_NAMESPACE=data/
 
 PASS_UI_URL=http://pass-ui:81/
 
@@ -76,7 +78,7 @@ DOWNLOAD_SERVICE_URL="http://downloadservice:6502"
 ###################################################
 LOADER_API_HOST=http://pass-core
 LOADER_API_PORT=8080
-LOADER_API_NAMESPACE=api/v1
+LOADER_API_NAMESPACE=data
 
 ###################################################
 # Static HTML config ##############################

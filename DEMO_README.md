@@ -5,7 +5,7 @@ The "demo" compose file describes an early system meant to demonstrate some new 
 Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file:
 
 ``` sh
-docker-compose -f demo.yml --env-file=.demo_env up -d
+docker-compose -f demo.yml --env-file .demo_env up -d
 ```
 
 `./demo.sh` is a convenience script that runs `docker-compose` with the right compose and environment files. The following will do the same as above:
@@ -20,36 +20,139 @@ Setting up an alias would perform the same function.
 
 ## Services:
 
-### `auth`
+### [`pass-auth`](https://github.com/jaredgalanis/pass-auth)
 
-[pass-auth](https://github.com/jaredgalanis/pass-auth) - currently in an early dev state, this service is currently configured to serve as a drop-in replacement of the old `sp` image. It provides authorization mechanisms to secure routes. Because of this, it also acts as a reverse proxy, ensuring the configured routes are protected appropriately.
+Repository: https://github.com/jaredgalanis/pass-auth
+Package: https://github.com/orgs/eclipse-pass/packages/container/package/pass-auth
 
-This early state uses a naive 'local' auth strategy, with a pre-configured password to authenticate by. Users that "login" must provide a valid username that matches a User email address from the Elide `User` table.
+Currently configured to serve as a drop-in replacement of the old `sp` image. It provides authorization mechanisms to secure routes. Because of this, it also acts as a reverse proxy, ensuring the configured routes are protected appropriately.
 
-### `elide`
+Node based authentication service that currently integrates SAML authentication workflow in the demo environment.
 
-Semi-custom [pass-elide-test](https://github.com/jabrah/pass-elide-test/tree/enable-links) (`#enable-links` branch). This requires a new local build at the moment. This services provides PASS' data APIs. A Swagger page is available at `/swagger` once authenticated, which may no longer function correctly in the docker-compose environment, but will still describe the API capabilities.
+Environment variables:
+
+* `PASS_CORE_API_URL=http://pass-core:8080/`
+* `PASS_CORE_NAMESPACE=data/`
+* `PASS_UI_URL=http://pass-ui:81/`
+* `PASSPORT_STRATEGY="multiSaml"`
+* `NODE_ENV="development"`
+* `AUTH_PORT=3000`
+* `AUTH_LOGIN="/login/:idpId"`
+* `AUTH_LOGIN_SUCCESS=/app/auth-callback`
+* `AUTH_LOGIN_FAILURE=/`
+* `AUTH_LOGOUT=/logout`
+* `AUTH_LOGOUT_REDIRECT=/`
+* `FORCE_AUTHN=true`
+* `SIGNING_CERT_IDP="..."`
+* `SAML_ENTRY_POINT="https://pass.local/idp/profile/SAML2/Redirect/SSO"` : absolute URL must change for different environments
+* `SAML_ISSUER="https://sp.pass/shibboleth"`
+* `ACS_URL="/Shibboleth.sso/SAML2/POST/:idpId"`
+* `METADATA_URL="/metadata/:idpId"`
+* `IDENTIFIER_FORMAT=""`
+* `SESSION_SECRET="..."`
+
+The following are absolute URLs on a docker compose private network, should not need to change in other environments
+* `FCREPO_URL="http://fcrepo:8080"`
+* `USER_SERVICE_URL="http://fcrepo:8080"`
+* `ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"`
+* `SCHEMA_SERVICE_URL="http://schemaservice:8086"`
+* `POLICY_SERVICE_URL="http://policyservice:8088"`
+* `DOI_SERVICE_URL="http://doiservice:8080/"`
+* `DOWNLOAD_SERVICE_URL="http://downloadservice:6502"`
+
+### [`pass-core`](https://github.com/eclipse-pass/pass-core)
+
+Repository: https://github.com/eclipse-pass/pass-core
+Package: https://github.com/orgs/eclipse-pass/packages/container/package/pass-core-main
+
+Presents a JSON:API window to the backend from behind the authentication layer. Swagger is not yet hooked up so is unreachable. Provides data and web APIs to the application.
+
+Environment variables:
+
+* `PASS_CORE_BASE_URL=https://pass.local` : Used when generating JSON API relationship links. Needs to be absolute and must change to match deployment environment
+* `PASS_CORE_POSTGRES_PORT=5432`
+* `PASS_CORE_API_PORT=8080`
+* `POSTGRES_USER=postgres`
+* `POSTGRES_PASSWORD=postgres`
+* `JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/pass`
+* `JDBC_DATABASE_USERNAME=pass`
+* `JDBC_DATABASE_PASSWORD=moo`
 
 ### `postgres`
 
-Pretty much an out-of-the-box PostgreSQL server. Only interacts with the `elide` service
+Pretty much an out-of-the-box PostgreSQL server. Only interacts with the [`pass-core`](https://github.com/eclipse-pass/pass-core) service.
 
 ### `proxy`
 
+Repository: built out of this project
+Package: https://github.com/orgs/eclipse-pass/packages/container/package/proxy
+
 Custom Apache server, copied from the previous non-demo environments top level proxy. Has a self-signed cert for pseudo "https" support. We should consider removing this in favor of simply exposing the `auth` service, since this proxy basically just forwards everything to `auth` anyway. This would require a more production-ready and robust `auth` service that handles https correctly and is easier to configure.
+
+### [`pass-ui`](https://github.com/eclipse-pass/pass-ui)
+
+Repository: https://github.com/eclipse-pass/pass-ui
+Package: https://github.com/orgs/eclipse-pass/packages/container/package/pass-ui
+
+User interface for the PASS application. Currently does not handle environment variables nicely - they are baked into images at build time due. The environment variables in the demo environment should not need to be adjusted between different deployment environments.
+
+Environment variables:
+
+* `PASS_UI_PORT=81`
+* `PASS_API_NAMESPACE=data`
+* `PASS_UI_GIT_REPO=https://github.com/eclipse-pass/pass-ui`
+* `PASS_UI_GIT_BRANCH=main`
+* `PASS_UI_ROOT_URL=/app`
+* `STATIC_CONFIG_URL=/app/config.json`
+* `DOI_SERVICE_URL=/doiservice/journal`
+* `MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup`
+* `MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download`
+* `POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies`
+* `POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories`
+* `SCHEMA_SERVICE_URL=/schemaservice`
+* `USER_SERVICE_URL=/pass-user-service/whoami`
 
 ### `loader`
 
-A bootstrap service that will dump a small set of testing data through the Elide endpoints. This will occur when the loader container starts up and shuts down when done. This service is commented out in `demo.yml` at the moment, since the data will persist in the postgres volume between docker environment restarts. If the volume is destroyed or otherwise not present, you can uncomment this service to run it.
+A bootstrap service that will dump a small set of testing data through the Elide endpoints. This will occur when the loader container starts up and shuts down when done. The service is currently too dumb to wait for `pass-core` to initialize the Postgres database and will run as soon as the postgres and pass-core services are started, so will fail its initial run. If you run the loader after the DB has been initialized properly, the data will be added through the JSON API based web API. It currently does this through the private `back` network, so avoids authentication issues.
 
 *This service should be removed or otherwise not be used when the "real" test assets is available.*
 
-### Images that must be built locally:
+Environment variables:
 
-* `auth`
-* `elide`
-* `proxy`
-* `loader`
+* `LOADER_API_HOST=http://pass-core`
+* `LOADER_API_PORT=8080`
+* `LOADER_API_NAMESPACE=data`
 
-TODO: Submit PRs where necessary, publish ready images to GHCR
+### `idp`, `ldap`
 
+Other related images that work together with `pass-auth` to handle authentication. Based on services of the same name in the older `docker-compose` environment.
+
+Environment variables:
+
+* `MAIL_SMTP=11025`
+* `MAIL_IMAPS=11993`
+* `MAIL_MSP=11587`
+* `OVERRIDE_HOSTNAME=mail.jhu.edu`
+* `ENABLE_SPAMASSASSIN=0`
+* `ENABLE_CLAMAV=0`
+* `ENABLE_FAIL2BAN=0`
+* `ENABLE_POSTGREY=0`
+* `SMTP_ONLY=0`
+* `ONE_DIR=1`
+* `DMS_DEBUG=0`
+* `ENABLE_LDAP=1`
+* `TLS_LEVEL=intermediate`
+* `LDAP_SERVER_HOST=ldap`
+* `LDAP_SEARCH_BASE=ou=People,dc=pass`
+* `LDAP_BIND_DN=cn=admin,dc=pass`
+* `LDAP_BIND_PW=password`
+* `LDAP_QUERY_FILTER_USER=(&(objectClass=posixAccount)(mail=%s))`
+* `LDAP_QUERY_FILTER_GROUP=(&(objectClass=posixAccount)(mailGroupMember=%s))`
+* `LDAP_QUERY_FILTER_ALIAS=(&(objectClass=posixAccount)(mailAlias=%s))`
+* `LDAP_QUERY_FILTER_DOMAIN=(|(mail=*@%s)(mailalias=*@%s)(mailGroupMember=*@%s))`
+* `ENABLE_SASLAUTHD=0`
+* `POSTMASTER_ADDRESS=root`
+* `SSL_TYPE=manual`
+* `SSL_CERT_PATH=/tmp/docker-mailserver/cert.pem`
+* `SSL_KEY_PATH=/tmp/docker-mailserver/key.rsa`

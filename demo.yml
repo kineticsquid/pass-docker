@@ -2,11 +2,11 @@ version: '3.8'
 
 # When running commands with this file, you must specify both this yml file and
 # the correct env file. For example:
-#   `docker-compose -f demo.yml --env-file=.demo_env up`
+#   `docker-compose -f demo.yml --env-file .demo_env up`
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/auth:0.2.0@sha256:4e2357d2a309dbf362c0fa8a4047ecd3460b7438eb187c0b951d36b3b343d193
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:13b79c0bdbf7f314cf6fecf4377fed32d8848ac269e3af41034b9b3b8dd87c73
     env_file: .demo_env
     container_name: auth
     networks:
@@ -14,7 +14,7 @@ services:
       - back
 
   pass-core:
-    image: ghcr.io/eclipse-pass/elide:0.2.0@sha256:de7aac5ad37b7b908f27ebad51f877e1f72078f45f1b26762e822c17b80af8af
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:eae7505426547db7b12c6962372a38030deab9567bbbf0cf1fe90629c9457b99
     env_file: .demo_env
     container_name: pass-core
     networks:
@@ -23,7 +23,21 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:2312f61ad07245bc1f443577946f1daebced8c06b5d3f1b34438dcba95be57e4
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:16608e780279640b400a86678a83555203dcff68fea333681d57742fe100dab2
+    build:
+      context: ./ember
+      args:
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
+        PASS_UI_PORT: "${PASS_UI_PORT}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
+        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL}"
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL}"
     env_file: .demo_env
     container_name: pass-ui
     networks:
@@ -41,7 +55,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:5b9eac298a1ee52982bbc94f4995121a8d6ec9b5a47ad40d3f40f4812c5d3087
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:caeeab82dc9e4f1ca25670bca1d22aaf0488a7fda0226148b0606441a7b042ae
     container_name: proxy
     networks:
       - front
@@ -99,7 +113,7 @@ services:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.0.2@sha256:82efd5b465241c3e5f50cbcf4ca30e7e3d4d375a4abe05b7e0348542c85d5d0a
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:42cecc2be7c6a9421094f21327943ac1353fce565c0b4dba003852a31d47f1e8
     env_file: .demo_env
     container_name: loader
     networks:
