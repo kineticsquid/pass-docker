@@ -2,28 +2,23 @@ version: '3.8'
 
 # Manages the nightly.eclipse-pass.org deploy
 # `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml up`
+version: '3.8'
+
 services:
   auth:
     env_file: .eclipse-pass.nightly_env
 
-  elide:
+  pass-core:
     env_file: .eclipse-pass.nightly_env
 
-  ember:
+  pass-ui:
     env_file: .eclipse-pass.nightly_env
 
   postgres:
     env_file: .eclipse-pass.nightly_env
 
-  # loader:
-  #   env_file: .eclipse-pass.nightly_env
+  pass-ui-public:
+    env_file: .eclipse-pass.nightly_env
 
-volumes:
-  db:
-    driver: local
-
-networks:
-  front:
-    driver: bridge
-  back:
-    driver: bridge
+  loader:
+    env_file: .eclipse-pass.nightly_env
