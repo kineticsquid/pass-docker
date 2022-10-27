@@ -6,12 +6,7 @@ This repository serves as the canonical environment for demonstrating integratio
 
 # Instructions for running with Gitpod
 
-<a href="https://gitpod.io/#https://github.com/kineticsquid/pass-docker">
-  <img
-    src="https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod"
-    alt="Contribute with Gitpod"
-  />
-</a>
+Click the link below to open a workspace in Gitpod and a deployed PASS.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kineticsquid/pass-docker)
 
