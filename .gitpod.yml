@@ -2,6 +2,9 @@
 tasks:
   - init: |
       ./demo.sh pull
+       echo 127.0.0.1 pass.local | sudo tee -a /etc/hosts
+       echo ======================
+       cat /etc/hosts
       ./demo.sh up -d && ./demo.sh logs -f # runs during prebuild
     command: |
       ./demo.sh up loader
