@@ -7,21 +7,38 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    image: ghcr.io/eclipse-pass/auth:0.1.0@sha256:b5c026fc5276d5181b5ef7cc7da171212996ea0f426835988d439d3f979be304
+    build: ./sp
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:13b79c0bdbf7f314cf6fecf4377fed32d8848ac269e3af41034b9b3b8dd87c73
+    container_name: auth
     networks:
       - front
       - back
 
-  elide:
-    image: ghcr.io/eclipse-pass/elide:0.2.0@sha256:de7aac5ad37b7b908f27ebad51f877e1f72078f45f1b26762e822c17b80af8af
+  pass-core:
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:eae7505426547db7b12c6962372a38030deab9567bbbf0cf1fe90629c9457b99
+    container_name: pass-core
     networks:
       - back
     depends_on:
       - postgres
-  
-  ember:
-    image: ghcr.io/eclipse-pass/pass-ui:0.1.0@sha256:d70814535e6c42c74ad0f15163e68aea165e484292e790f9c591a00569767844
-    container_name: ember
+
+  pass-ui:
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:16608e780279640b400a86678a83555203dcff68fea333681d57742fe100dab2
+    build:
+      context: ./ember
+      args:
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
+        PASS_UI_PORT: "${PASS_UI_PORT}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
+        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL}"
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL}"
+    container_name: pass-ui
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?
 
@@ -30,13 +47,13 @@ services:
     restart: always
     networks:
       - back
-    volumes: 
+    volumes:
       - db:/var/lib/postgresql/data
       - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
-  
+
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.1.0@sha256:92cbd8ffedf716bd71c32a0c069a79712c19071a92e5dd5fc317f5be2f5c78d3
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:caeeab82dc9e4f1ca25670bca1d22aaf0488a7fda0226148b0606441a7b042ae
     container_name: proxy
     networks:
       - front
@@ -45,13 +62,60 @@ services:
       - "80:80"
       - "443:443"
 
-  # loader:
-  #   image: ghcr.io/eclipse-pass/demo-loader:0.0.2@sha256:82efd5b465241c3e5f50cbcf4ca30e7e3d4d375a4abe05b7e0348542c85d5d0a
-  #   container_name: loader
-  #   networks:
-  #     - back
-  #   depends_on:
-  #     - elide
+  pass-ui-public:
+    build:
+      context: ./static-html
+      args:
+        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
+        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:59288c8687050d3d8822b9b4b8903db599ce9ef44a392f8c151620fd23305f47
+    container_name: pass-ui-public
+    ports:
+      - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
+    networks:
+      - front
+
+  idp:
+    build:
+      context: ./idp
+      args:
+        TENANT: jhu
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:48998d5160175c98742eea99ec29be63096d7d9407bdc6b99a97b4a89b5d657e
+    container_name: idp
+    depends_on:
+     - ldap
+    environment:
+     - JETTY_MAX_HEAP=64m
+     - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
+     - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    expose:
+     - "4443"
+    networks:
+     - back
+    secrets:
+     - source: idp_backchannel
+     - source: idp_browser
+     - source: idp_encryption
+     - source: idp_signing
+     - source: idp_sealer
+
+  ldap:
+    build:
+      context: ./ldap
+      args:
+        TENANT: jhu
+    image: oapass/ldap:0.1.0@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
+    container_name: ldap
+    networks:
+     - back
+
+  loader:
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:42cecc2be7c6a9421094f21327943ac1353fce565c0b4dba003852a31d47f1e8
+    container_name: loader
+    networks:
+      - back
+    depends_on:
+      - pass-core
 
 volumes:
   db:
@@ -62,3 +126,17 @@ networks:
     driver: bridge
   back:
     driver: bridge
+
+secrets:
+  idp_backchannel:
+    file: ./secrets/idp/idp-backchannel.p12
+  idp_browser:
+    file: ./secrets/idp/idp-browser.p12
+  idp_encryption:
+    file: ./secrets/idp/idp-encryption.key
+  idp_signing:
+    file: ./secrets/idp/idp-signing.key
+  idp_sealer:
+    file: ./secrets/idp/sealer.jks
+  sp_key:
+    file: ./secrets/sp/sp-key.pem
