@@ -1,11 +1,11 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - init: |
+      sudo apt-get update
+      sudo apt-get install -y netcat 
+      echo 127.0.0.1 pass.local | sudo tee -a /etc/hosts
       ./demo.sh pull
-       echo 127.0.0.1 pass.local | sudo tee -a /etc/hosts
-       echo ======================
-       cat /etc/hosts
-      ./demo.sh up -d && ./demo.sh logs -f # runs during prebuild
+      ./demo.sh up -d && ./demo.sh logs -f
     command: |
       ./demo.sh up loader
       echo open the PASS UI at https://pass.local
