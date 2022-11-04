@@ -8,7 +8,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:35857ef19658f7ad23591cdaf298cf5aed18007cddda3380b062ea88d32dfe16
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:1149308b52a01b83ff490ac01490eaff7440dff8e35828f65093129bda30c6ca
     container_name: auth
     networks:
       - front
@@ -82,7 +82,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:1149308b52a01b83ff490ac01490eaff7440dff8e35828f65093129bda30c6ca
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:63c7c08e46474948d669ff77c8a51f8010dac02c019216ff12d90656ae0f816e
     container_name: idp
     depends_on:
      - ldap
