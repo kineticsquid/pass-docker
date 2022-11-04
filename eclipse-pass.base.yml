@@ -27,17 +27,19 @@ services:
     build:
       context: ./ember
       args:
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
-        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-        PASS_UI_PORT: "${PASS_UI_PORT}"
-        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
-        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL}"
-        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL}"
+        # required args (throw error during build):
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO:?undefined-EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH:?undefined-EMBER_GIT_BRANCH}"
+        # sensible defaults have been defined:
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL:-}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL:-}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI:-}"
+        PASS_UI_PORT: "${PASS_UI_PORT:-}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE:-}"
+        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL:-}"
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
     container_name: pass-ui
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?

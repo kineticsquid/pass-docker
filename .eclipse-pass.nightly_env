@@ -56,6 +56,9 @@ ACS_URL="/Shibboleth.sso/SAML2/POST/:idpId"
 METADATA_URL="/metadata/:idpId"
 IDENTIFIER_FORMAT=""
 
+EMBER_GIT_REPO="https://github.com/eclipse-pass/pass-ui"
+EMBER_GIT_BRANCH=main
+
 AUTH_LOGIN="/login/:idpId"
 AUTH_LOGIN_SUCCESS=/app/auth-callback
 AUTH_LOGIN_FAILURE=/
