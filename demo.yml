@@ -115,7 +115,7 @@ services:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:42cecc2be7c6a9421094f21327943ac1353fce565c0b4dba003852a31d47f1e8
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:231b96c7010048b618fbd07ed555547dba98544cc0b4ad96782db4ea4e774f7e
     env_file: .demo_env
     container_name: loader
     networks:
