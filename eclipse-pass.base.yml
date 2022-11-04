@@ -8,7 +8,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:13b79c0bdbf7f314cf6fecf4377fed32d8848ac269e3af41034b9b3b8dd87c73
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:35857ef19658f7ad23591cdaf298cf5aed18007cddda3380b062ea88d32dfe16
     container_name: auth
     networks:
       - front
@@ -23,7 +23,7 @@ services:
       - postgres
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:16608e780279640b400a86678a83555203dcff68fea333681d57742fe100dab2
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:cd9f03a79b44fc92adb7f3bbe7e6c2df4214596807c20d8c7cdeb1d765799cc8
     build:
       context: ./ember
       args:
@@ -70,7 +70,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:59288c8687050d3d8822b9b4b8903db599ce9ef44a392f8c151620fd23305f47
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:af1ecac3572fa8cf9009c05496b9957438957af39d135fb353a2c546a32a9d33
     container_name: pass-ui-public
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
