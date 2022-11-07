@@ -23,7 +23,7 @@ services:
       - postgres
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:bdefe7cedddf82706fc3770fbd0938a56f77a14e53e2edf0a167d1fd5b63a80c
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:214fac075acc10f37c8aba318463979dba9f47be93a6c4019d2a8a7c57b9f302
     build:
       context: ./ember
       args:
@@ -70,7 +70,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:af1ecac3572fa8cf9009c05496b9957438957af39d135fb353a2c546a32a9d33
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:b51827ed21908c76fcb8a955743b5418f4e0c3e01426de96884645051512a7e0
     container_name: pass-ui-public
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"

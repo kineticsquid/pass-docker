@@ -25,7 +25,7 @@ PASS_UI_GIT_BRANCH=main
 
 PASS_UI_ROOT_URL=/app
 
-STATIC_CONFIG_URL=/app/config.json
+STATIC_CONFIG_URL=/config.json
 
 DOI_SERVICE_URL=/doiservice/journal
 MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
