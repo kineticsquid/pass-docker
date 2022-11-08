@@ -27,7 +27,7 @@ PASS_UI_ROOT_URL=/app
 
 STATIC_CONFIG_URL=/config.json
 
-DOI_SERVICE_URL=/journal
+DOI_SERVICE_PUBLIC_URL=/journal
 MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
 MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
 POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
