@@ -8,14 +8,14 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:1149308b52a01b83ff490ac01490eaff7440dff8e35828f65093129bda30c6ca
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:08d3afb4ee4a7042c97d6d9a889b4adeeff0dfc199fa24d397a1c71830d3be5e
     container_name: auth
     networks:
       - front
       - back
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:eae7505426547db7b12c6962372a38030deab9567bbbf0cf1fe90629c9457b99
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
     container_name: pass-core
     networks:
       - back
