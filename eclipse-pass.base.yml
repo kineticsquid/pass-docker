@@ -55,7 +55,7 @@ services:
 
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:caeeab82dc9e4f1ca25670bca1d22aaf0488a7fda0226148b0606441a7b042ae
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:d58e6e123a922573c255edb3b20053fdd9aa494fa2f6cd6c46b46985650f472f
     container_name: proxy
     networks:
       - front
