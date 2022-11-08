@@ -72,7 +72,7 @@ USER_SERVICE_URL="http://fcrepo:8080"
 ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"
 SCHEMA_SERVICE_URL="http://schemaservice:8086"
 POLICY_SERVICE_URL="http://policyservice:8088"
-DOI_SERVICE_URL="http://doiservice:8080/"
+DOI_SERVICE_URL="http://pass-core:8080"
 DOWNLOAD_SERVICE_URL="http://downloadservice:6502"
 
 ###################################################

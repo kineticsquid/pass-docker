@@ -6,7 +6,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:08d3afb4ee4a7042c97d6d9a889b4adeeff0dfc199fa24d397a1c71830d3be5e
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:b32633e39b820bb7047a72922934503f71028dcf401396b96522c4535427d830
     env_file: .demo_env
     container_name: auth
     networks:
@@ -23,7 +23,7 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:e8a550cca8d906f046995cb3d96f12655c8f6569838364c574a4e604e00a5370
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:e78e363a4185ee96c9a83478546c43698f0373d900911d7082c9350ce8aced81
     build:
       context: ./ember
       args:
@@ -57,7 +57,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:115b4d0407d6772ce7ca267eaed7931148a72d59b147a784d6e58ae1876c4214
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:07847ef518d96464007aa583f1edbc505bd3221bc5d3d195609d8e1fbfa7822e
     container_name: proxy
     networks:
       - front
