@@ -12,6 +12,9 @@ ENV=/usr/bin/env
 DOCKER="$ENV docker"
 TIMEOUT_MINIMAL=1
 
+# Case-insensitive regex matching:
+shopt -s nocasematch
+
 # Currently "Docker Desktop" bundles compose as part of docker.
 # Earlier distributions, including those on servers, would likely require
 # that docker-compose be installed.  Find which we have... and if not found
@@ -19,7 +22,7 @@ TIMEOUT_MINIMAL=1
 COMPOSE=""
 for i in 'docker compose' docker-compose ; do
   ver=$( $i version 2> /dev/null )
-  if [ 0 -eq $? ] && [[ "$ver" =~ ^Docker\ Compose\ version ]] ; then
+  if [ 0 -eq $? ] && [[ "$ver" =~ compose.*version ]] ; then
     COMPOSE="$i"
     break
   fi
