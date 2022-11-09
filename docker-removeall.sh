@@ -19,7 +19,7 @@ TIMEOUT_MINIMAL=1
 COMPOSE=""
 for i in 'docker compose' docker-compose ; do
   ver=$( $i version 2> /dev/null )
-  if [ 0 -eq $? ] && [[ "$ver" =~ ^Docker\ Compose\ version\ v ]] ; then
+  if [ 0 -eq $? ] && [[ "$ver" =~ ^Docker\ Compose\ version ]] ; then
     COMPOSE="$i"
     break
   fi
