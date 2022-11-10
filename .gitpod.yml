@@ -4,14 +4,15 @@ tasks:
       sudo apt-get update
       sudo apt-get install -y netcat 
       echo 127.0.0.1 pass.local | sudo tee -a /etc/hosts
+    command: |
       ./demo.sh pull
       ./demo.sh up -d && ./demo.sh logs -f
-    command: |
-      ./demo.sh up loader
+      echo ./demo.sh up loader to load the demo data and then
       echo open the PASS UI at https://pass.local
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 # These are copied from https://github.com/eclipse/openvsx/blob/master/.gitpod.yml
+# Not clear what here I actually need
 ports:
 # Web UI (static resources)
 - port: 3000
