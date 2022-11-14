@@ -1,0 +1,46 @@
+name: pass-acceptance-testing
+
+on:
+  pull-request:
+    branches:
+      - main
+
+jobs:
+  deploy_code:
+     steps:
+      - uses: actions/checkout@v2
+
+      - name: Code Sanity Check
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🐧 This job is now running on a ${{ runner.os }}"
+          pwd
+          ls -la
+      - name: Docker Sanity Check
+        run: |
+          groups
+          docker info
+      - name: Stop Existing App
+        run: |
+          (docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml down || true)
+      - name: Build App
+        run: |
+          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml pull
+      - name: Run App
+        run: |
+          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml up -d
+  
+  run_acceptance_tests: 
+    steps:
+      - uses: actions/checkout@main
+        with:
+          repository: eclipse-pass/pass-acceptance-testing
+      
+      - name: Base Case Tests
+        run: |
+          testcafe chromium ./tests/baseCaseTests.js
+      
+      - name: Proxy Submission Tests
+        run: |
+          testcafe chromium ./tests/proxySubmissionTests.js
+
