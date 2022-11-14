@@ -6,7 +6,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:13b79c0bdbf7f314cf6fecf4377fed32d8848ac269e3af41034b9b3b8dd87c73
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:b32633e39b820bb7047a72922934503f71028dcf401396b96522c4535427d830
     env_file: .demo_env
     container_name: auth
     networks:
@@ -14,7 +14,7 @@ services:
       - back
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:eae7505426547db7b12c6962372a38030deab9567bbbf0cf1fe90629c9457b99
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
     env_file: .demo_env
     container_name: pass-core
     networks:
@@ -23,21 +23,23 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:16608e780279640b400a86678a83555203dcff68fea333681d57742fe100dab2
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:e78e363a4185ee96c9a83478546c43698f0373d900911d7082c9350ce8aced81
     build:
       context: ./ember
       args:
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
-        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-        PASS_UI_PORT: "${PASS_UI_PORT}"
-        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
-        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL}"
-        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL}"
+        # required args (throw error during build if not defined in env):
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO:?undefined-EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH:?undefined-EMBER_GIT_BRANCH}"
+        # sensible defaults have been defined:
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL:-}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL:-}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI:-}"
+        PASS_UI_PORT: "${PASS_UI_PORT:-}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE:-}"
+        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL:-}"
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
     env_file: .demo_env
     container_name: pass-ui
     networks:
@@ -55,7 +57,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:caeeab82dc9e4f1ca25670bca1d22aaf0488a7fda0226148b0606441a7b042ae
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:07847ef518d96464007aa583f1edbc505bd3221bc5d3d195609d8e1fbfa7822e
     container_name: proxy
     networks:
       - front
@@ -70,7 +72,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:59288c8687050d3d8822b9b4b8903db599ce9ef44a392f8c151620fd23305f47
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:b51827ed21908c76fcb8a955743b5418f4e0c3e01426de96884645051512a7e0
     container_name: pass-ui-public
     env_file: .demo_env
     ports:
@@ -113,7 +115,7 @@ services:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:42cecc2be7c6a9421094f21327943ac1353fce565c0b4dba003852a31d47f1e8
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:231b96c7010048b618fbd07ed555547dba98544cc0b4ad96782db4ea4e774f7e
     env_file: .demo_env
     container_name: loader
     networks:
