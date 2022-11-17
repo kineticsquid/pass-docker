@@ -1,9 +1,10 @@
 name: pass-acceptance-testing
 
 on:
-  pull-request:
-    branches:
-      - main
+  workflow_dispatch:
+    pull-request:
+      branches:
+        - main
 
 jobs:
   run_acceptance_tests:
@@ -17,9 +18,10 @@ jobs:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
     - name: Setup Yarn 
-      uses: borales/actions-yarn@v3.0.0
+      uses: actions/setup-node@v3
         with:
-          cmd: install # will run `yarn install` command
+          node-version: '16'
+    - run: yarn install
     
     - name: Run pass-docker
       run: |
