@@ -1,6 +1,4 @@
 name: pass-acceptance-testing
-
-on:
   workflow_dispatch:
     pull-request:
       branches:
