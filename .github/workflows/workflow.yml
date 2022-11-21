@@ -1,9 +1,9 @@
 name: pass-acceptance-testing
-  on:
-    workflow_dispatch:
-    pull-request:
-      branches:
-        - main
+on:
+  workflow_dispatch:
+  pull-request:
+    branches:
+      - main
 
 jobs:
   run_acceptance_tests:
