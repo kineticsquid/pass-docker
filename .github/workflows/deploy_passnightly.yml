@@ -31,8 +31,8 @@ jobs:
 
       - name: Stop Existing App
         run: |
-          # Cleanup all docker compose projects, containers, images, etc. for a clean start:
-          bash ./tools/docker/removeall.sh
+          # Stop any running container
+          bash ./tools/docker/stopall.sh
 
       - name: Build App
         run: |
