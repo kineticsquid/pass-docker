@@ -23,7 +23,7 @@ services:
       - postgres
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:e78e363a4185ee96c9a83478546c43698f0373d900911d7082c9350ce8aced81
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:300602608acd70e5c0330242f1b7bb5c991f06de70a9260c080f6e641c992bd9
     build:
       context: ./ember
       args:
@@ -106,13 +106,13 @@ services:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:0.1.0@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
+    image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
     networks:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:231b96c7010048b618fbd07ed555547dba98544cc0b4ad96782db4ea4e774f7e
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
     container_name: loader
     networks:
       - back
