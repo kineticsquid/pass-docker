@@ -31,7 +31,8 @@ jobs:
 
       - name: Stop Existing App
         run: |
-          # Stop any running container
+          # Stop the application, but then also  all docker compose projects, containers, images, etc. for a clean start:
+          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml down
           bash ./tools/docker/stopall.sh
 
       - name: Build App
