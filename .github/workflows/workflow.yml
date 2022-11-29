@@ -18,8 +18,8 @@ jobs:
         path: pass-acceptance-testing
     - name: Setup Yarn 
       uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+      with:
+        node-version: '16'
     - run: yarn install
     
     - name: Run pass-docker
@@ -31,4 +31,4 @@ jobs:
       with:
         run: |
           testcafe chrome ./pass-acceptance-testing/tests/baseCaseTests.js
-          testcafe chrome ./pass-acceptance-testing/test/proxySubmissionTests.js
+          testcafe chrome ./pass-acceptance-testing/tests/proxySubmissionTests.js
