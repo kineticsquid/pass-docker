@@ -14,6 +14,7 @@ RUN cd ${STATIC_HTML_DIR} && \
 
 FROM nginx:1.13.12-alpine
 
+ENV NGINX_404_REDIR_TARGET='$scheme://$host/404.html'
 ENV STATIC_HTML_PORT=80 
 
 COPY --from=static-builder /html/ /usr/share/nginx/html/
