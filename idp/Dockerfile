@@ -7,4 +7,9 @@ COPY common/shibboleth-idp/ /opt/shibboleth-idp/
 COPY common/shib-jetty-base/ /opt/shib-jetty-base/
 
 COPY ${TENANT}/shibboleth-idp/ /opt/shibboleth-idp/
-COPY metadata/${IDP_ENV}/ /opt/shibboleth-idp/metadata/
+COPY metadata/local/ /opt/shibboleth-idp/metadata/
+
+COPY styling/main.css /opt/shibboleth-idp/webapp/css/main.css
+COPY styling/dummylogo.png /opt/shibboleth-idp/webapp/images/dummylogo.png
+COPY styling/login.vm /opt/shibboleth-idp/views/login.vm
+COPY styling/error.vm /opt/shibboleth-idp/views/error.vm

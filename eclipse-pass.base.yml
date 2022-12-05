@@ -82,7 +82,7 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:63c7c08e46474948d669ff77c8a51f8010dac02c019216ff12d90656ae0f816e
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:207262db39f30412303ad3c8cffeeb24e52eab91491b1885982f14cfa46078d9
     container_name: idp
     depends_on:
      - ldap
