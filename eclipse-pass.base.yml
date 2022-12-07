@@ -70,7 +70,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:45c08f8f696c7201453b4eff61fc3b54d3bbbf9ad69ecb1a908bf426fd8f3bdf
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:8a02236371e34af3156a705699c3f701b183eb1bcaa25466a7506465d29ed225
     container_name: pass-ui-public
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
