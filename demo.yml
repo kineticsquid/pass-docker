@@ -23,7 +23,7 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:986bd4b8403014d6467b35ffad674e2acc975ac63d40baeaffe6d343f26c38aa
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
     build:
       context: ./ember
       args:
