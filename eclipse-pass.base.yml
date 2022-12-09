@@ -8,7 +8,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:f552fbd318227420d63ebb81b9513d66e42d6e1ee1e5ed72a082012f37f300a8
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
     container_name: auth
     networks:
       - front
