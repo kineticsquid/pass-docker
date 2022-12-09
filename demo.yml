@@ -90,7 +90,7 @@ services:
     depends_on:
      - ldap
     environment:
-     - IDP_HOST=https://moo.example.com
+     - IDP_HOST=https://pass.local
      - JETTY_MAX_HEAP=64m
      - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
