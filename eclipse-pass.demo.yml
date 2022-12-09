@@ -18,5 +18,9 @@ services:
   pass-ui-public:
     env_file: .eclipse-pass.demo_env
 
+  idp:
+    environment:
+      - IDP_HOST=https://demo.eclipse-pass.org
+
   loader:
     env_file: .eclipse-pass.demo_env
