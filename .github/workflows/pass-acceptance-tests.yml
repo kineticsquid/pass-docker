@@ -31,6 +31,4 @@ jobs:
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest
       with:
-        run: |
-          testcafe chrome ./pass-acceptance-testing/tests/baseCaseTests.js
-          testcafe chrome ./pass-acceptance-testing/tests/proxySubmissionTests.js
+        args: "chrome ./pass-acceptance-testing/tests/*Tests.js"
