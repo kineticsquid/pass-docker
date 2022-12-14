@@ -9,6 +9,8 @@ jobs:
   run_acceptance_tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Append hosts file
+      run: echo "127.0.1 pass.local" | sudo tee -a /etc/hosts
     - name: Checkout pass-docker
       uses: actions/checkout@v3
 
