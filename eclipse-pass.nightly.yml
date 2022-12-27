@@ -1,5 +1,3 @@
-version: '3.8'
-
 # Manages the nightly.eclipse-pass.org deploy
 # `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml up`
 version: '3.8'
@@ -20,6 +18,10 @@ services:
 
   pass-ui-public:
     env_file: .eclipse-pass.nightly_env
+
+  idp:
+    environment:
+      - IDP_HOST=https://nightly.eclipse-pass.org
 
   loader:
     env_file: .eclipse-pass.nightly_env

@@ -6,12 +6,16 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:b32633e39b820bb7047a72922934503f71028dcf401396b96522c4535427d830
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
     env_file: .demo_env
     container_name: auth
     networks:
       - front
       - back
+    secrets:
+     - source: sp_key
+     - source: sp_cert
+     - source: idp_cert
 
   pass-core:
     image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
@@ -23,7 +27,7 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:300602608acd70e5c0330242f1b7bb5c991f06de70a9260c080f6e641c992bd9
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
     build:
       context: ./ember
       args:
@@ -72,7 +76,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:b51827ed21908c76fcb8a955743b5418f4e0c3e01426de96884645051512a7e0
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
     container_name: pass-ui-public
     env_file: .demo_env
     ports:
@@ -85,11 +89,12 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:48998d5160175c98742eea99ec29be63096d7d9407bdc6b99a97b4a89b5d657e
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:02235c80cda327375819d84074b165bf931b25e219aff100e8fad13c2a21800d
     container_name: idp
     depends_on:
      - ldap
     environment:
+     - IDP_HOST=https://pass.local
      - JETTY_MAX_HEAP=64m
      - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
@@ -103,6 +108,7 @@ services:
      - source: idp_encryption
      - source: idp_signing
      - source: idp_sealer
+     - source: idp_cert
 
   ldap:
     build:
@@ -144,5 +150,9 @@ secrets:
     file: ./secrets/idp/idp-signing.key
   idp_sealer:
     file: ./secrets/idp/sealer.jks
+  idp_cert:
+    file: ./secrets/idp/idp-signing.crt
   sp_key:
     file: ./secrets/sp/sp-key.pem
+  sp_cert:
+    file: ./secrets/sp/sp-cert.pem
