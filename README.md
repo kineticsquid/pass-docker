@@ -4,7 +4,18 @@ This repository serves as the canonical environment for demonstrating integratio
 1. Docker images that are the basis for the production deployment of PASS, pushed to the [`pass` organization](https://hub.docker.com/u/pass/dashboard/) in Docker Hub
 1. Provides a `docker-compose` orchestration that configures and launches PASS for developers
 
-# Instructions
+# Instructions for running with Gitpod
+
+<a href="https://gitpod.io/#https://github.com/kineticsquid/pass-docker">
+  <img
+    src="https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod"
+    alt="Contribute with Gitpod"
+  />
+</a>
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kineticsquid/pass-docker)
+
+# Instructions for running locally
 
 These instructions are for starting PASS with `docker-compose`.  If you have Docker already installed and want to start up the demo ASAP, jump to [starting Docker](#start).  Documentation related to supporting runtime environments for different institutions is [here](INSTITUTIONS.md).
 
