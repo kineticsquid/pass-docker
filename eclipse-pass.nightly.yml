@@ -8,7 +8,7 @@ services:
 
   pass-core:
     env_file: .eclipse-pass.nightly_env
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:ee786c4f484617f3c0f0eea5957e660e31821c645acb1f63b4f6cf5dc9e3ed0c
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:4d38f39cefef2b58d9269a08c0b12fa63c8961b6416fd2c15d9c3b72dde03d57
 
   pass-ui:
     env_file: .eclipse-pass.nightly_env
