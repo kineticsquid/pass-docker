@@ -529,3 +529,255 @@ employeeNumber: 99000008
 displayName: Notification Demo BCC Address
 employeeType: STAFF
 homeDirectory: /home/ndemobcc
+
+dn: uid=aforward,ou=People,dc=pass
+uid: aforward
+uidNumber: 7025
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Andrew
+sn: Forward
+cn: Andrew Forward
+mail: aforward@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0009
+employeeNumber: 99000009
+displayName: aforward@example.com
+employeeType: STAFF
+homeDirectory: /home/aforward
+
+dn: uid=amoore,ou=People,dc=pass
+uid: amoore
+uidNumber: 7026
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Allen
+sn: Moore
+cn: Allen Moore
+mail: amoore@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0010
+employeeNumber: 99000010
+displayName: amoore@example.com
+employeeType: STAFF
+homeDirectory: /home/amoore
+
+dn: uid=bbranan,ou=People,dc=pass
+uid: bbranan
+uidNumber: 7027
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Bill
+sn: Branan
+cn: Bill Branan
+mail: bbranan@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0011
+employeeNumber: 99000011
+displayName: bbranan@example.com
+employeeType: STAFF
+homeDirectory: /home/bbranan
+
+dn: uid=grant-mcs,ou=People,dc=pass
+uid: grant-mcs
+uidNumber: 7028
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Grant
+sn: McSheffrey
+cn: Grant McSheffrey
+mail: grant-mcs@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0012
+employeeNumber: 99000012
+displayName: grant-mcs@example.com
+employeeType: STAFF
+homeDirectory: /home/grant-mcs
+
+dn: uid=jabrah,ou=People,dc=pass
+uid: jabrah
+uidNumber: 7029
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: John
+sn: Abrahams
+cn: John Abrahams
+mail: jabrah@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0013
+employeeNumber: 99000013
+displayName: jabrah@example.com
+employeeType: STAFF
+homeDirectory: /home/jabrah
+
+dn: uid=jaredgalanis,ou=People,dc=pass
+uid: jaredgalanis
+uidNumber: 7030
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Jared
+sn: Galanis
+cn: Jared Galanis
+mail: jaredgalanis@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0014
+employeeNumber: 99000014
+displayName: jaredgalanis@example.com
+employeeType: STAFF
+homeDirectory: /home/jaredgalanis
+
+dn: uid=jgara,ou=People,dc=pass
+uid: jgara
+uidNumber: 7031
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Jeff
+sn: Gara
+cn: Jeff Gara
+mail: jgara@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0015
+employeeNumber: 99000015
+displayName: jgara@example.com
+employeeType: STAFF
+homeDirectory: /home/jgara
+
+dn: uid=jrmartino,ou=People,dc=pass
+uid: jrmartino
+uidNumber: 7032
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Jim
+sn: Martino
+cn: Jim Martino
+mail: jrmartino@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0016
+employeeNumber: 99000016
+displayName: jrmartino@example.com
+employeeType: STAFF
+homeDirectory: /home/jrmartino
+
+dn: uid=kineticsquid,ou=People,dc=pass
+uid: kineticsquid
+uidNumber: 7033
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: John
+sn: Kellerman
+cn: John Kellerman
+mail: kineticsquid@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0017
+employeeNumber: 99000017
+displayName: kineticsquid@example.com
+employeeType: STAFF
+homeDirectory: /home/kineticsquid
+
+dn: uid=markpatton,ou=People,dc=pass
+uid: markpatton
+uidNumber: 7034
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Mark
+sn: Patton
+cn: Mark Patton
+mail: markpatton@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0018
+employeeNumber: 99000018
+displayName: markpatton@example.com
+employeeType: STAFF
+homeDirectory: /home/markpatton
+
+dn: uid=springstim,ou=People,dc=pass
+uid: springstim
+uidNumber: 7035
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Tim
+sn: Martin
+cn: Tim Martin
+mail: springstim@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0019
+employeeNumber: 99000019
+displayName: springstim@example.com
+employeeType: STAFF
+homeDirectory: /home/springstim
+
+dn: uid=tsande16,ou=People,dc=pass
+uid: tsande16
+uidNumber: 7036
+gidNumber: 5000
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: eduPerson
+givenName: Tim
+sn: Sanders
+cn: Tim Sanders
+mail: tsande16@example.com
+userPassword: moo
+eduPersonUniqueId: FAKE0020
+employeeNumber: 99000020
+displayName: tsande16@example.com
+employeeType: STAFF
+homeDirectory: /home/tsande16

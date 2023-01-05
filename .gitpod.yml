@@ -1,0 +1,75 @@
+# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - before: |
+      sudo apt-get update
+      sudo apt-get install -y netcat 
+      echo 127.0.0.1 pass.local | sudo tee -a /etc/hosts
+
+  - init: |
+      git pull
+      ./demo.sh pull
+
+    command: |
+      ./demo.sh up -d && ./demo.sh logs -f
+      echo ./demo.sh up loader to load the demo data and then
+      echo open the PASS UI at https://pass.local
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+# These are copied from https://github.com/eclipse/openvsx/blob/master/.gitpod.yml
+# Not clear what here I actually need
+ports:
+# Web UI (static resources)
+- port: 3000
+# Server (API, must be public for CORS)
+- port: 8080
+  visibility: public
+  onOpen: ignore
+# Test report
+- port: 8081
+# schema service port
+- port: 8086
+  onOpen: ignore
+# Policy service port
+- port: 8088
+  onOpen: ignore
+# DOI service port
+- port: 8090
+  onOpen: ignore
+# Download service port
+- port: 6502
+  onOpen: ignore
+# ActiveMQ JMS Port
+- port: 61616
+  onOpen: ignore
+# ActiveMQ Stomp Port
+- port: 61613
+  onOpen: ignore
+# ActiveMQ Web console Port
+- port: 8161
+  onOpen: ignore
+# Java debugging
+- port: 5011
+  onOpen: ignore
+# PostgreSQL
+- port: 6543
+  onOpen: ignore
+# Elasticsearch
+- port: 9200
+  onOpen: ignore
+- port: 9300
+  onOpen: ignore
+# NodeJS debugging
+- port: 9229
+  onOpen: ignore
+# Mail SMTP
+- port: 11025
+  onOpen: ignore
+# Mail IMAPS
+- port: 11993
+  onOpen: ignore
+# Mail MSP
+- port: 11587
+  onOpen: ignore
+# SMTP port used by NS to send email
+- port: 587
+  onOpen: ignore

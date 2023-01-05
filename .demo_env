@@ -25,9 +25,9 @@ PASS_UI_GIT_BRANCH=main
 
 PASS_UI_ROOT_URL=/app
 
-STATIC_CONFIG_URL=/app/config.json
+STATIC_CONFIG_URL=/config.json
 
-DOI_SERVICE_URL=/doiservice/journal
+DOI_SERVICE_PUBLIC_URL=/journal
 MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
 MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
 POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
@@ -56,6 +56,9 @@ ACS_URL="/Shibboleth.sso/SAML2/POST/:idpId"
 METADATA_URL="/metadata/:idpId"
 IDENTIFIER_FORMAT=""
 
+EMBER_GIT_REPO="https://github.com/eclipse-pass/pass-ui"
+EMBER_GIT_BRANCH=main
+
 AUTH_LOGIN="/login/:idpId"
 AUTH_LOGIN_SUCCESS=/app/auth-callback
 AUTH_LOGIN_FAILURE=/
@@ -69,7 +72,7 @@ USER_SERVICE_URL="http://fcrepo:8080"
 ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"
 SCHEMA_SERVICE_URL="http://schemaservice:8086"
 POLICY_SERVICE_URL="http://policyservice:8088"
-DOI_SERVICE_URL="http://doiservice:8080/"
+DOI_SERVICE_URL="http://pass-core:8080"
 DOWNLOAD_SERVICE_URL="http://downloadservice:6502"
 
 ###################################################
@@ -90,7 +93,7 @@ STATIC_HTML_PORT=82
 
 # Static html server build-time config
 STATIC_HTML_GIT_REPO=https://github.com/eclipse-pass/pass-ui-public
-STATIC_HTML_GIT_BRANCH=3b5a7be6db6a7b0b7a69da0ce6f5a84abada4a6e
+STATIC_HTML_GIT_BRANCH=main
 
 ###################################################
 # LDAP / Mail server config #######################

@@ -6,15 +6,19 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:13b79c0bdbf7f314cf6fecf4377fed32d8848ac269e3af41034b9b3b8dd87c73
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
     env_file: .demo_env
     container_name: auth
     networks:
       - front
       - back
+    secrets:
+     - source: sp_key
+     - source: sp_cert
+     - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:eae7505426547db7b12c6962372a38030deab9567bbbf0cf1fe90629c9457b99
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
     env_file: .demo_env
     container_name: pass-core
     networks:
@@ -23,21 +27,23 @@ services:
       - postgres
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:16608e780279640b400a86678a83555203dcff68fea333681d57742fe100dab2
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
     build:
       context: ./ember
       args:
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH}"
-        DOI_SERVICE_URL: "${DOI_SERVICE_URL}"
-        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL}"
-        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL}"
-        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI}"
-        PASS_UI_PORT: "${PASS_UI_PORT}"
-        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE}"
-        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL}"
-        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL}"
-        USER_SERVICE_URL: "${USER_SERVICE_URL}"
+        # required args (throw error during build if not defined in env):
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO:?undefined-EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH:?undefined-EMBER_GIT_BRANCH}"
+        # sensible defaults have been defined:
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL:-}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL:-}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI:-}"
+        PASS_UI_PORT: "${PASS_UI_PORT:-}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE:-}"
+        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL:-}"
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
     env_file: .demo_env
     container_name: pass-ui
     networks:
@@ -55,7 +61,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:caeeab82dc9e4f1ca25670bca1d22aaf0488a7fda0226148b0606441a7b042ae
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:07847ef518d96464007aa583f1edbc505bd3221bc5d3d195609d8e1fbfa7822e
     container_name: proxy
     networks:
       - front
@@ -70,7 +76,7 @@ services:
       args:
         STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
-    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:59288c8687050d3d8822b9b4b8903db599ce9ef44a392f8c151620fd23305f47
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
     container_name: pass-ui-public
     env_file: .demo_env
     ports:
@@ -83,11 +89,12 @@ services:
       context: ./idp
       args:
         TENANT: jhu
-    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:48998d5160175c98742eea99ec29be63096d7d9407bdc6b99a97b4a89b5d657e
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:02235c80cda327375819d84074b165bf931b25e219aff100e8fad13c2a21800d
     container_name: idp
     depends_on:
      - ldap
     environment:
+     - IDP_HOST=https://pass.local
      - JETTY_MAX_HEAP=64m
      - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
@@ -101,19 +108,20 @@ services:
      - source: idp_encryption
      - source: idp_signing
      - source: idp_sealer
+     - source: idp_cert
 
   ldap:
     build:
       context: ./ldap
       args:
         TENANT: jhu
-    image: oapass/ldap:0.1.0@sha256:059f4b287a8a1e8381afeca0e3e13b0255ccf2d93d50d8b318fc8d9826f5d5e5
+    image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
     networks:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:42cecc2be7c6a9421094f21327943ac1353fce565c0b4dba003852a31d47f1e8
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
     env_file: .demo_env
     container_name: loader
     networks:
@@ -142,5 +150,9 @@ secrets:
     file: ./secrets/idp/idp-signing.key
   idp_sealer:
     file: ./secrets/idp/sealer.jks
+  idp_cert:
+    file: ./secrets/idp/idp-signing.crt
   sp_key:
     file: ./secrets/sp/sp-key.pem
+  sp_cert:
+    file: ./secrets/sp/sp-cert.pem
