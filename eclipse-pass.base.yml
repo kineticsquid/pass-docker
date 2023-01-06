@@ -7,9 +7,10 @@ version: '3.8'
 #  - eclipse-pass.nightly.yml
 services:
   auth:
-    build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:c966c8500fe43d90a59839bba2798f9ed9a051c5379783a0971bf700003aeddf
     container_name: auth
+    env_file:
+      - .eclipse-pass.base_env
     networks:
       - front
       - back
@@ -19,15 +20,20 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:318b14d2dbfee4570b91454632a443aef67d15bf481677fbd7f4532c02853af2
     container_name: pass-core
+    env_file:
+      - .eclipse-pass.base_env
     networks:
       - back
     depends_on:
       - postgres
+    healthcheck:
+      test: "curl -f http://pass-core:8080/data/user || exit 1"
+      start_period: 30s
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:8e82bb2e3b5e760d17f36c0c980547f132b284739982938b5f235d079430f6c4
     build:
       context: ./ember
       args:
@@ -45,12 +51,16 @@ services:
         POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
         USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
     container_name: pass-ui
+    env_file:
+      - .eclipse-pass.base_env
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?
 
   postgres:
     image: postgres:14-alpine
     restart: always
+    env_file:
+      - .eclipse-pass.base_env
     networks:
       - back
     volumes:
@@ -59,8 +69,10 @@ services:
 
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:07847ef518d96464007aa583f1edbc505bd3221bc5d3d195609d8e1fbfa7822e
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:6020f7f017108fcc1911d94e0afafcbb5dd02f005876eaa5453395697627628c
     container_name: proxy
+    env_file:
+      - .eclipse-pass.base_env
     networks:
       - front
       - back
@@ -76,6 +88,8 @@ services:
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
     image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
     container_name: pass-ui-public
+    env_file:
+      - .eclipse-pass.base_env
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
     networks:
@@ -96,6 +110,8 @@ services:
      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
     expose:
      - "4443"
+    env_file:
+      - .eclipse-pass.base_env
     networks:
      - back
     secrets:
@@ -113,16 +129,22 @@ services:
         TENANT: jhu
     image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
+    env_file:
+      - .eclipse-pass.base_env
     networks:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
+    image: curlimages/curl:7.87.0
     container_name: loader
+    command: [curl, http://pass-core:8080/data/, -X, PATCH, -H, "content-type: application/vnd.api+json; ext=jsonpatch", -d, "@/data.json"]
     networks:
       - back
     depends_on:
-      - pass-core
+      pass-core:
+        condition: service_healthy
+    volumes:
+      - ./demo_data.json:/data.json
 
 volumes:
   db:

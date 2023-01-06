@@ -1,0 +1,31 @@
+# Env customizations for a local development instance
+version: '3.8'
+
+services:
+  auth:
+    env_file:
+      - .eclipse-pass.local_env
+
+  pass-core:
+    env_file:
+      - .eclipse-pass.local_env
+
+  pass-ui:
+    env_file:
+      - .eclipse-pass.local_env
+
+  postgres:
+    env_file:
+      - .eclipse-pass.local_env
+
+  pass-ui-public:
+    env_file:
+      - .eclipse-pass.local_env
+
+  idp:
+    env_file:
+      - .eclipse-pass.local_env
+
+  loader:
+    env_file:
+      - .eclipse-pass.local_env
