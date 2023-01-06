@@ -1,4 +1,4 @@
-name: pass-acceptance-testing
+name: PASS (FCREPO) Acceptance Tests
 
 # On demand only, run tests against Fedora based infrastructure
 on:
