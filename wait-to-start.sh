@@ -1,6 +1,6 @@
 #! /bin/sh
 
-PI_FEDORA_EXTERNAL_BASE="http://pass.local:8080/fcrepo/rest"
+PI_FEDORA_EXTERNAL_BASE="${PI_FEDORA_EXTERNAL_BASE:-http://pass.local:8080/data}"
 PI_FEDORA_USER="fedoraAdmin"
 PI_FEDORA_PASS="moo"
 PI_MAX_ATTEMPTS=100
@@ -8,7 +8,7 @@ PI_MAX_ATTEMPTS=100
 # curl \
 #     -I \
 #     -u ${PI_FEDORA_USER}:${PI_FEDORA_PASS} \
-#     --write-out ${http_code} \
+#     --write-out %{http_code} \
 #     --silent \
 #     -o /dev/stderr \
 #     --retry 50 \

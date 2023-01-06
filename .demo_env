@@ -27,9 +27,9 @@ PASS_UI_ROOT_URL=/app
 
 STATIC_CONFIG_URL=/config.json
 
-DOI_SERVICE_PUBLIC_URL=/journal
-MANUSCRIPT_SERVICE_LOOKUP_URL=/downloadservice/lookup
-MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
+DOI_SERVICE_PUBLIC_URL=/doi/journal
+MANUSCRIPT_SERVICE_LOOKUP_URL=/doi/manuscript
+# MANUSCRIPT_SERVICE_DOWNLOAD_URL=/downloadservice/download
 POLICY_SERVICE_POLICY_ENDPOINT=/policyservice/policies
 POLICY_SERVICE_REPOSITORY_ENDPOINT=/policyservice/repositories
 SCHEMA_SERVICE_URL=/schemaservice
@@ -73,7 +73,7 @@ ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"
 SCHEMA_SERVICE_URL="http://schemaservice:8086"
 POLICY_SERVICE_URL="http://policyservice:8088"
 DOI_SERVICE_URL="http://pass-core:8080"
-DOWNLOAD_SERVICE_URL="http://downloadservice:6502"
+DOWNLOAD_SERVICE_URL="http://pass-core:8080"
 
 ###################################################
 # Sample data loader ##############################

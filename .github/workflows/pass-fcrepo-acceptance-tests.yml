@@ -1,13 +1,11 @@
 name: pass-acceptance-testing
 
+# On demand only, run tests against Fedora based infrastructure
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
 
 env:
-  TIMEOUT_LENGTH: 120000
+  PI_FEDORA_EXTERNAL_BASE: "http://pass.local:8080/fcrepo/rest" # Used in the wait script
 
 jobs:
   run_acceptance_tests:
@@ -19,15 +17,23 @@ jobs:
     - name: Checkout pass-docker
       uses: actions/checkout@v3
 
-    # The '--wait' flag will wait for the pass-core healthcheck
     - name: Run pass-docker
-      run: ./demo.sh up -d --quiet-pull --no-build --wait
+      run: |
+        docker-compose pull --quiet
+        docker-compose up -d
+
+    - name: Wait for startup
+      run: |
+        chmod +x ./wait-to-start.sh
+        ./wait-to-start.sh
+      shell: bash
 
     - name: Checkout pass-acceptance-testing
       uses: actions/checkout@v3
       with:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
+        ref: fedora-tests
 
     - name: Run acceptance tests
       uses: DevExpress/testcafe-action@latest

@@ -6,7 +6,7 @@ version: '3.8'
 services:
   auth:
     build: ./sp
-    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:c966c8500fe43d90a59839bba2798f9ed9a051c5379783a0971bf700003aeddf
     env_file: .demo_env
     container_name: auth
     networks:
@@ -18,16 +18,19 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:318b14d2dbfee4570b91454632a443aef67d15bf481677fbd7f4532c02853af2
     env_file: .demo_env
     container_name: pass-core
     networks:
       - back
     depends_on:
       - postgres
+    healthcheck:
+      test: "curl -f http://pass-core:8080/data/user || exit 1"
+      start_period: 30s
   
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:8e82bb2e3b5e760d17f36c0c980547f132b284739982938b5f235d079430f6c4
     build:
       context: ./ember
       args:
@@ -61,7 +64,7 @@ services:
   
   proxy:
     build: ./demo-proxy/
-    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:07847ef518d96464007aa583f1edbc505bd3221bc5d3d195609d8e1fbfa7822e
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:6020f7f017108fcc1911d94e0afafcbb5dd02f005876eaa5453395697627628c
     container_name: proxy
     networks:
       - front
