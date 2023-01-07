@@ -7,11 +7,10 @@ tasks:
 
   - init: |
       git pull
-      ./gitpod.sh pull
+      ./gitpod-demo.sh pull
 
     command: |
-      ./gitpod.sh up -d && ./gitpod.sh logs -f
-      echo ./gitpod.sh up loader to load the demo data 
+      ./gitpod-demo.sh up -d && ./gitpod-demo.sh logs -f
 
 ports:
 - port: 80

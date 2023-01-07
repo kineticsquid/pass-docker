@@ -7,7 +7,7 @@ services:
   auth:
     build: ./sp
     image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
-    env_file: .eclipse-pass.gitpod_env
+    env_file: .demo_env
     container_name: auth
     networks:
       - front
@@ -19,7 +19,7 @@ services:
 
   pass-core:
     image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
-    env_file: .eclipse-pass.gitpod_env
+    env_file: .demo_env
     container_name: pass-core
     networks:
       - back
@@ -44,7 +44,7 @@ services:
         PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL:-}"
         POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
         USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
-    env_file: .eclipse-pass.gitpod_env
+    env_file: .demo_env
     container_name: pass-ui
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?
@@ -52,7 +52,7 @@ services:
   postgres:
     image: postgres:14-alpine
     restart: always
-    env_file: .eclipse-pass.gitpod_env
+    env_file: .demo_env
     networks:
       - back
     volumes: 
@@ -78,7 +78,7 @@ services:
         STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
     image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
     container_name: pass-ui-public
-    env_file: .eclipse-pass.gitpod_env
+    env_file: .demo_env
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
     networks:
@@ -122,7 +122,7 @@ services:
 
   loader:
     image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
-    env_file: .eclipse-pass.gitpod_env
+    env_file: .demo_env
     container_name: loader
     networks:
       - back
