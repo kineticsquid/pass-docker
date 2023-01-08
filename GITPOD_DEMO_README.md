@@ -20,10 +20,10 @@ Setting up an alias would perform the same function.
 
 ## Terminating
 ``` sh
-./gitpod-demo.sh down -d
+./gitpod-demo.sh down
 ```
 
 ## Update images
 ``` sh
-./demo.sh pull -d
+./demo.sh pull
 ```
