@@ -6,6 +6,8 @@ This repository serves as the canonical environment for demonstrating integratio
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kineticsquid/pass-docker)
 
+See `gitpod-demo-notes.md` for details on running in gitpod. 
+
 # Instructions for running locally
 
 These instructions are for starting PASS with `docker-compose`.  If you have Docker already installed and want to start up the demo ASAP, jump to [starting Docker](#start).  Documentation related to supporting runtime environments for different institutions is [here](INSTITUTIONS.md).
