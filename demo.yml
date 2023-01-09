@@ -5,7 +5,6 @@ version: '3.8'
 #   `docker-compose -f demo.yml --env-file .demo_env up`
 services:
   auth:
-    build: ./sp
     image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:c966c8500fe43d90a59839bba2798f9ed9a051c5379783a0971bf700003aeddf
     env_file: .demo_env
     container_name: auth
@@ -124,13 +123,16 @@ services:
      - back
 
   loader:
-    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
-    env_file: .demo_env
+    image: curlimages/curl:7.87.0
     container_name: loader
+    command: [curl, http://pass-core:8080/data/, -X, PATCH, -H, "content-type: application/vnd.api+json; ext=jsonpatch", -d, "@/data.json"]
     networks:
       - back
     depends_on:
-      - pass-core
+      pass-core:
+        condition: service_healthy
+    volumes:
+      - ./demo_data.json:/data.json
 
 volumes:
   db:
