@@ -20,7 +20,7 @@ services:
      - source: idp_cert
 
   pass-core:
-    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:318b14d2dbfee4570b91454632a443aef67d15bf481677fbd7f4532c02853af2
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0@sha256:89e035c0882af618375e504b91433319916a90731396ab81c3bc683126266a26
     container_name: pass-core
     env_file:
       - .eclipse-pass.base_env
@@ -33,7 +33,7 @@ services:
       start_period: 30s
 
   pass-ui:
-    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:8e82bb2e3b5e760d17f36c0c980547f132b284739982938b5f235d079430f6c4
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:9b4003ffff1484ad4c4cad8e262dbe1480d68bf6dbdb3a2f453ea155a1fa5569
     build:
       context: ./ember
       args:
