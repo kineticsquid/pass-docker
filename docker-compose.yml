@@ -38,8 +38,8 @@ services:
       context: ./ember
       args:
         # required args (throw error during build):
-        EMBER_GIT_REPO: "${EMBER_GIT_REPO:?undefined-EMBER_GIT_REPO}"
-        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH:?undefined-EMBER_GIT_BRANCH}"
+        EMBER_GIT_PASS_UI_GIT_REPOREPO: "${PASS_UI_GIT_REPO:?undefined-PASS_UI_GIT_REPO}"
+        PASS_UI_GIT_BRANCH: "${PASS_UI_GIT_BRANCH:?undefined-PASS_UI_GIT_BRANCH}"
         # sensible defaults have been defined:
         DOI_SERVICE_URL: "${DOI_SERVICE_URL:-}"
         MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL:-}"
