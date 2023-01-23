@@ -21,7 +21,7 @@ jobs:
 
     # The '--wait' flag will wait for the pass-core healthcheck
     - name: Run pass-docker
-      run: docker compose up -d --quiet-pull ----no-build --wait
+      run: docker compose up -d --quiet-pull --no-build --wait
 
     - name: Checkout pass-acceptance-testing
       uses: actions/checkout@v3
