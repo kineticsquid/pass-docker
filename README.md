@@ -1,11 +1,11 @@
-The "demo" compose file describes an early system meant to demonstrate some new technologies and services in PASS. In its current state, several services rely on local images not yet published.
+The "demo" compose file describes an early system meant to demonstrate some new technologies and services in PASS. 
 
 ## Running:
 
 Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file. In order to run a local instance, you can use both the base and local compose files together:
 
 ``` sh
-docker compose -f eclipse-pass.base.yml -f eclipse-pass.local.yml up -d
+docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d
 ```
 
 `./demo.sh` is a convenience script that runs `docker compose` with the right compose and environment files. The following will do the same as above:
@@ -25,7 +25,7 @@ Setting up an alias would perform the same function.
 Repository: https://github.com/jaredgalanis/pass-auth
 Package: https://github.com/orgs/eclipse-pass/packages/container/package/pass-auth
 
-Currently configured to serve as a drop-in replacement of the old `sp` image. It provides authorization mechanisms to secure routes. Because of this, it also acts as a reverse proxy, ensuring the configured routes are protected appropriately.
+Provides authorization mechanisms to secure routes. It also acts as a reverse proxy, ensuring the configured routes are protected appropriately.
 
 Node based authentication service that currently integrates SAML authentication workflow in the demo environment.
 
@@ -52,7 +52,6 @@ Environment variables:
 * `SESSION_SECRET="..."`
 
 The following are absolute URLs on a docker compose private network, should not need to change in other environments
-* `FCREPO_URL="http://fcrepo:8080"`
 * `USER_SERVICE_URL="http://fcrepo:8080"`
 * `ELASTIC_SEARCH_URL="http://elasticsearch:9200/pass/_search"`
 * `SCHEMA_SERVICE_URL="http://schemaservice:8086"`
@@ -114,15 +113,7 @@ Environment variables:
 
 ### `loader`
 
-A bootstrap service that will dump a small set of testing data through the Elide endpoints. This will occur when the loader container starts up and shuts down when done. The service is currently too dumb to wait for `pass-core` to initialize the Postgres database and will run as soon as the postgres and pass-core services are started, so will fail its initial run. If you run the loader after the DB has been initialized properly, the data will be added through the JSON API based web API. It currently does this through the private `back` network, so avoids authentication issues.
-
-*This service should be removed or otherwise not be used when the "real" test assets is available.*
-
-Environment variables:
-
-* `LOADER_API_HOST=http://pass-core`
-* `LOADER_API_PORT=8080`
-* `LOADER_API_NAMESPACE=data`
+A basic Docker image where we can run a `curl` command to bootstrap the environment with data from `demo_data.json`
 
 ### `idp`, `ldap`
 
@@ -156,3 +147,17 @@ Environment variables:
 * `SSL_TYPE=manual`
 * `SSL_CERT_PATH=/tmp/docker-mailserver/cert.pem`
 * `SSL_KEY_PATH=/tmp/docker-mailserver/key.rsa`
+
+## Running Acceptance Tests
+
+Repository: https://github.com/eclipse-pass/pass-acceptance-testing
+
+There is a small set of end-to-end smoke tests that we can run against this environment for some validation of changes. These tests run automatically for new PRs that are opened against `main`, but can also be run locally. In order to do this, you'll first need to clone the repository with the tests.
+
+Once you have the repository, wait for the Docker Compose environment to start up and initialize then run the tests directly. From the `pass-acceptance-testing` local repo, run:
+
+``` sh
+yarn            # Installs project dependencies
+yarn run test   # Runs tests
+```
+

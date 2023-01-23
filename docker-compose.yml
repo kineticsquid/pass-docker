@@ -10,7 +10,7 @@ services:
     image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:c966c8500fe43d90a59839bba2798f9ed9a051c5379783a0971bf700003aeddf
     container_name: auth
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
       - front
       - back
@@ -23,7 +23,7 @@ services:
     image: ghcr.io/eclipse-pass/pass-core-main:0.2.0@sha256:89e035c0882af618375e504b91433319916a90731396ab81c3bc683126266a26
     container_name: pass-core
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
       - back
     depends_on:
@@ -52,7 +52,7 @@ services:
         USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
     container_name: pass-ui
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
       - back # is 'back' in the main docker-compose, use this or 'front'?
 
@@ -60,7 +60,7 @@ services:
     image: postgres:14-alpine
     restart: always
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
       - back
     volumes:
@@ -72,7 +72,7 @@ services:
     image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:6020f7f017108fcc1911d94e0afafcbb5dd02f005876eaa5453395697627628c
     container_name: proxy
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
       - front
       - back
@@ -89,7 +89,7 @@ services:
     image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
     container_name: pass-ui-public
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     ports:
       - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
     networks:
@@ -111,7 +111,7 @@ services:
     expose:
      - "4443"
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
      - back
     secrets:
@@ -130,7 +130,7 @@ services:
     image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
     container_name: ldap
     env_file:
-      - .eclipse-pass.base_env
+      - .env
     networks:
      - back
 
