@@ -1,4 +1,0 @@
-ARG PROVIDERS_IMAGE
-FROM ${PROVIDERS_IMAGE}
-
-ADD repositories-*.json /
