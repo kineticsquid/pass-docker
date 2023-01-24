@@ -23,13 +23,13 @@ jobs:
       - name: Stop Existing App
         run: |
           # Stop the application, but then any other running containers
-          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml down
+          docker compose -f docker-compose.yml -f eclipse-pass.demo.yml down
           bash ./tools/docker/stopall.sh
 
       - name: Build App
         run: |
-          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml pull
+          docker compose -f docker-compose.yml -f eclipse-pass.demo.yml pull
 
       - name: Run App
         run: |
-          docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up -d
+          docker compose -f docker-compose.yml -f eclipse-pass.demo.yml up -d
