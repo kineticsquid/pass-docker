@@ -1,0 +1,158 @@
+version: '3.8'
+
+# When running commands with this file, you must specify both this yml file and
+# the correct env file. For example:
+#   `docker-compose -f demo.yml --env-file .demo_env up`
+services:
+  auth:
+    build: ./sp
+    image: ghcr.io/eclipse-pass/pass-auth:0.2.0@sha256:e3ac0fb8bdd2cbc726076e7d67ec28e3a9546d184cf86a5180b8c416289372d5
+    env_file: .demo_env
+    container_name: auth
+    networks:
+      - front
+      - back
+    secrets:
+     - source: sp_key
+     - source: sp_cert
+     - source: idp_cert
+
+  pass-core:
+    image: ghcr.io/eclipse-pass/pass-core-main:0.2.0-SNAPSHOT@sha256:bd0b8b3a79a5e476bed8545c3738b274922e6421be1bd39c5b1a3518a326fb23
+    env_file: .demo_env
+    container_name: pass-core
+    networks:
+      - back
+    depends_on:
+      - postgres
+  
+  pass-ui:
+    image: ghcr.io/eclipse-pass/pass-ui:0.2.0@sha256:d8d2b5aa7948bf14d3ae2bba4164e74e4bc08aa06973015d76196eddd05d06c1
+    build:
+      context: ./ember
+      args:
+        # required args (throw error during build if not defined in env):
+        EMBER_GIT_REPO: "${EMBER_GIT_REPO:?undefined-EMBER_GIT_REPO}"
+        EMBER_GIT_BRANCH: "${EMBER_GIT_BRANCH:?undefined-EMBER_GIT_BRANCH}"
+        # sensible defaults have been defined:
+        DOI_SERVICE_URL: "${DOI_SERVICE_URL:-}"
+        MANUSCRIPT_SERVICE_LOOKUP_URL: "${MANUSCRIPT_SERVICE_LOOKUP_URL:-}"
+        MANUSCRIPT_SERVICE_DOWNLOAD_URL: "${MANUSCRIPT_SERVICE_DOWNLOAD_URL:-}"
+        METADATA_SCHEMA_URI: "${METADATA_SCHEMA_URI:-}"
+        PASS_UI_PORT: "${PASS_UI_PORT:-}"
+        PASS_API_NAMESPACE: "${PASS_API_NAMESPACE:-}"
+        PASS_UI_ROOT_URL: "${PASS_UI_ROOT_URL:-}"
+        POLICY_SERVICE_URL: "${POLICY_SERVICE_URL:-}"
+        USER_SERVICE_URL: "${USER_SERVICE_URL:-}"
+    env_file: .demo_env
+    container_name: pass-ui
+    networks:
+      - back # is 'back' in the main docker-compose, use this or 'front'?
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    env_file: .demo_env
+    networks:
+      - back
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./postgres/demo/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
+  
+  proxy:
+    build: ./demo-proxy/
+    image: ghcr.io/eclipse-pass/proxy:0.2.0@sha256:07847ef518d96464007aa583f1edbc505bd3221bc5d3d195609d8e1fbfa7822e
+    container_name: proxy
+    networks:
+      - front
+      - back
+    ports:
+      - "80:80"
+      - "443:443"
+
+  pass-ui-public:
+    build:
+      context: ./static-html
+      args:
+        STATIC_HTML_GIT_REPO: "${STATIC_HTML_GIT_REPO}"
+        STATIC_HTML_GIT_BRANCH: "${STATIC_HTML_GIT_BRANCH}"
+    image: ghcr.io/eclipse-pass/pass-ui-public:0.2.0@sha256:35ee542e0e38183baeb94b0274c4a360f6a7b6a147a8557ab421ae4a6d86ea4d
+    container_name: pass-ui-public
+    env_file: .demo_env
+    ports:
+      - "${STATIC_HTML_PORT}:${STATIC_HTML_PORT}"
+    networks:
+      - front
+
+  idp:
+    build:
+      context: ./idp
+      args:
+        TENANT: jhu
+    image: ghcr.io/eclipse-pass/idp:0.2.0@sha256:02235c80cda327375819d84074b165bf931b25e219aff100e8fad13c2a21800d
+    container_name: idp
+    depends_on:
+     - ldap
+    environment:
+     - IDP_HOST=https://82-kineticsquid-passdocker-1hlkn7c98uj.ws-us81.gitpod.io
+     - JETTY_MAX_HEAP=64m
+     - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
+     - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    expose:
+     - "4443"
+    networks:
+     - back
+    secrets:
+     - source: idp_backchannel
+     - source: idp_browser
+     - source: idp_encryption
+     - source: idp_signing
+     - source: idp_sealer
+     - source: idp_cert
+
+  ldap:
+    build:
+      context: ./ldap
+      args:
+        TENANT: jhu
+    image: ghcr.io/eclipse-pass/demo-ldap:0.2.0@sha256:331cd3ae9c3673c9439fa7465ee807172702bc3dac6583c173766e3c036e8c3e
+    container_name: ldap
+    networks:
+     - back
+
+  loader:
+    image: ghcr.io/eclipse-pass/demo-loader:0.2.0@sha256:d6d559ad9a35e62c4109dff559dc346f700c6f56b516ae666bb03971c7561646
+    env_file: .demo_env
+    container_name: loader
+    networks:
+      - back
+    depends_on:
+      - pass-core
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
+
+secrets:
+  idp_backchannel:
+    file: ./secrets/idp/idp-backchannel.p12
+  idp_browser:
+    file: ./secrets/idp/idp-browser.p12
+  idp_encryption:
+    file: ./secrets/idp/idp-encryption.key
+  idp_signing:
+    file: ./secrets/idp/idp-signing.key
+  idp_sealer:
+    file: ./secrets/idp/sealer.jks
+  idp_cert:
+    file: ./secrets/idp/idp-signing.crt
+  sp_key:
+    file: ./secrets/sp/sp-key.pem
+  sp_cert:
+    file: ./secrets/sp/sp-cert.pem

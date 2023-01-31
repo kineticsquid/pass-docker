@@ -1,0 +1,27 @@
+# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - before: |
+      sudo apt-get update
+      sudo apt-get install -y netcat 
+      echo 127.0.0.1 pass.local | sudo tee -a /etc/hosts
+
+  - init: |
+      git pull
+      ./gitpod-demo.sh pull
+
+    command: |
+      ./gitpod-demo.sh up -d && ./gitpod-demo.sh logs -f
+
+ports:
+- port: 80
+  visibility: private
+  onOpen: ignore
+- port: 82
+  visibility: public
+  onOpen: notify
+- port: 443
+  visibility: private
+  onOpen: ignore
+- port: 40611
+  visibility: private
+  onOpen: ignore

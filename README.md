@@ -3,10 +3,14 @@ The "demo" compose file describes an early system meant to demonstrate some new 
 ## Running:
 
 Docker compose works as normal, but for the demo you need to specify both correct `yml` file and env file. In order to run a local instance, you can run:
-
 ``` sh
 docker compose up -d --no-build
 ```
+
+## Gitpod
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kineticsquid/pass-docker)
+
+See `gitpod-demo-notes.md` for details on running in gitpod. 
 
 ## Services:
 
