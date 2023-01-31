@@ -7,6 +7,11 @@ Docker compose works as normal, but for the demo you need to specify both correc
 docker compose up -d --no-build
 ```
 
+## Gitpod
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kineticsquid/pass-docker)
+
+See `gitpod-demo-notes.md` for details on running in gitpod. 
+
 ## Services:
 
 ### [`pass-auth`](https://github.com/jaredgalanis/pass-auth)
