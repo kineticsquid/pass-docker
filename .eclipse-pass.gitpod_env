@@ -1,0 +1,10 @@
+###################################################
+# PASS_CORE config ####################################
+###################################################
+PASS_CORE_BASE_URL=https://nightly.eclipse-pass.org
+
+###################################################
+# Auth / Proxy config #############################
+###################################################
+IDP_HOST=https://nightly.eclipse-pass.org
+SAML_ENTRY_POINT="https://nightly.eclipse-pass.org/idp/profile/SAML2/Redirect/SSO"
