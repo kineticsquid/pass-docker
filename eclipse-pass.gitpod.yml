@@ -5,29 +5,29 @@ version: '3.8'
 services:
   auth:
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env
 
   pass-core:
     image: ghcr.io/eclipse-pass/pass-core-main:0.3.0-SNAPSHOT@sha256:c4e988803ca496d41581d89b465262085daad1deb2b1819ee1e08e261d7eb640
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env
 
   pass-ui:
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env
 
   postgres:
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env
 
   pass-ui-public:
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env
 
   idp:
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env
 
   loader:
     env_file:
-      - .eclipse-pass.nightly_env
+      - .eclipse-pass.gitpod_env

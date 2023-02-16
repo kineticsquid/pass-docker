@@ -1,10 +1,10 @@
 ###################################################
 # PASS_CORE config ####################################
 ###################################################
-PASS_CORE_BASE_URL=https://nightly.eclipse-pass.org
+PASS_CORE_BASE_URL=https://82-kineticsquid-passdocker-dh1iydwsfdj.ws-us87.gitpod.io
 
 ###################################################
 # Auth / Proxy config #############################
 ###################################################
-IDP_HOST=https://nightly.eclipse-pass.org
-SAML_ENTRY_POINT="https://nightly.eclipse-pass.org/idp/profile/SAML2/Redirect/SSO"
+IDP_HOST=https://82-kineticsquid-passdocker-dh1iydwsfdj.ws-us87.gitpod.io
+SAML_ENTRY_POINT="https://82-kineticsquid-passdocker-dh1iydwsfdj.ws-us87.gitpod.io/idp/profile/SAML2/Redirect/SSO"

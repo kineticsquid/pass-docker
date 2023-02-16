@@ -12,11 +12,8 @@ tbd
 
 ## Running
 ``` sh
-docker compose -f eclipse-pass.gitpod.yml up
-docker compose -f eclipse-pass.gitpod.yml up && docker compose logs -f proxy
-./gitpod-demo.sh up -d
-./gitpod-demo.sh up -d && ./gitpod-demo.sh logs -f
-
+docker compose -f docker-compose.yml -f eclipse-pass.gitpod.yml up
+docker compose -f docker-compose.yml -f eclipse-pass.gitpod.yml logs
 ```
 If you want to tail the `proxy` logs, for example, run `./gitpod-demo.sh logs -f proxy`
 
