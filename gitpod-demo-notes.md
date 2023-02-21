@@ -10,12 +10,20 @@
 tbd
 ```
 
-## Running
+## Running in gitpod
 ``` sh
 docker compose -f docker-compose.yml -f eclipse-pass.gitpod.yml up
 docker compose -f docker-compose.yml -f eclipse-pass.gitpod.yml logs
 ```
+
 If you want to tail the `proxy` logs, for example, run `./gitpod-demo.sh logs -f proxy`
+
+## Running Locally
+``` sh
+docker compose -f docker-compose.yml -f eclipse-pass.local.yml up
+docker compose -f docker-compose.yml -f eclipse-pass.local.yml logs
+```
+
 
 ## Terminating
 ``` sh
